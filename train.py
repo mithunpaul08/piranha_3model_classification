@@ -131,6 +131,7 @@ print(f"************found that the device is {device}\n")
 for epoch in range(EPOCHS):
     train(epoch)
 
+trainer.save_model ("./output/best_model/")
 def validation(epoch):
     model.eval()
     fin_targets=[]
@@ -155,3 +156,4 @@ for epoch in range(EPOCHS):
     print(f"Accuracy Score = {accuracy}")
     print(f"F1 Score (Micro) = {f1_score_micro}")
     print(f"F1 Score (Macro) = {f1_score_macro}")
+
