@@ -16,26 +16,8 @@ VALID_BATCH_SIZE = 4
 EPOCHS = 50
 LEARNING_RATE = 1e-05
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+SAVED_MODEL_PATH="./output/best_model.pt"
 
-
-def train(epoch):
-    model.train()
-    for _, data in enumerate(training_loader, 0):
-        ids = data['ids'].to(device, dtype=torch.long)
-        mask = data['mask'].to(device, dtype=torch.long)
-        token_type_ids = data['token_type_ids'].to(device, dtype=torch.long)
-        targets = data['targets'].to(device, dtype=torch.float)
-
-        outputs = model(ids, mask, token_type_ids)
-
-        optimizer.zero_grad()
-        loss = loss_fn(outputs, targets)
-        if _ % 5000 == 0:
-            print(f'Epoch: {epoch}, Loss:  {loss.item()}')
-
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
 class CustomDataset(Dataset):
 
     def __init__(self, dataframe, tokenizer, max_len):
@@ -73,29 +55,7 @@ class CustomDataset(Dataset):
         }
 
 
-class BERTClass(torch.nn.Module):
-    def __init__(self):
-        super(BERTClass, self).__init__()
-        self.l1 = transformers.BertModel.from_pretrained('bert-base-uncased')
-        self.l2 = torch.nn.Dropout(0.3)
-        self.l3 = torch.nn.Linear(768, NO_OF_CLASSES)
 
-    def forward(self, ids, mask, token_type_ids):
-        output_1 = self.l1(ids, attention_mask=mask, token_type_ids=token_type_ids)
-        output_2 = self.l2(output_1['pooler_output'])
-        output = self.l3(output_2)
-        return output
-model = BERTClass()
-model.to(device)
-
-def loss_fn(outputs, targets):
-    return torch.nn.BCEWithLogitsLoss()(outputs, targets)
-optimizer = torch.optim.Adam(params =  model.parameters(), lr=LEARNING_RATE)
-# import csv
-# with open('/Users/mitch/research/piranha/piranha_3model_classification/data/all_data.csv') as csvfile:
-#     spamreader = csv.reader(csvfile, delimiter=',')
-#     for row in spamreader:
-#         print(', '.join(row))
 
 df = pd.read_csv("./data/test.csv", sep=",", on_bad_lines='skip')
 df['list'] = df[df.columns[2:]].values.tolist()
@@ -137,17 +97,18 @@ def validation(epoch):
 
 
 print(f"************found that the device is {device}\n")
-for epoch in range(EPOCHS):
-    train(epoch)
-    outputs, targets = validation(epoch)
-    outputs = np.array(outputs) >= 0.5
-    accuracy = metrics.accuracy_score(targets, outputs)
-    f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
-    f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
-    print(f"Validation at epoch : {epoch}")
-    print(f"Accuracy Score = {accuracy}")
-    print(f"F1 Score (Micro) = {f1_score_micro}")
-    print(f"F1 Score (Macro) = {f1_score_macro}")
-    print(f"end of epoch {epoch}")
-    print(f"---------------------------")
+model=torch.load(SAVED_MODEL_PATH)
+
+
+outputs, targets = validation(0)
+outputs = np.array(outputs) >= 0.5
+accuracy = metrics.accuracy_score(targets, outputs)
+f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
+f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
+print(f"Validation at epoch : {epoch}")
+print(f"Accuracy Score = {accuracy}")
+print(f"F1 Score (Micro) = {f1_score_micro}")
+print(f"F1 Score (Macro) = {f1_score_macro}")
+print(f"end of epoch {epoch}")
+print(f"---------------------------")
 

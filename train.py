@@ -14,9 +14,9 @@ MAX_LEN = 500
 TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
 EPOCHS = 50
-LEARNING_RATE = 1e-03
+LEARNING_RATE = 1e-05
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-
+SAVED_MODEL_PATH="./output/"
 
 def train(epoch):
     model.train()
@@ -127,7 +127,7 @@ test_params = {'batch_size': VALID_BATCH_SIZE,
 training_loader = DataLoader(training_set, **train_params)
 testing_loader = DataLoader(testing_set, **test_params)
 
-torch.save(model,"./output/best_model.pt")
+
 
 
 def validation(epoch):
