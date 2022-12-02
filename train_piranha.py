@@ -81,8 +81,8 @@ class BERTClass(torch.nn.Module):
         self.l3 = torch.nn.Linear(768, NO_OF_CLASSES)
 
     def forward(self, ids, mask, token_type_ids):
-        output = self.l1(ids, attention_mask=mask, token_type_ids=token_type_ids)
-        output_2 = self.l2(output[0])
+        output_1 = self.l1(ids, attention_mask=mask, token_type_ids=token_type_ids)
+        output_2 = self.l2(output_1['pooler_output'])
         output = self.l3(output_2)
         return output
 model = BERTClass()
@@ -130,3 +130,28 @@ testing_loader = DataLoader(testing_set, **test_params)
 
 for epoch in range(EPOCHS):
     train(epoch)
+
+def validation(epoch):
+    model.eval()
+    fin_targets=[]
+    fin_outputs=[]
+    with torch.no_grad():
+        for _, data in enumerate(testing_loader, 0):
+            ids = data['ids'].to(device, dtype = torch.long)
+            mask = data['mask'].to(device, dtype = torch.long)
+            token_type_ids = data['token_type_ids'].to(device, dtype = torch.long)
+            targets = data['targets'].to(device, dtype = torch.float)
+            outputs = model(ids, mask, token_type_ids)
+            fin_targets.extend(targets.cpu().detach().numpy().tolist())
+            fin_outputs.extend(torch.sigmoid(outputs).cpu().detach().numpy().tolist())
+    return fin_outputs, fin_targets
+
+for epoch in range(EPOCHS):
+    outputs, targets = validation(epoch)
+    outputs = np.array(outputs) >= 0.5
+    accuracy = metrics.accuracy_score(targets, outputs)
+    f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
+    f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
+    print(f"Accuracy Score = {accuracy}")
+    print(f"F1 Score (Micro) = {f1_score_micro}")
+    print(f"F1 Score (Macro) = {f1_score_macro}")
