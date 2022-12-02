@@ -10,10 +10,10 @@ from transformers import BertTokenizer, BertModel, BertConfig
 from torch import cuda
 device = 'cuda' if cuda.is_available() else 'cpu'
 NO_OF_CLASSES=3
-MAX_LEN = 200
+MAX_LEN = 500
 TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
-EPOCHS = 1
+EPOCHS = 50
 LEARNING_RATE = 1e-05
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
@@ -127,7 +127,7 @@ test_params = {'batch_size': VALID_BATCH_SIZE,
 training_loader = DataLoader(training_set, **train_params)
 testing_loader = DataLoader(testing_set, **test_params)
 
-
+print(f"************found that the device is {device}\n")
 for epoch in range(EPOCHS):
     train(epoch)
 
