@@ -127,11 +127,9 @@ test_params = {'batch_size': VALID_BATCH_SIZE,
 training_loader = DataLoader(training_set, **train_params)
 testing_loader = DataLoader(testing_set, **test_params)
 
-print(f"************found that the device is {device}\n")
-for epoch in range(EPOCHS):
-    train(epoch)
+#torch.save(model,"./output/best_model/")
 
-trainer.save_model ("./output/best_model/")
+
 def validation(epoch):
     model.eval()
     fin_targets=[]
@@ -147,13 +145,20 @@ def validation(epoch):
             fin_outputs.extend(torch.sigmoid(outputs).cpu().detach().numpy().tolist())
     return fin_outputs, fin_targets
 
+
+
+print(f"************found that the device is {device}\n")
 for epoch in range(EPOCHS):
+    train(epoch)
     outputs, targets = validation(epoch)
     outputs = np.array(outputs) >= 0.5
     accuracy = metrics.accuracy_score(targets, outputs)
     f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
     f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
+    print(f"Validation at epoch : {epoch}")
     print(f"Accuracy Score = {accuracy}")
     print(f"F1 Score (Micro) = {f1_score_micro}")
     print(f"F1 Score (Macro) = {f1_score_macro}")
+    print(f"end of epoch {epoch}")
+    print(f"---------------------------")
 
