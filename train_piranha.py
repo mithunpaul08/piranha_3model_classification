@@ -9,6 +9,7 @@ from transformers import BertTokenizer, BertModel, BertConfig
 
 from torch import cuda
 device = 'cuda' if cuda.is_available() else 'cpu'
+NO_OF_CLASSES=3
 MAX_LEN = 200
 TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
@@ -16,6 +17,25 @@ EPOCHS = 1
 LEARNING_RATE = 1e-05
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
+
+def train(epoch):
+    model.train()
+    for _, data in enumerate(training_loader, 0):
+        ids = data['ids'].to(device, dtype=torch.long)
+        mask = data['mask'].to(device, dtype=torch.long)
+        token_type_ids = data['token_type_ids'].to(device, dtype=torch.long)
+        targets = data['targets'].to(device, dtype=torch.float)
+
+        outputs = model(ids, mask, token_type_ids)
+
+        optimizer.zero_grad()
+        loss = loss_fn(outputs, targets)
+        if _ % 5000 == 0:
+            print(f'Epoch: {epoch}, Loss:  {loss.item()}')
+
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
 class CustomDataset(Dataset):
 
     def __init__(self, dataframe, tokenizer, max_len):
@@ -51,6 +71,26 @@ class CustomDataset(Dataset):
             'token_type_ids': torch.tensor(token_type_ids, dtype=torch.long),
             'targets': torch.tensor(self.targets[index], dtype=torch.float)
         }
+
+
+class BERTClass(torch.nn.Module):
+    def __init__(self):
+        super(BERTClass, self).__init__()
+        self.l1 = transformers.BertModel.from_pretrained('bert-base-uncased')
+        self.l2 = torch.nn.Dropout(0.3)
+        self.l3 = torch.nn.Linear(768, NO_OF_CLASSES)
+
+    def forward(self, ids, mask, token_type_ids):
+        output = self.l1(ids, attention_mask=mask, token_type_ids=token_type_ids)
+        output_2 = self.l2(output[0])
+        output = self.l3(output_2)
+        return output
+model = BERTClass()
+model.to(device)
+
+def loss_fn(outputs, targets):
+    return torch.nn.BCEWithLogitsLoss()(outputs, targets)
+optimizer = torch.optim.Adam(params =  model.parameters(), lr=LEARNING_RATE)
 # import csv
 # with open('/Users/mitch/research/piranha/piranha_3model_classification/data/all_data.csv') as csvfile:
 #     spamreader = csv.reader(csvfile, delimiter=',')
@@ -72,3 +112,21 @@ print("TEST Dataset: {}".format(test_dataset.shape))
 
 training_set = CustomDataset(train_dataset, tokenizer, MAX_LEN)
 testing_set = CustomDataset(test_dataset, tokenizer, MAX_LEN)
+
+
+train_params = {'batch_size': TRAIN_BATCH_SIZE,
+                'shuffle': True,
+                'num_workers': 0
+                }
+
+test_params = {'batch_size': VALID_BATCH_SIZE,
+                'shuffle': True,
+                'num_workers': 0
+                }
+
+training_loader = DataLoader(training_set, **train_params)
+testing_loader = DataLoader(testing_set, **test_params)
+
+
+for epoch in range(EPOCHS):
+    train(epoch)
