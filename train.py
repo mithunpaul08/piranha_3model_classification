@@ -127,7 +127,7 @@ test_params = {'batch_size': VALID_BATCH_SIZE,
 training_loader = DataLoader(training_set, **train_params)
 testing_loader = DataLoader(testing_set, **test_params)
 
-#torch.save(model,"./output/best_model/")
+torch.save(model,"./output/best_model.pt")
 
 
 def validation(epoch):
