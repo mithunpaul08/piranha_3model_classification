@@ -10,7 +10,14 @@ from transformers import BertTokenizer, BertModel, BertConfig
 from torch import cuda
 device = 'cuda' if cuda.is_available() else 'cpu'
 
-df = pd.read_csv("./data/train.csv")
+
+# import csv
+# with open('/Users/mitch/research/piranha/piranha_3model_classification/data/train.csv') as csvfile:
+#     spamreader = csv.reader(csvfile, delimiter=',')
+#     for row in spamreader:
+#         print(', '.join(row))
+
+df = pd.read_csv("/Users/mitch/research/piranha/piranha_3model_classification/data/train.csv",sep="," ,on_bad_lines='skip')
 df['list'] = df[df.columns[2:]].values.tolist()
-new_df = df[['comment_text', 'list']].copy()
-new_df.head()
+new_df = df[['text', 'list']].copy()
+print(new_df.head())
