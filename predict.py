@@ -14,7 +14,7 @@ MAX_LEN = 500
 TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
 EPOCHS = 50
-LEARNING_RATE = 1e-03
+LEARNING_RATE = 1e-05
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
 
@@ -97,37 +97,26 @@ optimizer = torch.optim.Adam(params =  model.parameters(), lr=LEARNING_RATE)
 #     for row in spamreader:
 #         print(', '.join(row))
 
-df = pd.read_csv("./data/all_data.csv", sep=",", on_bad_lines='skip')
+df = pd.read_csv("./data/test.csv", sep=",", on_bad_lines='skip')
 df['list'] = df[df.columns[2:]].values.tolist()
 new_df = df[['text', 'list']].copy()
-train_size = 0.8
-train_dataset=new_df.sample(frac=train_size,random_state=200)
-test_dataset=new_df.drop(train_dataset.index).reset_index(drop=True)
-train_dataset = train_dataset.reset_index(drop=True)
+test_dataset=new_df.sample(frac=1)
 
 
-print("FULL Dataset: {}".format(new_df.shape))
-print("TRAIN Dataset: {}".format(train_dataset.shape))
 print("TEST Dataset: {}".format(test_dataset.shape))
 
-training_set = CustomDataset(train_dataset, tokenizer, MAX_LEN)
+
 testing_set = CustomDataset(test_dataset, tokenizer, MAX_LEN)
 
-
-train_params = {'batch_size': TRAIN_BATCH_SIZE,
-                'shuffle': True,
-                'num_workers': 0
-                }
 
 test_params = {'batch_size': VALID_BATCH_SIZE,
                 'shuffle': True,
                 'num_workers': 0
                 }
 
-training_loader = DataLoader(training_set, **train_params)
+
 testing_loader = DataLoader(testing_set, **test_params)
 
-torch.save(model,"./output/best_model.pt")
 
 
 def validation(epoch):
