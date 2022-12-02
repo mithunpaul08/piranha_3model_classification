@@ -6,10 +6,10 @@ import json
 import csv
 import hashlib
 OUTPUT_FILE_NAME= "data/train.csv"
-
+header=["id","text","message_contact_person_asking","message_contact_person_org","message_org"]
 labels_all=["message_contact_person_asking","message_contact_person_org","message_org","sentence_intent_attachment","sentence_intent_click","sentence_intent_intro","sentence_intent_money","sentence_intent_phonecall","sentence_intent_products","sentence_intent_recruiting","sentence_intent_scheduling","sentence_intent_service","sentence_intent_unsubscribe","sentence_org_used_by_employer","sentence_passwd","sentence_tone_polite","sentence_tone_urgent","sentence_url_no_name","sentence_url_third_party","signature","signature_email","signature_fullname","signature_jobtitle","signature_org","signature_phone","signature_signoff","signature_url","signaure_address","signaure_handle","words_reciever_organization","words_sender_location","words_sender_organization"]
-sentence_labels={}
-
+message_labels={}
+message_labels={}
 
 message_level_labels_index={
 "message_contact_person_asking":0,
@@ -17,8 +17,51 @@ message_level_labels_index={
 "message_org":2,
 }
 
+def get_span_text_and_labels():
+    Lines = in_file.readlines()
+    for index, line in enumerate(Lines):
+        annotations = json.loads(line)
+        if "spans" in annotations:
+            for entry in annotations["spans"]:
+                label = entry["label"]
+                assert label in labels_all
+                # full_text = get_spans(entry['start'], entry['end'], annotations)
+
+                # get the entire text of the email. note, this is being done only for message level labels.DO NOT USE THIS FOR SENTENCE LEVEL OR LESS< USE SPANS
+                full_text = line
+                if full_text is not None:
+                    if full_text in message_labels:
+                        old_value = message_labels[full_text]
+                        if label not in old_value:
+                            old_value.append(label)
+                            message_labels[full_text] = old_value
+                    else:
+                        message_labels[full_text] = [label]
+
+
+def get_message_level_text_labels(Lines):
+    for index, line in enumerate(Lines):
+        annotations = json.loads(line)
+        if "spans" in annotations:
+            for entry in annotations["spans"]:
+                label = entry["label"]
+                text=annotations['text']
+                if "message" in label:
+                    assert label in labels_all
+                    # get the entire text of the email. note, this is being done only for message level labels.DO NOT USE THIS FOR SENTENCE LEVEL OR LESS< USE SPANS
+                    if text is not None:
+                        text=text.replace("\n","")
+                        if text in message_labels:
+                            old_value = message_labels[text]
+                            if label not in old_value:
+                                old_value.append(label)
+                                message_labels[text] = old_value
+                        else:
+                            message_labels[text] = [label]
+
+
 #given the start and end of a span return the collection of the tokens corresponding to this in string format
-def get_text(span_start, span_end, annotations):
+def get_spans(span_start, span_end, annotations):
     starts_ends_tokens = []
     for token in annotations['tokens']:
         if (token['start']>=span_start and token['end']<=span_end):
@@ -26,35 +69,18 @@ def get_text(span_start, span_end, annotations):
         if (token['start'] >= span_start and token['end'] > span_end):
             return " ".join(starts_ends_tokens)
 
-
 with open(OUTPUT_FILE_NAME, 'w') as out:
-    out.write("")
+    out.write(",".join(header))
+    out.write("\n")
 
 with open("/Users/mitch/research/piranha/prodigy-tools/datasets/ta3_complete_extraction_nov30th2022_onlyuma.jsonl", 'r') as in_file:
     Lines = in_file.readlines()
-    for index,line in enumerate(Lines):
-        annotations = json.loads(line)
-        if "spans" in annotations:
-            for entry in annotations["spans"]:
-                label=entry["label"]
-                assert label in labels_all
-                full_text = get_text(entry['start'], entry['end'], annotations)
-                if full_text is not None:
-                    if full_text in sentence_labels:
-                            old_value= sentence_labels[full_text]
-                            if label not in old_value:
-                                old_value.append(label)
-                                sentence_labels[full_text]=old_value
-                    else:
-                            sentence_labels[full_text] = [label]
-
-
-
+    get_message_level_text_labels(Lines)
 
     with open(OUTPUT_FILE_NAME, 'a') as out:
         counter=0
         line_counter=0
-        for sentence, labels in sentence_labels.items():
+        for sentence, labels in message_labels.items():
             line_counter+=1
             labels_onehot = [0, 0, 0]
             write_flag=False
@@ -74,7 +100,9 @@ with open("/Users/mitch/research/piranha/prodigy-tools/datasets/ta3_complete_ext
                         write_flag = True
             assert sum(labels_onehot)<3
             if(write_flag==True):
-                out.write(f"{counter},\"{sentence}\",{labels_onehot}\n")
+
+                oneHotString=",".join([str(x) for x in labels_onehot])
+                out.write(f"{counter},\"{sentence}\",{oneHotString}\n")
                 counter = counter + 1
 
 
