@@ -1,3 +1,6 @@
+#to train a model to detect message, sentence and token level labels
+#run convertData.py before this
+
 import numpy as np
 import pandas as pd
 from sklearn import metrics
@@ -6,6 +9,13 @@ import torch
 from torch.utils.data import Dataset, DataLoader, RandomSampler, SequentialSampler
 from transformers import BertTokenizer, BertModel, BertConfig
 
+
+
+message_level_labels_index={
+"message_contact_person_asking":0,
+"message_contact_person_org":1,
+"message_org":2,
+}
 
 from torch import cuda
 device = 'cuda' if cuda.is_available() else 'cpu'
@@ -151,8 +161,13 @@ print(f"************found that the device is {device}\n")
 for epoch in range(EPOCHS):
     train(epoch)
     outputs, targets = validation(epoch)
+
     outputs = np.array(outputs) >= 0.5
-    accuracy = metrics.accuracy_score(targets, outputs)
+    outputs_float = outputs.astype(float)
+    print(f"gold={targets}")
+    print(f"predictions={outputs_float}")
+
+    accuracy = metrics.accuracy_score(targets, outputs_float)
     f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
     f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
     print(f"Validation at epoch : {epoch}")
