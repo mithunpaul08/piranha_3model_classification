@@ -55,13 +55,19 @@ def get_message_level_text_labels(Lines):
 
 
 #given the start and end of a span return the collection of the tokens corresponding to this in string format
-def get_spans(span_start, span_end, annotations):
+def get_spans(token_start_of_span, token_end_of_span, annotations):
     starts_ends_tokens = []
-    for token in annotations['tokens']:
-        if (token['start']>=span_start and token['end']<=span_end):
+
+    for index, token in enumerate(annotations['tokens']):
+        if index>=token_start_of_span and index<=token_end_of_span:
             starts_ends_tokens.append(token['text'])
-        if (token['start'] >= span_start and token['end'] > span_end):
-            return " ".join(starts_ends_tokens)
+
+
+        # if (token['start']>=token_start_of_span and token['end']<=token_end_of_span):
+        #     starts_ends_tokens.append(token['text'])
+        # if (token['start'] >= token_start_of_span and token['end'] > token_end_of_span):
+    assert len(starts_ends_tokens) >0
+    return " ".join(starts_ends_tokens)
 
 with open(OUTPUT_FILE_NAME, 'w') as out:
     out.write(",".join(header))

@@ -60,14 +60,20 @@ with open(path_annotated_emails, 'r') as annotated_file:
                     if label in label_index:
                         lbl_index=label_index[label]
                         if bit_vector_retrieved_labels[lbl_index]==0:
-                            full_text = convertData.get_spans(entry['start'], entry['end'], annotations)
-                            print(full_text)
-                            bit_vector_retrieved_labels[lbl_index] = 1
-                            label_text_gold[label]=full_text
+                            full_text = convertData.get_spans(entry['token_start'], entry['token_end'], annotations)
+                            if full_text is not None:
+                                full_text=full_text.replace("\n","")
+                                bit_vector_retrieved_labels[lbl_index] = 1
+                                label_text_gold[label]=full_text
+                            else:
+                                print(f"Error:Found no gold text for this label {label}. Going to exit ")
+                                sys.exit()
+
 
     #annotated_emails = annotated_file.readlines()
 
-
+with open('output/retrieved_emails.jsonl', mode="w") as writer:
+    writer.write("")
 
 non_annotated_emails_text=[]
 retrieved_emails={}
@@ -148,8 +154,7 @@ def get_similar_emails(annotation_type,label):
 
     return top_retrieved
 
-with open('output/retrieved_emails.jsonl', mode="w") as writer:
-    writer.write("")
+
 
 
 
