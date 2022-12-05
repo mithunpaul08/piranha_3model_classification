@@ -18,12 +18,12 @@ from torch import cuda
 device = 'cuda' if cuda.is_available() else 'cpu'
 print(f"***********found that the device available is a {device}\n")
 #how many emails do you want ot retireve for each label. if you hit this number break the loop and move onto the next label
-NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=100
+NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=10
 
 COSINE_SIM_THRESHOLD=0.75
 #how many emails in the unannotated dataset should we search through. i.e we cant search through all of 600k emails in enron
 #so even after searching NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH emails, we can't find 50 emails of the given label, we quit and move onto next label.
-NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=10000
+NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=100
 
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
@@ -144,9 +144,7 @@ for label,query_text in tqdm(label_text_gold.items(),desc="labels",total=len(lab
         random.shuffle(non_annotated_emails_text)
         retrieved_emails_per_label = []
         for overall_unannotated_emails_parsed_counter,each_retrieved_email in enumerate(tqdm(non_annotated_emails_text,desc="retrieving_emails",total=len(non_annotated_emails_text))):
-
-                retrieved_texts_json_format={}
-                if overall_unannotated_emails_parsed_counter<NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH or len(retrieved_emails_per_label)<NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL:
+                    retrieved_texts_json_format={}
                     try:
                         if "message" not in label:
                             each_retrieved_email=split_reply_part_email(each_retrieved_email)
@@ -172,8 +170,10 @@ for label,query_text in tqdm(label_text_gold.items(),desc="labels",total=len(lab
                         continue
 
 
-                else:
-                    break
+                    else:
+                        if overall_unannotated_emails_parsed_counter > NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH or len(retrieved_emails_per_label) > NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL:
+                            print("hitting break")
+                            break
 
 
 
