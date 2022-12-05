@@ -10,8 +10,10 @@ from sentence_transformers import SentenceTransformer, util
 import convertData
 import sys
 import json
+from torch import cuda
 
-
+device = 'cuda' if cuda.is_available() else 'cpu'
+print(f"***********found that the device available is a {device}\n")
 #how many emails do you want ot retireve for each label. if you hit this number break the loop and move onto the next label
 NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=50
 
@@ -21,6 +23,8 @@ COSINE_SIM_THRESHOLD=0.5
 NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=1000
 
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+
+model.to(device)
 PATH_RETRIEVED_EMAILS_FILE="output/retrieved_emails.jsonl"
 PATH_PER_SIGNATURE_RETREIVED_EMAILS="output/per_signature_retrieved_emails.json"
 
