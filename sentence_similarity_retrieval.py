@@ -46,9 +46,24 @@ path_non_annotated_emails="./datasets/ta3_unannotated_head100.jsonl"
 label_text_gold={}
 
 with open(path_annotated_emails, 'r') as annotated_file:
-    for label_to_check in LABELS_TO_RETRIEVE:
-        full_text=convertData.given_label_retrieve_gold_text(annotated_file, label_to_check)
-        label_text_gold[label]=full_text
+    # for label_to_check in LABELS_TO_RETRIEVE:
+    #     full_text=convertData.given_label_retrieve_gold_text(annotated_file, label_to_check)
+    #     label_text_gold[label]=full_text
+
+    Lines = annotated_file.readlines()
+    for index, line in enumerate(Lines):
+        if sum(bit_vector_retrieved_labels) <= len(LABELS_TO_RETRIEVE):
+            annotations = json.loads(line)
+            if "spans" in annotations:
+                for entry in annotations["spans"]:
+                    label = entry["label"]
+                    if label in label_index:
+                        lbl_index=label_index[label]
+                        if bit_vector_retrieved_labels[lbl_index]==0:
+                            full_text = convertData.get_spans(entry['start'], entry['end'], annotations)
+                            print(full_text)
+                            bit_vector_retrieved_labels[lbl_index] = 1
+                            label_text_gold[label]=full_text
 
     #annotated_emails = annotated_file.readlines()
 
