@@ -8,6 +8,7 @@ from pysbd.utils import PySBDFactory
 import pysbd
 from sentence_transformers import SentenceTransformer, util
 import convertData
+import sys
 
 #how many emails do you want ot retireve for each label. if you hit this number break the loop and move onto the next label
 NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=50
@@ -72,9 +73,10 @@ with open(path_annotated_emails, 'r') as annotated_file:
 
     #annotated_emails = annotated_file.readlines()
 
-with open('output/retrieved_emails.jsonl', mode="w") as writer:
-    writer.write("")
-
+with open('output/labels_gold_texts.jsonl', mode="w") as writer:
+    for k,v in label_text_gold.items():
+        writer.write(f"{k}:{v}\n")
+sys.exit()
 non_annotated_emails_text=[]
 retrieved_emails={}
 #to ensure duplicatees are not added, checking each emails sha in a dictionary
