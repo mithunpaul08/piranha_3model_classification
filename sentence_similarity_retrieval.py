@@ -22,6 +22,7 @@ NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=1000
 
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 PATH_RETRIEVED_EMAILS_FILE="output/retrieved_emails.jsonl"
+PATH_PER_SIGNATURE_RETREIVED_EMAILS="output/per_signature_retrieved_emails.json"
 
 
 #list of labels for which the emails have to be retrievedl
@@ -107,7 +108,7 @@ def get_similar_emails(annotation_type,label):
             try:
                 if "label" in each_annotation:
                     if (each_annotation['label'] == label):
-                        annotated_text = ((annotations['text']).strip().replace("\n", " "))
+                        annotated_text = ((annotations['text']).strip().replace("\n", ""))
 
                         #find the most similar sentence in each email. not just the whole email as an embedding
                         seg = pysbd.Segmenter(language="en", clean=False)
@@ -204,6 +205,10 @@ for label,query_text in tqdm(label_text_gold.items(),total=len(label_text_gold.i
         with open(PATH_RETRIEVED_EMAILS_FILE, mode="a") as writer:
             for each_email in retrieved_emails_per_label:
                 json.dump(each_email,writer)
+                writer.write("\n")
+
+with open(PATH_PER_SIGNATURE_RETREIVED_EMAILS, mode="w") as writer:
+                json.dump(label_retrieved_emails,writer)
                 writer.write("\n")
 
 
