@@ -20,7 +20,12 @@ model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 
 #list of labels for which the emails have to be retrievedl
-LABELS=["signature_fullname","sentence_tone_urgent","sentence_url_no_name","sentence_intent_products","signature_signoff","words_sender_location","signature_phone","sentence_url_third_party","sentence_intent_unsubscribe","sentence_intent_attachment","signature_org","sentence_org_used_by_employer","signature_jobtitle","sentence_passwd","signature_email","sentence_intent_recruiting","signature_address","signature_url","words_receiver_organization","sentence_intent_intro","words_sender_organization","signaure_handle"]
+LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org", "sentence_org_used_by_employer", "signature_jobtitle", "sentence_passwd", "signature_email", "sentence_intent_recruiting", "signature_address", "signature_url", "words_receiver_organization", "sentence_intent_intro", "words_sender_organization"]
+
+#a serial number assigning dict - to use in bit vector later
+label_index={}
+for index, label in enumerate(LABELS_TO_RETRIEVE):
+    label_index[label]=index
 
 
 #the ones which will be used as gold emails to retrieve similar ones
@@ -111,14 +116,14 @@ def get_similar_emails(annotation_type,label):
 
     return top_retrieved
 
-with open('retrieved_emails.jsonl',mode="w") as writer:
+with open('output/retrieved_emails.jsonl', mode="w") as writer:
     writer.write("")
 
 with open(path_annotated_emails, 'r') as annotated_file:
     annotated_emails = annotated_file.readlines()
 
 
-for label in LABELS:
+for label in LABELS_TO_RETRIEVE:
     retrieved_emails = []
     for annotated_email in tqdm(annotated_emails,total=len(annotated_emails),desc="annotatedemails:"):
     #for annotated_email in annotated_emails:
@@ -136,7 +141,7 @@ for label in LABELS:
 
     print(f"\n for label {label} number of emails retreived:{len(retrieved_emails)}")
 
-    with open('retrieved_emails.jsonl', mode="a") as writer:
+    with open('output/retrieved_emails.jsonl', mode="a") as writer:
             for each_email in retrieved_emails:
                 d={}
                 d["text"]=each_email
