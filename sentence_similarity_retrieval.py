@@ -140,10 +140,10 @@ check_if_unique_email={}
 overall_retrieved_emails=[]
 label_counter=0
 
-for label,query_text in tqdm(label_text_gold.items(),total=len(label_text_gold.items())):
+for label,query_text in tqdm(label_text_gold.items(),desc="labels",total=len(label_text_gold.items())):
     random.shuffle(non_annotated_emails_text)
     retrieved_emails_per_label = []
-    for overall_unannotated_emails_parsed_counter,each_retrieved_email in enumerate(non_annotated_emails_text):
+    for overall_unannotated_emails_parsed_counter,each_retrieved_email in enumerate(tqdm(non_annotated_emails_text,desc="retrieving_emails",total=len(non_annotated_emails_text))):
         retrieved_texts_json_format={}
         if overall_unannotated_emails_parsed_counter<NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH or len(retrieved_emails_per_label)<NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL:
             if "message" not in label:
