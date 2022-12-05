@@ -172,6 +172,7 @@ label_retrieved_emails={}
 check_if_unique_email={}
 # a list of dictionaries which contains each of the retrieved emails
 overall_retrieved_emails=[]
+label_counter=0
 for label,query_text in tqdm(label_text_gold.items(),total=len(label_text_gold.items())):
     retrieved_emails_per_label = []
     for overall_unannotated_emails_parsed_counter,each_retrieved_email in enumerate(non_annotated_emails_text):
@@ -195,6 +196,8 @@ for label,query_text in tqdm(label_text_gold.items(),total=len(label_text_gold.i
                             else:
                                 label_retrieved_emails[label]=[(each_retrieved_email,result_text)]
                             retrieved_emails_per_label.append(retrieved_texts_json_format)
+
+
     if len(retrieved_emails_per_label)>0:
         overall_retrieved_emails.extend(retrieved_emails_per_label)
 
