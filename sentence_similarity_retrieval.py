@@ -22,11 +22,13 @@ model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 #list of labels for which the emails have to be retrievedl
 LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org", "sentence_org_used_by_employer", "signature_jobtitle", "sentence_passwd", "signature_email", "sentence_intent_recruiting", "signature_address", "signature_url", "words_receiver_organization", "sentence_intent_intro", "words_sender_organization"]
 
-#a serial number assigning dict - to use in bit vector later
+#a serial number assigning dict - to use in bit vector
 label_index={}
 for index, label in enumerate(LABELS_TO_RETRIEVE):
     label_index[label]=index
 
+##a bit vector to check which all labels have already been retrieved
+bit_vector_retrieved_labels=[0]*len(LABELS_TO_RETRIEVE)
 
 #the ones which will be used as gold emails to retrieve similar ones
 path_annotated_emails="./datasets/combined_ta3_enron_sofar_onlyuma_nov30th2022_extraction.jsonl"
