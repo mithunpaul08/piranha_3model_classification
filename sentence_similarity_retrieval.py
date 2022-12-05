@@ -97,70 +97,22 @@ with open(path_non_annotated_emails, 'r') as non_annotated_file:
         annotations = json.loads(non_annotated_email)
         non_annotated_emails_text.append((annotations['text']).strip().replace("\n", " "))
 
-#for each given input email retrieve 10 similar emails
-# annotations can be marked as spans (sentence, messages) or tokens (one word).
-# Given a type of annotation marker (e.g., span) this code will return a sentence/word of that type
-def get_similar_emails(annotation_type,label):
-    top_retrieved=[]
-    if (annotation_type in annotations):
-        spans = annotations[annotation_type]
-        for each_annotation in spans:
-            try:
-                if "label" in each_annotation:
-                    if (each_annotation['label'] == label):
-                        annotated_text = ((annotations['text']).strip().replace("\n", ""))
-
-                        #find the most similar sentence in each email. not just the whole email as an embedding
-                        seg = pysbd.Segmenter(language="en", clean=False)
-
-                        #store the scores of each email in a list. one on one mapping to non_annotated_emails_text:
-                        email_scores=[]
-                        for index,na_email in enumerate(non_annotated_emails_text):
-
-                            # if the email has "---" it is probably the reply to part. remove it.
-                            common_reply_splitters=["From:","________________________________","'‐‐‐‐‐‐‐ Original Message","Original Message"]
-                            if any(splitter in na_email for splitter in common_reply_splitters):
-                                this_splitter=""
-                                for splitter in common_reply_splitters:
-                                    if splitter in na_email:
-                                        this_splitter=splitter
-                                        break
-                                assert this_splitter!=""
-                                na_email_split=na_email.split(this_splitter)
-                                na_email=na_email_split[0]
-                            email_split_sentences=seg.segment(na_email)
-
-                            if len(email_split_sentences)>NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL:
-                                #add code to break out of this loop and go to next label
-                                pass
-
-                            embedding_1 = model.encode(annotated_text, convert_to_tensor=True)
-                            embedding_2 = model.encode(email_split_sentences, convert_to_tensor=True)
-
-                            email_sent_scores = util.pytorch_cos_sim(embedding_1, embedding_2)
-                            #for each email sum up the scores for individual sentences so that we have a single score per email.
-                            score_email=sum(email_sent_scores)
-                            email_scores.append(score_email)
-
-                        assert len(email_scores)==len(non_annotated_emails_text)
-                        #now from all the emails and their scores, pick top 10
-                        if len(email_scores)>0:
-                            data_sorted= sorted(email_scores,reverse=True)
-                            top10=data_sorted[0:9]
-
-                            for score in top10:
-                                #for each of the 10 top emails, find the corresponding index
-                                highest_score_index = email_scores.index(score)
-                                #get the email text from that index
-                                retrieved_email=non_annotated_emails_text[highest_score_index]
-                                sha_retrieved_email=hashlib.sha256(retrieved_email.encode('utf-8')).hexdigest()
-                                if sha_retrieved_email not in retrieved_emails_sha:
-                                    retrieved_emails_sha[sha_retrieved_email]=1
-                                    top_retrieved.append(retrieved_email)
-            except Exception as e:
-                print(e)
-
-    return top_retrieved
+def split_reply_part_email(na_email):
+    # if the email has "---" it is probably the reply to part. remove it.
+    common_reply_splitters = ["From:", "________________________________", "'‐‐‐‐‐‐‐ Original Message",
+                              "Original Message","-----Original Message-----","To:","Subject:","cc:"]
+    for splitter in common_reply_splitters:
+        if splitter in na_email:
+            this_splitter = ""
+            for splitter in common_reply_splitters:
+                if splitter in na_email:
+                    this_splitter = splitter
+                    break
+            assert this_splitter != ""
+            na_email_split = na_email.split(this_splitter)
+            if len(na_email_split)>0:
+                return na_email_split[0]
+    return na_email
 
 
 with open(PATH_RETRIEVED_EMAILS_FILE, mode="w") as writer:
@@ -180,6 +132,7 @@ for label,query_text in tqdm(label_text_gold.items(),total=len(label_text_gold.i
         retrieved_texts_json_format={}
         if overall_unannotated_emails_parsed_counter<NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH or len(retrieved_emails_per_label)<NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL:
             if "message" not in label:
+                each_retrieved_email=split_reply_part_email(each_retrieved_email)
                 seg = pysbd.Segmenter(language="en", clean=True)
                 email_split_sentences = seg.segment(each_retrieved_email)
                 for result_text in email_split_sentences:
@@ -208,8 +161,9 @@ for label,query_text in tqdm(label_text_gold.items(),total=len(label_text_gold.i
                 writer.write("\n")
 
 with open(PATH_PER_SIGNATURE_RETREIVED_EMAILS, mode="w") as writer:
-                json.dump(label_retrieved_emails,writer)
-                writer.write("\n")
+    for k,v in label_retrieved_emails. items():
+        writer.write(f"{k}:{v[0][1]}")
+        writer.write("\n")
 
 
 
