@@ -166,11 +166,12 @@ for label,query_text in tqdm(label_text_gold.items(),desc="labels",total=len(lab
                                     else:
                                         label_retrieved_emails[label]=[(each_retrieved_email,result_text)]
                                     retrieved_emails_per_label.append(retrieved_texts_json_format)
+
+
+                else:
+                    break
             except:
                 traceback.print_exc()
-
-            else:
-                break
 
 
 
