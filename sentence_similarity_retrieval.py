@@ -31,16 +31,27 @@ for index, label in enumerate(LABELS_TO_RETRIEVE):
 ##a bit vector to check which all labels have already been retrieved
 bit_vector_retrieved_labels=[0]*len(LABELS_TO_RETRIEVE)
 
-#a dictionary to store each label and a gold text with sentences containing that label
-label_text_gold={}
+
+
 
 #the ones which will be used as gold emails to retrieve similar ones
-path_annotated_emails="./datasets/combined_ta3_enron_sofar_onlyuma_nov30th2022_extraction.jsonl"
+path_annotated_emails="./data/enron_combined_all_uma_annotations_so_far_extraction_nov30th2022.jsonl"
 
 #the ones from which data will be retreived
 path_non_annotated_emails="./datasets/ta3_unannotated_head100.jsonl"
 #forserver
 #path_non_annotated_emails="./datasets/enron_head_5k.jsonl"
+
+#a dictionary to store each label and a gold text with sentences containing that label
+label_text_gold={}
+
+with open(path_annotated_emails, 'r') as annotated_file:
+    for label_to_check in LABELS_TO_RETRIEVE:
+        full_text=convertData.given_label_retrieve_gold_text(annotated_file, label_to_check)
+        label_text_gold[label]=full_text
+
+    #annotated_emails = annotated_file.readlines()
+
 
 
 non_annotated_emails_text=[]
@@ -125,8 +136,6 @@ def get_similar_emails(annotation_type,label):
 with open('output/retrieved_emails.jsonl', mode="w") as writer:
     writer.write("")
 
-with open(path_annotated_emails, 'r') as annotated_file:
-    annotated_emails = annotated_file.readlines()
 
 
 for label in LABELS_TO_RETRIEVE:

@@ -18,7 +18,7 @@ message_level_labels_index={
 }
 
 #given a label, and annotation span, retrieve a gold text (sentence or email ) which has annotations for that label
-def given_label_retrieve_gold_text(label_to_check):
+def given_label_retrieve_gold_text(in_file,label_to_check):
     Lines = in_file.readlines()
     for index, line in enumerate(Lines):
         annotations = json.loads(line)
@@ -27,19 +27,10 @@ def given_label_retrieve_gold_text(label_to_check):
                 label = entry["label"]
 
                 #if the label in the span is the same as the one we are looking for- get the text corresponding to the start and end character indices
+                if label == label_to_check:
+                    full_text = get_spans(entry['start'], entry['end'], annotations)
+                    return full_text
 
-                # full_text = get_spans(entry['start'], entry['end'], annotations)
-
-                # get the entire text of the email. note, this is being done only for message level labels.DO NOT USE THIS FOR SENTENCE LEVEL OR LESS< USE SPANS
-                full_text = line
-                if full_text is not None:
-                    if full_text in message_labels:
-                        old_value = message_labels[full_text]
-                        if label not in old_value:
-                            old_value.append(label)
-                            message_labels[full_text] = old_value
-                    else:
-                        message_labels[full_text] = [label]
 
 
 def get_message_level_text_labels(Lines):
@@ -76,7 +67,7 @@ with open(OUTPUT_FILE_NAME, 'w') as out:
     out.write(",".join(header))
     out.write("\n")
 
-with open("/Users/mitch/research/piranha/prodigy-tools/datasets/ta3_complete_extraction_nov30th2022_onlyuma.jsonl", 'r') as in_file:
+with open("./data/enron_head_10.jsonl", 'r') as in_file:
     Lines = in_file.readlines()
     get_message_level_text_labels(Lines)
 
