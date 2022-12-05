@@ -44,10 +44,10 @@ bit_vector_retrieved_labels=[0]*len(LABELS_TO_RETRIEVE)
 
 
 #the ones which will be used as gold emails to retrieve similar ones
-path_annotated_emails="./data/enron_combined_all_uma_annotations_so_far_extraction_nov30th2022.jsonl"
+path_annotated_emails= "data/query_file.jsonl"
 
 #the ones from which data will be retreived
-path_non_annotated_emails="./data/enron_head_10.jsonl"
+path_non_annotated_emails= "data/file_to_do_information_retrieval.jsonl"
 #forserver
 #path_non_annotated_emails="./datasets/enron_head_5k.jsonl"
 

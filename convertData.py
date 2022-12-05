@@ -73,7 +73,7 @@ with open(OUTPUT_FILE_NAME, 'w') as out:
     out.write(",".join(header))
     out.write("\n")
 
-with open("./data/enron_head_10.jsonl", 'r') as in_file:
+with open("data/file_to_do_information_retrieval.jsonl", 'r') as in_file:
     Lines = in_file.readlines()
     get_message_level_text_labels(Lines)
 
