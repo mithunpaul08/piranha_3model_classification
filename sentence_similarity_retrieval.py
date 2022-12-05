@@ -9,6 +9,8 @@ import pysbd
 from sentence_transformers import SentenceTransformer, util
 import convertData
 import sys
+import json
+
 
 #how many emails do you want ot retireve for each label. if you hit this number break the loop and move onto the next label
 NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=50
@@ -163,28 +165,43 @@ def get_similar_emails(annotation_type,label):
 with open(PATH_RETRIEVED_EMAILS_FILE, mode="w") as writer:
     writer.write("")
 
+# a dictionary which maps each label to the n emails retrieved per that label- and the sentence in that email which was retrieved
+label_retrieved_emails={}
 
-    overall_retrieved_emails=[]
-    for label,query_text in label_text_gold.items():
-        retrieved_emails_per_label = []
-        for overall_unannotated_emails_parsed_counter,each_email in enumerate(non_annotated_emails_text):
-            if overall_unannotated_emails_parsed_counter<NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH or len(retrieved_emails_per_label)<NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL:
-                if "message" not in label:
-                    seg = pysbd.Segmenter(language="en", clean=True)
-                    email_split_sentences = seg.segment(each_email)
-                    for result_text in email_split_sentences:
-                        embedding_1 = model.encode(result_text, convert_to_tensor=False)
-                        embedding_2 = model.encode(query_text, convert_to_tensor=False)
-                        cosine_sim = util.pytorch_cos_sim(embedding_1, embedding_2)
-                        if cosine_sim.item()>COSINE_SIM_THRESHOLD:
-                            retrieved_emails_per_label.append(each_email)
-        if len(retrieved_emails_per_label)>0:
-            overall_retrieved_emails.extend(retrieved_emails_per_label)
+#if this email has already been retrieved for some reason, it is useless spending cpu cycles retrieving it again
+check_if_unique_email={}
+# a list of dictionaries which contains each of the retrieved emails
+overall_retrieved_emails=[]
+for label,query_text in tqdm(label_text_gold.items(),total=len(label_text_gold.items())):
+    retrieved_emails_per_label = []
+    for overall_unannotated_emails_parsed_counter,each_retrieved_email in enumerate(non_annotated_emails_text):
+        retrieved_texts_json_format={}
+        if overall_unannotated_emails_parsed_counter<NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH or len(retrieved_emails_per_label)<NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL:
+            if "message" not in label:
+                seg = pysbd.Segmenter(language="en", clean=True)
+                email_split_sentences = seg.segment(each_retrieved_email)
+                for result_text in email_split_sentences:
+                    embedding_1 = model.encode(result_text, convert_to_tensor=False)
+                    embedding_2 = model.encode(query_text, convert_to_tensor=False)
+                    cosine_sim = util.pytorch_cos_sim(embedding_1, embedding_2)
+                    if cosine_sim.item()>COSINE_SIM_THRESHOLD:
+                        retrieved_texts_json_format["text"]=each_retrieved_email
+                        if each_retrieved_email not in check_if_unique_email:
+                            check_if_unique_email[each_retrieved_email]=0
+                            if label in label_retrieved_emails:
+                                current_emails=label_retrieved_emails[label]
+                                current_emails.append((each_retrieved_email,result_text))
+                                label_retrieved_emails[label] = current_emails
+                            else:
+                                label_retrieved_emails[label]=[(each_retrieved_email,result_text)]
+                            retrieved_emails_per_label.append(retrieved_texts_json_format)
+    if len(retrieved_emails_per_label)>0:
+        overall_retrieved_emails.extend(retrieved_emails_per_label)
 
-            with open(PATH_RETRIEVED_EMAILS_FILE, mode="a") as writer:
-                for each_retrieved_email in retrieved_emails_per_label:
-                    all_emails_text_this_label = "\n".join(each_retrieved_email)
-                    writer.write(each_retrieved_email)
+        with open(PATH_RETRIEVED_EMAILS_FILE, mode="a") as writer:
+            for each_email in retrieved_emails_per_label:
+                json.dump(each_email,writer)
+                writer.write("\n")
 
 
 
