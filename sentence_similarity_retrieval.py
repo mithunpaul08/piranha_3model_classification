@@ -3,6 +3,8 @@
 
 import json
 import hashlib
+import random
+
 from tqdm import tqdm
 from pysbd.utils import PySBDFactory
 import pysbd
@@ -136,7 +138,9 @@ check_if_unique_email={}
 # a list of dictionaries which contains each of the retrieved emails
 overall_retrieved_emails=[]
 label_counter=0
+
 for label,query_text in tqdm(label_text_gold.items(),total=len(label_text_gold.items())):
+    random.shuffle(non_annotated_emails_text)
     retrieved_emails_per_label = []
     for overall_unannotated_emails_parsed_counter,each_retrieved_email in enumerate(non_annotated_emails_text):
         retrieved_texts_json_format={}
