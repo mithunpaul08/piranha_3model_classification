@@ -140,7 +140,7 @@ check_if_unique_email={}
 overall_retrieved_emails=[]
 label_counter=0
 
-    for label,query_text in tqdm(label_text_gold.items(),desc="labels",total=len(label_text_gold.items())):
+for label,query_text in tqdm(label_text_gold.items(),desc="labels",total=len(label_text_gold.items())):
         random.shuffle(non_annotated_emails_text)
         retrieved_emails_per_label = []
         for overall_unannotated_emails_parsed_counter,each_retrieved_email in enumerate(tqdm(non_annotated_emails_text,desc="retrieving_emails",total=len(non_annotated_emails_text))):
@@ -174,12 +174,12 @@ label_counter=0
 
 
 
-    if len(retrieved_emails_per_label)>0:
-        overall_retrieved_emails.extend(retrieved_emails_per_label)
+        if len(retrieved_emails_per_label)>0:
+            overall_retrieved_emails.extend(retrieved_emails_per_label)
 
-        with open(PATH_RETRIEVED_EMAILS_FILE, mode="a") as writer:
-            for each_email in retrieved_emails_per_label:
-                json.dump(each_email,writer)
+            with open(PATH_RETRIEVED_EMAILS_FILE, mode="a") as writer:
+                for each_email in retrieved_emails_per_label:
+                    json.dump(each_email,writer)
                 writer.write("\n")
 
 with open(PATH_PER_SIGNATURE_RETREIVED_EMAILS, mode="w") as writer:
