@@ -5,7 +5,7 @@ import json
 import hashlib
 import random
 import datetime
-
+import traceback
 from tqdm import tqdm
 from pysbd.utils import PySBDFactory
 import pysbd
@@ -168,7 +168,7 @@ try:
             else:
                 break
 except:
-    print("error")
+    traceback.print_exc()
 
 
     if len(retrieved_emails_per_label)>0:
