@@ -15,7 +15,7 @@ from torch import cuda
 device = 'cuda' if cuda.is_available() else 'cpu'
 print(f"***********found that the device available is a {device}\n")
 #how many emails do you want ot retireve for each label. if you hit this number break the loop and move onto the next label
-NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=50
+NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=10
 
 COSINE_SIM_THRESHOLD=0.75
 #how many emails in the unannotated dataset should we search through. i.e we cant search through all of 600k emails in enron
@@ -30,7 +30,13 @@ PATH_PER_SIGNATURE_RETREIVED_EMAILS="output/per_signature_retrieved_emails.json"
 
 
 #list of labels for which the emails have to be retrievedl
-LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org", "sentence_org_used_by_employer", "signature_jobtitle", "sentence_passwd", "signature_email", "sentence_intent_recruiting", "signature_address", "signature_url", "words_receiver_organization", "sentence_intent_intro", "words_sender_organization"]
+#all of them LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org", "sentence_org_used_by_employer", "signature_jobtitle", "sentence_passwd", "signature_email", "sentence_intent_recruiting", "signature_address", "signature_url", "words_receiver_organization", "sentence_intent_intro", "words_sender_organization"]
+
+#the top 20- or weakest 20- will retrieve 10 emails per
+LABELS_TO_RETRIEVE=[ "sentence_org_used_by_employer", "signature_jobtitle", "sentence_passwd", "signature_email", "sentence_intent_recruiting", "signature_address", "signature_url", "words_receiver_organization", "sentence_intent_intro", "words_sender_organization"]
+
+#stronger20- will retrieve only 5 emails per
+#LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org",]
 
 #a serial number assigning dict - to use in bit vector
 label_index={}
