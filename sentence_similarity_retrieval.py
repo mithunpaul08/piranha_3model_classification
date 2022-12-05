@@ -18,7 +18,7 @@ from torch import cuda
 device = 'cuda' if cuda.is_available() else 'cpu'
 print(f"***********found that the device available is a {device}\n")
 #how many emails do you want ot retireve for each label. if you hit this number break the loop and move onto the next label
-NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=10
+NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=100
 
 COSINE_SIM_THRESHOLD=0.75
 #how many emails in the unannotated dataset should we search through. i.e we cant search through all of 600k emails in enron
@@ -144,34 +144,38 @@ for label,query_text in tqdm(label_text_gold.items(),desc="labels",total=len(lab
         random.shuffle(non_annotated_emails_text)
         retrieved_emails_per_label = []
         for overall_unannotated_emails_parsed_counter,each_retrieved_email in enumerate(tqdm(non_annotated_emails_text,desc="retrieving_emails",total=len(non_annotated_emails_text))):
-            try:
+
                 retrieved_texts_json_format={}
                 if overall_unannotated_emails_parsed_counter<NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH or len(retrieved_emails_per_label)<NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL:
-                    if "message" not in label:
-                        each_retrieved_email=split_reply_part_email(each_retrieved_email)
-                        seg = pysbd.Segmenter(language="en", clean=True)
-                        email_split_sentences = seg.segment(each_retrieved_email)
-                        for result_text in email_split_sentences:
-                            embedding_1 = model.encode(result_text, convert_to_tensor=False)
-                            embedding_2 = model.encode(query_text, convert_to_tensor=False)
-                            cosine_sim = util.pytorch_cos_sim(embedding_1, embedding_2)
-                            if cosine_sim.item()>COSINE_SIM_THRESHOLD:
-                                retrieved_texts_json_format["text"]=each_retrieved_email
-                                if each_retrieved_email not in check_if_unique_email:
-                                    check_if_unique_email[each_retrieved_email]=0
-                                    if label in label_retrieved_emails:
-                                        current_emails=label_retrieved_emails[label]
-                                        current_emails.append((each_retrieved_email,result_text))
-                                        label_retrieved_emails[label] = current_emails
-                                    else:
-                                        label_retrieved_emails[label]=[(each_retrieved_email,result_text)]
-                                    retrieved_emails_per_label.append(retrieved_texts_json_format)
+                    try:
+                        if "message" not in label:
+                            each_retrieved_email=split_reply_part_email(each_retrieved_email)
+                            seg = pysbd.Segmenter(language="en", clean=True)
+                            email_split_sentences = seg.segment(each_retrieved_email)
+                            for result_text in email_split_sentences:
+                                embedding_1 = model.encode(result_text, convert_to_tensor=False)
+                                embedding_2 = model.encode(query_text, convert_to_tensor=False)
+                                cosine_sim = util.pytorch_cos_sim(embedding_1, embedding_2)
+                                if cosine_sim.item()>COSINE_SIM_THRESHOLD:
+                                    retrieved_texts_json_format["text"]=each_retrieved_email
+                                    if each_retrieved_email not in check_if_unique_email:
+                                        check_if_unique_email[each_retrieved_email]=0
+                                        if label in label_retrieved_emails:
+                                            current_emails=label_retrieved_emails[label]
+                                            current_emails.append((each_retrieved_email,result_text))
+                                            label_retrieved_emails[label] = current_emails
+                                        else:
+                                            label_retrieved_emails[label]=[(each_retrieved_email,result_text)]
+                                        retrieved_emails_per_label.append(retrieved_texts_json_format)
+                    except:
+                        traceback.print_exc()
+                        continue
 
 
                 else:
                     break
-            except:
-                traceback.print_exc()
+
+
 
 
 
