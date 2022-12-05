@@ -39,7 +39,7 @@ bit_vector_retrieved_labels=[0]*len(LABELS_TO_RETRIEVE)
 path_annotated_emails="./data/enron_combined_all_uma_annotations_so_far_extraction_nov30th2022.jsonl"
 
 #the ones from which data will be retreived
-path_non_annotated_emails="./datasets/ta3_unannotated_head100.jsonl"
+path_non_annotated_emails="./data/enron_head_10.jsonl"
 #forserver
 #path_non_annotated_emails="./datasets/enron_head_5k.jsonl"
 
@@ -76,7 +76,9 @@ with open(path_annotated_emails, 'r') as annotated_file:
 with open('output/labels_gold_texts.jsonl', mode="w") as writer:
     for k,v in label_text_gold.items():
         writer.write(f"{k}:{v}\n")
-sys.exit()
+
+
+##########now that we have gold text/emails for the low frequency labels, lets go retrieve more similar emails form the unannotated text
 non_annotated_emails_text=[]
 retrieved_emails={}
 #to ensure duplicatees are not added, checking each emails sha in a dictionary
@@ -160,21 +162,19 @@ def get_similar_emails(annotation_type,label):
 
 
 
-for label in LABELS_TO_RETRIEVE:
+for label,text in label_text_gold.items():
+    per_label_no_of_emails_retrieved_counter=0
     retrieved_emails = []
-    for annotated_email in tqdm(annotated_emails,total=len(annotated_emails),desc="annotatedemails:"):
-    #for annotated_email in annotated_emails:
-
-            annotations = json.loads(annotated_email)
-
-            #check if the label exists in both token based labels and labels which span multiple tokens including sentences
-            retrieved_emails_this_label=get_similar_emails("tokens",label)
-            if(len(retrieved_emails_this_label)>0):
-                retrieved_emails.extend(retrieved_emails_this_label)
-            retrieved_emails_this_label=(get_similar_emails("spans",label))
-            if(len(retrieved_emails_this_label)>0):
-                retrieved_emails.extend(retrieved_emails_this_label)
-
+    for overall_unannotated_emails_parsed_counter,each_email in enumerate(non_annotated_emails_text):
+        if overall_unannotated_emails_parsed_counter<NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH:
+            if "message" not in label:
+                seg = pysbd.Segmenter(language="en", clean=False)
+                email_split_sentences = seg.segment(each_email)
+                for each_sentence in email_split_sentences:
+                    embedding_1 = model.encode(each_sentence, convert_to_tensor=False)
+                    embedding_2 = model.encode(text, convert_to_tensor=False)
+                    email_sent_scores = util.pytorch_cos_sim(embedding_1, embedding_2)
+                    print(email_sent_scores)
 
     print(f"\n for label {label} number of emails retreived:{len(retrieved_emails)}")
 
