@@ -4,6 +4,7 @@
 import json
 import hashlib
 import random
+import datetime
 
 from tqdm import tqdm
 from pysbd.utils import PySBDFactory
@@ -27,8 +28,8 @@ NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=1000
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 model.to(device)
-PATH_RETRIEVED_EMAILS_FILE="output/retrieved_emails.jsonl"
-PATH_PER_SIGNATURE_RETREIVED_EMAILS="output/per_signature_retrieved_emails.json"
+PATH_RETRIEVED_EMAILS_FILE="output/retrieved_emails"+str(datetime.datetime.now())+".jsonl"
+PATH_PER_SIGNATURE_RETREIVED_EMAILS="output/per_signature_retrieved_emails"+str(datetime.datetime.now())+".jsonl"
 
 
 #list of labels for which the emails have to be retrievedl
