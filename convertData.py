@@ -1,6 +1,6 @@
 # read the piranha annotated data and convert it into the kaggle toxic comment format:
 #"id","comment_text","toxic","severe_toxic","obscene","threat","insult","identity_hate"
-#"00190820581d90ce","FUCK YOUR FILTHY MOTHER IN THE ASS, DRY!",1,0,1,0,1,0
+#"00190820581d90ce"," YOUR FILTHY MOTHER IN THE ASS, DRY!",1,0,1,0,1,0
 # https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge
 import json
 import csv
@@ -17,14 +17,17 @@ message_level_labels_index={
 "message_org":2,
 }
 
-def get_span_text_and_labels():
+#given a label, and annotation span, retrieve a gold text (sentence or email ) which has annotations for that label
+def given_label_retrieve_gold_text(label_to_check):
     Lines = in_file.readlines()
     for index, line in enumerate(Lines):
         annotations = json.loads(line)
         if "spans" in annotations:
             for entry in annotations["spans"]:
                 label = entry["label"]
-                assert label in labels_all
+
+                #if the label in the span is the same as the one we are looking for- get the text corresponding to the start and end character indices
+
                 # full_text = get_spans(entry['start'], entry['end'], annotations)
 
                 # get the entire text of the email. note, this is being done only for message level labels.DO NOT USE THIS FOR SENTENCE LEVEL OR LESS< USE SPANS

@@ -7,6 +7,7 @@ from tqdm import tqdm
 from pysbd.utils import PySBDFactory
 import pysbd
 from sentence_transformers import SentenceTransformer, util
+import convertData
 
 #how many emails do you want ot retireve for each label. if you hit this number break the loop and move onto the next label
 NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=50
@@ -29,6 +30,9 @@ for index, label in enumerate(LABELS_TO_RETRIEVE):
 
 ##a bit vector to check which all labels have already been retrieved
 bit_vector_retrieved_labels=[0]*len(LABELS_TO_RETRIEVE)
+
+#a dictionary to store each label and a gold text with sentences containing that label
+label_text_gold={}
 
 #the ones which will be used as gold emails to retrieve similar ones
 path_annotated_emails="./datasets/combined_ta3_enron_sofar_onlyuma_nov30th2022_extraction.jsonl"
