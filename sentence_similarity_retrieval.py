@@ -13,6 +13,7 @@ import sys
 #how many emails do you want ot retireve for each label. if you hit this number break the loop and move onto the next label
 NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=50
 
+COSINE_SIM_THRESHOLD=0.5
 #how many emails in the unannotated dataset should we search through. i.e we cant search through all of 600k emails in enron
 #so even after searching NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH emails, we can't find 50 emails of the given label, we quit and move onto next label.
 NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=1000
@@ -162,19 +163,21 @@ def get_similar_emails(annotation_type,label):
 
 
 
-for label,text in label_text_gold.items():
+for label,query_text in label_text_gold.items():
     per_label_no_of_emails_retrieved_counter=0
     retrieved_emails = []
     for overall_unannotated_emails_parsed_counter,each_email in enumerate(non_annotated_emails_text):
         if overall_unannotated_emails_parsed_counter<NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH:
             if "message" not in label:
-                seg = pysbd.Segmenter(language="en", clean=False)
+                seg = pysbd.Segmenter(language="en", clean=True)
                 email_split_sentences = seg.segment(each_email)
-                for each_sentence in email_split_sentences:
-                    embedding_1 = model.encode(each_sentence, convert_to_tensor=False)
-                    embedding_2 = model.encode(text, convert_to_tensor=False)
-                    email_sent_scores = util.pytorch_cos_sim(embedding_1, embedding_2)
-                    print(email_sent_scores)
+                for result_text in email_split_sentences:
+                    embedding_1 = model.encode(result_text, convert_to_tensor=False)
+                    embedding_2 = model.encode(query_text, convert_to_tensor=False)
+                    cosine_sim = util.pytorch_cos_sim(embedding_1, embedding_2)
+                    if cosine_sim.item()>COSINE_SIM_THRESHOLD:
+                        retrieved_emails.append(each_email)
+                        
 
     print(f"\n for label {label} number of emails retreived:{len(retrieved_emails)}")
 
