@@ -19,7 +19,7 @@ COSINE_SIM_THRESHOLD=0.5
 NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=1000
 
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
-
+PATH_RETRIEVED_EMAILS_FILE="output/retrieved_emails.jsonl"
 
 
 #list of labels for which the emails have to be retrievedl
@@ -160,35 +160,31 @@ def get_similar_emails(annotation_type,label):
     return top_retrieved
 
 
+with open(PATH_RETRIEVED_EMAILS_FILE, mode="w") as writer:
+    writer.write("")
 
 
+    overall_retrieved_emails=[]
+    for label,query_text in label_text_gold.items():
+        retrieved_emails_per_label = []
+        for overall_unannotated_emails_parsed_counter,each_email in enumerate(non_annotated_emails_text):
+            if overall_unannotated_emails_parsed_counter<NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH or len(retrieved_emails_per_label)<NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL:
+                if "message" not in label:
+                    seg = pysbd.Segmenter(language="en", clean=True)
+                    email_split_sentences = seg.segment(each_email)
+                    for result_text in email_split_sentences:
+                        embedding_1 = model.encode(result_text, convert_to_tensor=False)
+                        embedding_2 = model.encode(query_text, convert_to_tensor=False)
+                        cosine_sim = util.pytorch_cos_sim(embedding_1, embedding_2)
+                        if cosine_sim.item()>COSINE_SIM_THRESHOLD:
+                            retrieved_emails_per_label.append(each_email)
+        if len(retrieved_emails_per_label)>0:
+            overall_retrieved_emails.extend(retrieved_emails_per_label)
 
-for label,query_text in label_text_gold.items():
-    per_label_no_of_emails_retrieved_counter=0
-    retrieved_emails = []
-    for overall_unannotated_emails_parsed_counter,each_email in enumerate(non_annotated_emails_text):
-        if overall_unannotated_emails_parsed_counter<NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH:
-            if "message" not in label:
-                seg = pysbd.Segmenter(language="en", clean=True)
-                email_split_sentences = seg.segment(each_email)
-                for result_text in email_split_sentences:
-                    embedding_1 = model.encode(result_text, convert_to_tensor=False)
-                    embedding_2 = model.encode(query_text, convert_to_tensor=False)
-                    cosine_sim = util.pytorch_cos_sim(embedding_1, embedding_2)
-                    if cosine_sim.item()>COSINE_SIM_THRESHOLD:
-                        retrieved_emails.append(each_email)
-                        
-
-    print(f"\n for label {label} number of emails retreived:{len(retrieved_emails)}")
-
-    with open('output/retrieved_emails.jsonl', mode="a") as writer:
-            for each_email in retrieved_emails:
-                d={}
-                d["text"]=each_email
-                json.dump(d,writer)
-                writer.write("\n")
-
-
+            with open(PATH_RETRIEVED_EMAILS_FILE, mode="a") as writer:
+                for each_retrieved_email in retrieved_emails_per_label:
+                    all_emails_text_this_label = "\n".join(each_retrieved_email)
+                    writer.write(each_retrieved_email)
 
 
 
