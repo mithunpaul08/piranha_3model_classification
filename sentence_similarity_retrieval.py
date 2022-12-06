@@ -23,7 +23,7 @@ NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=10
 COSINE_SIM_THRESHOLD=0.75
 #how many emails in the unannotated dataset should we search through. i.e we cant search through all of 600k emails in enron
 #so even after searching NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH emails, we can't find 50 emails of the given label, we quit and move onto next label.
-NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=10000
+NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=50000
 
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
@@ -142,7 +142,7 @@ label_counter=0
 
 for label,query_text in tqdm(label_text_gold.items(),desc="labels",total=len(label_text_gold.items())):
         #store all 600k emails in memory, and after shuffling pick only top n
-        random.shuffle(non_annotated_emails_text)
+        #random.shuffle(non_annotated_emails_text)
         non_annotated_emails_text=non_annotated_emails_text[:NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH]
         retrieved_emails_per_label = []
         for overall_unannotated_emails_parsed_counter,each_retrieved_email in enumerate(tqdm(non_annotated_emails_text,desc="retrieving_emails",total=len(non_annotated_emails_text))):
