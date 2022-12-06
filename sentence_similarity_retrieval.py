@@ -20,10 +20,10 @@ print(f"***********found that the device available is a {device}\n")
 #how many emails do you want ot retireve for each label. if you hit this number break the loop and move onto the next label
 NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=10
 
-COSINE_SIM_THRESHOLD=0.75
+COSINE_SIM_THRESHOLD=0.5
 #how many emails in the unannotated dataset should we search through. i.e we cant search through all of 600k emails in enron
 #so even after searching NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH emails, we can't find 50 emails of the given label, we quit and move onto next label.
-NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=50000
+NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=20000
 
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
