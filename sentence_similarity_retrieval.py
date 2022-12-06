@@ -170,23 +170,16 @@ for label,query_text in tqdm(label_text_gold.items(),desc="labels",total=len(lab
                     except:
                         traceback.print_exc()
                         continue
-
-
                     else:
                         if overall_unannotated_emails_parsed_counter > NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH or len(retrieved_emails_per_label) > NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL:
                             break
 
-
-
-
-
         if len(retrieved_emails_per_label)>0:
             overall_retrieved_emails.extend(retrieved_emails_per_label)
-
             with open(PATH_RETRIEVED_EMAILS_FILE, mode="a") as writer:
                 for each_email in retrieved_emails_per_label:
                     json.dump(each_email,writer)
-                writer.write("\n")
+                    writer.write("\n")
 
 with open(PATH_PER_SIGNATURE_RETREIVED_EMAILS, mode="w") as writer:
 
