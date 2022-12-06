@@ -17,6 +17,13 @@ message_level_labels_index={
 "message_org":2,
 }
 
+
+index_message_level_labels={
+0:"message_contact_person_asking",
+1:"message_contact_person_org",
+2:"message_org",
+}
+
 from torch import cuda
 device = 'cuda' if cuda.is_available() else 'cpu'
 NO_OF_CLASSES=3
@@ -155,20 +162,33 @@ def validation(epoch):
             fin_outputs.extend(torch.sigmoid(outputs).cpu().detach().numpy().tolist())
     return fin_outputs, fin_targets
 
+def get_label_string_given_index(labels_boolvalue):
+    all_labels_string_value=[]
+    for each_truple in labels_boolvalue:
+        string_truple_labels = []
+        for index, bool_value in enumerate(each_truple):
+            if bool_value==1:
+                string_truple_labels.append(index_message_level_labels[index])
+            else:
+                string_truple_labels.append(0)
+        all_labels_string_value.append(string_truple_labels)
+    return all_labels_string_value
+
+
 
 
 print(f"************found that the device is {device}\n")
 for epoch in range(EPOCHS):
     train(epoch)
     outputs, targets = validation(epoch)
+    print(f"raw sigmoid outputs before threshold cut:{outputs}")
 
     outputs = np.array(outputs) >= 0.5
     outputs_float = outputs.astype(float)
-    print(f"gold={targets}")
-    print(f"predictions={outputs_float}")
     print(f"precision={metrics.precision_score(targets,outputs_float,average='micro')}")
     print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
-
+    print(f"Gold labels:{get_label_string_given_index(targets)}")
+    print(f"predicted:{get_label_string_given_index(outputs_float)}")
     accuracy = metrics.accuracy_score(targets, outputs_float)
     f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
     f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
