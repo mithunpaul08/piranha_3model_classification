@@ -193,7 +193,6 @@ for epoch in range(EPOCHS):
     f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
     f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
     print(f"Validation at epoch : {epoch}")
-    print(f"Accuracy Score = {accuracy}")
     print(f"F1 Score (Micro) = {f1_score_micro}")
     print(f"F1 Score (Macro) = {f1_score_macro}")
     print(f"end of epoch {epoch}")
