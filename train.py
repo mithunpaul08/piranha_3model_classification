@@ -166,6 +166,8 @@ for epoch in range(EPOCHS):
     outputs_float = outputs.astype(float)
     print(f"gold={targets}")
     print(f"predictions={outputs_float}")
+    print(f"precision={metrics.precision_score(targets,outputs_float,average='micro')}")
+    print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
 
     accuracy = metrics.accuracy_score(targets, outputs_float)
     f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
