@@ -98,9 +98,8 @@ with open("data/query_file.jsonl", 'r') as in_file:
                         label_index = message_level_labels_index[label]
                         labels_onehot[label_index] = 1
                         write_flag = True
-            assert sum(labels_onehot)<3
+            assert sum(labels_onehot)<=3
             if(write_flag==True):
-
                 oneHotString=",".join([str(x) for x in labels_onehot])
                 out.write(f"{counter},\"{sentence}\",{oneHotString}\n")
                 counter = counter + 1
