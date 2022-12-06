@@ -185,14 +185,13 @@ for label,query_text in tqdm(label_text_gold.items(),desc="labels",total=len(lab
                     json.dump(each_email,writer)
                     writer.write("\n")
 
-with open(PATH_PER_LABEL_RETREIVED_EMAILS, mode="w") as writer:
-
-    for label,list_emails in label_retrieved_emails. items():
-        writer.write("-------------\n")
-        writer.write(f"label:{label}\n")
-        for index,each_email in enumerate(list_emails):
-            writer.write(f"{index}:\n")
-            writer.write(f"retrieved_sentence:{each_email[1]}\n retrieved_email:{each_email[0]}\n")
+        with open(PATH_PER_LABEL_RETREIVED_EMAILS, mode="w") as writer:
+            for label,list_emails in label_retrieved_emails. items():
+                writer.write("-------------\n")
+                writer.write(f"label:{label}\n")
+                for index,each_email in enumerate(list_emails):
+                    writer.write(f"{index}:\n")
+                    writer.write(f"retrieved_sentence:{each_email[1]}\n retrieved_email:{each_email[0]}\n")
 
 
 
