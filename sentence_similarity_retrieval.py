@@ -29,7 +29,7 @@ model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 model.to(device)
 PATH_RETRIEVED_EMAILS_FILE="output/retrieved_emails"+str(datetime.datetime.now())+".jsonl"
-PATH_PER_SIGNATURE_RETREIVED_EMAILS="output/per_signature_retrieved_emails"+str(datetime.datetime.now())+".jsonl"
+PATH_PER_LABEL_RETREIVED_EMAILS= "output/per_label_retrieved_emails" + str(datetime.datetime.now()) + ".jsonl"
 
 
 #list of labels for which the emails have to be retrievedl
@@ -181,7 +181,7 @@ for label,query_text in tqdm(label_text_gold.items(),desc="labels",total=len(lab
                     json.dump(each_email,writer)
                     writer.write("\n")
 
-with open(PATH_PER_SIGNATURE_RETREIVED_EMAILS, mode="w") as writer:
+with open(PATH_PER_LABEL_RETREIVED_EMAILS, mode="w") as writer:
 
     for label,list_emails in label_retrieved_emails. items():
         writer.write("-------------\n")
