@@ -8,21 +8,21 @@ import transformers
 import torch
 from torch.utils.data import Dataset, DataLoader, RandomSampler, SequentialSampler
 from transformers import BertTokenizer, BertModel, BertConfig
+import convertData
+
+#
+# message_level_labels_index={
+# "message_contact_person_asking":0,
+# "message_contact_person_org":1,
+# "message_org":2,
+# }
 
 
-
-message_level_labels_index={
-"message_contact_person_asking":0,
-"message_contact_person_org":1,
-"message_org":2,
-}
-
-
-index_message_level_labels={
-0:"message_contact_person_asking",
-1:"message_contact_person_org",
-2:"message_org",
-}
+# index_message_level_labels={
+# 0:"message_contact_person_asking",
+# 1:"message_contact_person_org",
+# 2:"message_org",
+# }
 
 from torch import cuda
 device = 'cuda' if cuda.is_available() else 'cpu'
@@ -168,7 +168,7 @@ def get_label_string_given_index(labels_boolvalue):
         string_truple_labels = []
         for index, bool_value in enumerate(each_truple):
             if bool_value==1:
-                string_truple_labels.append(index_message_level_labels[index])
+                string_truple_labels.append(convertData.dict_all_index_labels[index])
             else:
                 string_truple_labels.append(0)
         all_labels_string_value.append(string_truple_labels)
