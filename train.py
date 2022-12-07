@@ -1,5 +1,5 @@
-#to train a model to detect message, sentence and token level labels
-#run convertData.py before this
+#to train a model to predict message, sentence and token level labels
+#Note: run convertData.py before this train.py
 
 import numpy as np
 import pandas as pd
