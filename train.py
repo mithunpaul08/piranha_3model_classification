@@ -12,7 +12,7 @@ import convertData
 
 from torch import cuda
 device = 'cuda' if cuda.is_available() else 'cpu'
-NO_OF_CLASSES=len(convertData.labels_all)
+NO_OF_CLASSES=len(convertData.labels_in_this_training)
 MAX_LEN = 500
 TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
@@ -95,6 +95,8 @@ def loss_fn(outputs, targets):
     return torch.nn.BCEWithLogitsLoss()(outputs, targets)
 optimizer = torch.optim.Adam(params =  model.parameters(), lr=LEARNING_RATE)
 
+
+convertData.create_training_data()
 df = pd.read_csv("./data/all_data.csv", sep=",", on_bad_lines='skip')
 df['list'] = df[df.columns[2:]].values.tolist()
 new_df = df[['text', 'list']].copy()
