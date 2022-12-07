@@ -10,23 +10,9 @@ from torch.utils.data import Dataset, DataLoader, RandomSampler, SequentialSampl
 from transformers import BertTokenizer, BertModel, BertConfig
 import convertData
 
-#
-# message_level_labels_index={
-# "message_contact_person_asking":0,
-# "message_contact_person_org":1,
-# "message_org":2,
-# }
-
-
-# index_message_level_labels={
-# 0:"message_contact_person_asking",
-# 1:"message_contact_person_org",
-# 2:"message_org",
-# }
-
 from torch import cuda
 device = 'cuda' if cuda.is_available() else 'cpu'
-NO_OF_CLASSES=3
+NO_OF_CLASSES=len(convertData.labels_all)
 MAX_LEN = 500
 TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
@@ -108,11 +94,6 @@ model.to(device)
 def loss_fn(outputs, targets):
     return torch.nn.BCEWithLogitsLoss()(outputs, targets)
 optimizer = torch.optim.Adam(params =  model.parameters(), lr=LEARNING_RATE)
-# import csv
-# with open('/Users/mitch/research/piranha/piranha_3model_classification/data/all_data.csv') as csvfile:
-#     spamreader = csv.reader(csvfile, delimiter=',')
-#     for row in spamreader:
-#         print(', '.join(row))
 
 df = pd.read_csv("./data/all_data.csv", sep=",", on_bad_lines='skip')
 df['list'] = df[df.columns[2:]].values.tolist()
@@ -181,8 +162,6 @@ print(f"************found that the device is {device}\n")
 for epoch in range(EPOCHS):
     train(epoch)
     outputs, targets = validation(epoch)
-    print(f"raw sigmoid outputs before threshold cut:{outputs}")
-
     outputs = np.array(outputs) >= 0.5
     outputs_float = outputs.astype(float)
     print(f"precision={metrics.precision_score(targets,outputs_float,average='micro')}")
