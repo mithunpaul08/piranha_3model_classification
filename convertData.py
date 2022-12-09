@@ -19,6 +19,8 @@ dict_spantext_to_labels={}
 labels_in_this_training=[]
 #creating  different input data for each of messsage level, sentence level, signature, word
 TYPE_OF_LABEL="sentence"
+
+print(f"found that the type of label in this training run is: {TYPE_OF_LABEL}")
 for label in labels_all:
     if TYPE_OF_LABEL in label:
         labels_in_this_training.append(label)
