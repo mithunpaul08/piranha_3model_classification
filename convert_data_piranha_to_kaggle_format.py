@@ -16,7 +16,8 @@ OUTPUT_FILE_NAME= "data/all_data.csv"
 header=["id","text"]
 labels_all=["message_contact_person_asking", "message_contact_person_org", "message_org", "sentence_intent_attachment", "sentence_intent_click", "sentence_intent_intro", "sentence_intent_money", "sentence_intent_phonecall", "sentence_intent_products", "sentence_intent_recruiting", "sentence_intent_scheduling", "sentence_intent_service", "sentence_intent_unsubscribe", "sentence_org_used_by_employer", "sentence_passwd", "sentence_tone_polite", "sentence_tone_urgent", "sentence_url_no_name", "sentence_url_third_party", "signature", "signature_email", "signature_fullname", "signature_jobtitle", "signature_org", "signature_phone", "signature_signoff", "signature_url", "signaure_address", "signaure_handle", "words_reciever_organization", "words_sender_location", "words_sender_organization"]
 dict_spantext_to_labels={}
-
+dict_all_labels_index = {}
+dict_all_index_labels = {}
 labels_in_this_training=[]
 #creating  different input data for each of messsage level, sentence level, signature, word
 TYPE_OF_LABEL="sentence"
@@ -35,12 +36,10 @@ for label in labels_in_this_training:
 
 
 def create_label_index_mapping_both_directions():
-    dict_all_labels_index = {}
-    dict_all_index_labels={}
     for index,label in enumerate(labels_in_this_training):
         dict_all_labels_index[label]=index
         dict_all_index_labels[index]=label
-    return (dict_all_labels_index,dict_all_index_labels)
+
 
 
 #given a label, and annotation span, retrieve a gold text (sentence or email ) which has annotations for that label
@@ -125,7 +124,7 @@ def create_training_data():
         with open(OUTPUT_FILE_NAME, 'a') as out:
             counter=0
             line_counter=0
-            dict_all_labels_index,dict_all_index_labels=create_label_index_mapping_both_directions()
+            create_label_index_mapping_both_directions()
             for sentence, labels in dict_spantext_to_labels.items():
                 line_counter+=1
                 #to check gold sentences for this label has been retreieved or not
