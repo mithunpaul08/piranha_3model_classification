@@ -151,7 +151,7 @@ def get_label_string_given_index(labels_boolvalue):
         string_truple_labels = []
         for index, bool_value in enumerate(each_truple):
             if bool_value==1:
-                string_truple_labels.append(convertData.dict_all_index_labels[index])
+                string_truple_labels.append(convert_data_piranha_to_kaggle_format.dict_all_index_labels[index])
             else:
                 string_truple_labels.append(0)
         all_labels_string_value.append(string_truple_labels)
