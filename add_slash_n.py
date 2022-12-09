@@ -8,18 +8,21 @@ OUTPUT_FILE="./output/combined_retrieved_emails_dec5th_6th_with_slash_n.jsonl"
 
 all_emails=[]
 with open(INPUT_FILE) as input_file:
-    dict_emails_with_slashn = {}
     lines=input_file.readlines()
     for each_email in lines:
+        dict_input_email=json.loads(each_email)
+        dict_emails_with_slashn = {}
         seg = pysbd.Segmenter(language="en", clean=True)
-        email_split_sentences = seg.segment(each_email)
+        email_split_sentences = seg.segment(dict_input_email['text'])
         with_slash_n="\n".join(email_split_sentences)
         dict_emails_with_slashn["text"]=with_slash_n
         all_emails.append(dict_emails_with_slashn)
 
     input_file.close()
+with open(OUTPUT_FILE,"w") as output_file:
+    output_file.write("")
 
-with open(OUTPUT_FILE) as output_file:
+with open(OUTPUT_FILE,"a") as output_file:
     for each_slashn_email in all_emails:
         json.dump(each_slashn_email,output_file)
         output_file.write("\n")
