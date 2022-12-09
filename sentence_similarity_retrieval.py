@@ -37,10 +37,11 @@ PATH_PER_LABEL_RETREIVED_EMAILS= "output/per_label_retrieved_emails" + str(datet
 
 
 #list of labels for which the emails have to be retrievedl
-#all of them LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org", "sentence_org_used_by_employer", "signature_jobtitle", "sentence_passwd", "signature_email", "sentence_intent_recruiting", "signature_address", "signature_url", "words_receiver_organization", "sentence_intent_intro", "words_sender_organization"]
+#all of them
+# LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org", "sentence_org_used_by_employer", "signature_jobtitle", "sentence_passwd", "signature_email", "sentence_intent_recruiting", "signature_address", "signature_url", "words_receiver_organization", "sentence_intent_intro", "words_sender_organization"]
 
 #the top 20- or weakest 20- will retrieve 10 emails per
-LABELS_TO_RETRIEVE=[ "sentence_org_used_by_employer", "signature_jobtitle", "sentence_passwd", "signature_email", "sentence_intent_recruiting", "signature_address", "signature_url", "words_receiver_organization", "sentence_intent_intro", "words_sender_organization"]
+LABELS_TO_RETRIEVE=[ "words_receiver_organization", "sentence_intent_intro", "words_sender_organization"]
 
 #stronger20- will retrieve only 5 emails per
 #LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org",]
