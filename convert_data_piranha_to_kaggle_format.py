@@ -1,4 +1,5 @@
-# high level: read the piranha annotated data and convert it into the kaggle toxic comment format. :
+# high level: read the piranha annotated data and convert it into the kaggle toxic comment format as shown below. This will be
+#format:# used for running the training:
 #"id","comment_text","toxic","severe_toxic","obscene","threat","insult","identity_hate"
 #"00190820581d90ce"," YOUR FILTHY MOTHER IN THE ASS, DRY!",1,0,1,0,1,0
 # https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge

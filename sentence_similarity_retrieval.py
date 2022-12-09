@@ -10,7 +10,7 @@ from tqdm import tqdm
 from pysbd.utils import PySBDFactory
 import pysbd
 from sentence_transformers import SentenceTransformer, util
-import convertData
+import convert_data_piranha_to_kaggle_format
 import sys
 import json
 from torch import cuda
@@ -82,7 +82,7 @@ with open(path_annotated_emails, 'r') as annotated_file:
                     if label in label_index:
                         lbl_index=label_index[label]
                         if bit_vector_retrieved_labels[lbl_index]==0:
-                            full_text = convertData.get_spans_text_given_start_end_tokens(entry['token_start'], entry['token_end'], annotations)
+                            full_text = convert_data_piranha_to_kaggle_format.get_spans_text_given_start_end_tokens(entry['token_start'], entry['token_end'], annotations)
                             if full_text is not None:
                                 full_text=full_text.replace("\n","")
                                 bit_vector_retrieved_labels[lbl_index] = 1
