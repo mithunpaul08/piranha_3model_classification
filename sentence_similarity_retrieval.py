@@ -23,7 +23,7 @@ NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=10
 COSINE_SIM_THRESHOLD=0.5
 #how many emails in the unannotated dataset should we search through. i.e we cant search through all of 600k emails in enron
 #so even after searching NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH emails, we can't find 50 emails of the given label, we quit and move onto next label.
-NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=50000
+NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=10000
 
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
@@ -41,7 +41,9 @@ PATH_PER_LABEL_RETREIVED_EMAILS= "output/per_label_retrieved_emails" + str(datet
 # LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org", "sentence_org_used_by_employer", "signature_jobtitle", "sentence_passwd", "signature_email", "sentence_intent_recruiting", "signature_address", "signature_url", "words_receiver_organization", "sentence_intent_intro", "words_sender_organization"]
 
 #the top 20- or weakest 20- will retrieve 10 emails per
-LABELS_TO_RETRIEVE=[ "words_receiver_organization", "sentence_intent_intro", "words_sender_location"]
+#the details of weakest 20 can be found in this spreadsheet under the tab: scaling window
+#https://docs.google.com/spreadsheets/d/1xm2et0URPiRkPAuHRMOrqkJbY8lDwP1v7a05l5AEVd4/edit?usp=sharing
+LABELS_TO_RETRIEVE=["sentence_org_used_by_employer","signature_jobtitle","sentence_passwd","signature_email","sentence_intent_recruiting","signature_address","signature_url","words_receiver_organization","sentence_intent_intro","words_sender_organization"]
 
 #stronger20- will retrieve only 5 emails per
 #LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org",]
