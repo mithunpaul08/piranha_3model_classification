@@ -9,7 +9,7 @@ from tqdm import tqdm
 INPUT_FILE="./data/fraud_email_.csv"
 OUTPUT_FILE="./output/fraud_email_piranha_format.jsonl"
 
-all_emails=[] 
+all_emails=[]
 with open(INPUT_FILE) as input_file:
     lines=csv.reader(input_file,delimiter=",")
     for index,each_email in enumerate(tqdm(lines,total=len(lines))):

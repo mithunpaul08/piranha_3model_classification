@@ -1,283 +1,36 @@
-id,text,signature,signature_email,signature_fullname,signature_jobtitle,signature_org,signature_phone,signature_signoff,signature_url
-0,"Shirley S. Elliott  Citibank , N.A. - Global Energy & Mining  Two Allen Center  1200 Smith Street , Suite 2000  Houston , Texas 77002  Tel :   ( 713 ) 654 - 2868  Fax :   ( 713 ) 654 - 2849",1,0,0,0,0,0,0,0
-1,"-PLK ",1,0,0,0,0,0,0,0
-2,"Matthew Lenhart@ECT",1,0,1,0,0,0,0,0
-3,"Matthew Lenhart@ECT ",0,0,0,0,1,0,0,0
-4,"Regards ,",0,0,0,0,0,0,1,0
-5,"Kevin A. Boone  Accenture -- Houston  ( Octel ) 713.837.1638  ( Client ) 281.848.1619  ( C ) 713.306.7940  ( H ) 713.864.4149  Kevin.A.Boone@accenture.com  Our web address is http://www.accenture.com",1,0,0,0,0,0,0,0
-6,"Accenture -- Houston",0,0,0,0,1,0,0,0
-7,"Shirley S. Elliott",0,0,1,0,0,0,0,0
-8,"Citibank , N.A.",0,0,0,0,1,0,0,0
-9,"Global Energy & Mining",0,0,0,1,0,0,0,0
-10,"Tel :   ( 713 ) 654 - 2868",0,0,0,0,0,1,0,0
-11,"Regards , ",0,0,0,0,0,0,1,0
-12,"Regards ,  Kevin A. Boone  Accenture -- Houston  ( Octel ) 713.837.1638  ( Client ) 281.848.1619  ( C ) 713.306.7940  ( H ) 713.864.4149  Kevin.A.Boone@accenture.com  Our web address is http://www.accenture.com",1,0,0,0,0,0,0,0
-13,"Kevin A. Boone ",0,0,1,0,0,0,0,0
-14,"Accenture",0,0,0,0,1,0,0,0
-15,"Kevin.A.Boone@accenture.com ",0,1,0,0,0,0,0,0
-16,"http://www.accenture.com                     ",0,0,0,0,0,0,0,1
-17,"Kevin A. Boone",0,0,1,0,0,0,0,0
-18,"( C ) 713.306.7940 ",0,0,0,0,0,1,0,0
-19,"( H ) 713.864.4149 ",0,0,0,0,0,1,0,0
-20,"http://www.accenture.com",0,0,0,0,0,0,0,1
-21,"Thanks",1,0,0,0,0,0,1,0
-22,"Thanks  Kris Shireman",1,0,0,0,0,0,0,0
-23,"Kris Shireman ",0,0,1,0,0,0,0,0
-24,"Sincerely",0,0,0,0,0,0,1,0
-25,"Emmanuel",0,0,1,0,0,0,0,0
-26,"Emmanuel Mangin ",0,0,1,0,0,0,0,0
-27,"Outlook Migration Team Lead",0,0,0,1,1,0,0,0
-28,"Emmanuel.Mangin@Enron.com",0,1,0,0,0,0,0,0
-29,"Work : ? 713 - 345 - 9357 ",0,0,0,0,0,1,0,0
-30,"Regards",0,0,0,0,0,0,1,0
-31,"( Octel ) 713.837.1638  ( Client ) 281.848.1619  ( C ) 713.306.7940  ( H ) 713.864.4149",0,0,0,0,0,1,0,0
-32,"Kevin.A.Boone@accenture.com",0,1,0,0,0,0,0,0
-33,"Our web address is http://www.accenture.com",0,0,0,0,0,0,0,1
-34,"Love -- Grandma",1,0,0,0,0,0,1,0
-35,"Emmanuel Mangin  Outlook Migration Team Lead  Emmanuel.Mangin@Enron.com  Work : ? 713 - 345 - 9357  Pager : 713 - 415 - 5091",1,0,0,0,0,0,0,0
-36,"Work : ? 713 - 345 - 9357  Pager : 713 - 415 - 5091",0,0,0,0,0,1,0,0
-37,"Myers P. Namie  Partner  Cypress Litigation , L.L.C.  667 Laurel Street  Baton Rouge , LA 70802  ( 225 ) 387 - 6511  Fax : ( 225 ) 387 - 6533  clcs@msn.com",1,0,0,0,0,0,0,0
-38,"Myers P. Namie",0,0,1,0,0,0,0,0
-39,"Partner",0,0,0,1,0,0,0,0
-40,"Cypress Litigation , L.L.C.",0,0,0,0,1,0,0,0
-41,"( 225 ) 387 - 6511",0,0,0,0,0,1,0,0
-42,"clcs@msn.com ",0,1,0,0,0,0,0,0
-43,"-PLK",1,0,1,0,0,0,0,0
-44,"s.",1,0,0,0,0,0,0,0
-45,"love",0,0,0,0,0,0,1,0
-46,"Samantha  503 - 464 - 7248 ",1,0,0,0,0,0,0,0
-47,"503 - 464 - 7248",0,0,0,0,0,1,0,0
-48,"Fran  503.464.7973",1,0,0,0,0,0,0,0
-49,"503.464.7973",0,0,0,0,0,1,0,0
-50,"later",0,0,0,0,0,0,1,0
-51,"Expedia.com  Do n't just travel .   Travel right . http://expedia.com/",1,0,0,0,0,0,0,0
-52,"Travel right . http://expedia.com/",0,0,0,0,0,0,0,1
-53,"Thank you ,  Matt Lenhart ",1,0,0,0,0,0,0,0
-54,"Thank you",1,0,0,0,0,0,1,0
-55,"Matt Lenhart",1,0,1,0,0,0,0,0
-56,"Thanks for your help",0,0,0,0,0,0,1,0
-57,"matt",1,0,1,0,0,0,0,0
-58,"Citibank , N.A. - Global Energy & Mining",0,0,0,0,1,0,0,0
-59,"Fax :   ( 713 ) 654 - 2849",0,0,0,0,0,1,0,0
-60,"713.837.1638",0,0,0,0,0,1,0,0
-61,"Client ) 281.848.1619",0,0,0,0,0,1,0,0
-62,"281.848.1619",0,0,0,0,0,1,0,0
-63,"713.306.7940",0,0,0,0,0,1,0,0
-64,"713.864.4149",0,0,0,0,0,1,0,0
-65,"Love",0,0,0,0,0,0,1,0
-66,"Grandma",1,0,1,0,0,0,0,0
-67,"Kris Shireman",0,0,1,0,0,0,0,0
-68,"Sincerely ,  Emmanuel  Emmanuel Mangin  Outlook Migration Team Lead  Emmanuel.Mangin@Enron.com  Work : ? 713 - 345 - 9357  Pager : 713 - 415 - 5091",1,0,0,0,0,0,0,0
-69,"Emmanuel Mangin",0,0,1,0,0,0,0,0
-70,"713 - 345 - 9357",0,0,0,0,0,1,0,0
-71,"713 - 415 - 5091",0,0,0,0,0,1,0,0
-72,"225 ) 387 - 6511",0,0,0,0,0,1,0,0
-73,"225 ) 387 - 6533",0,0,0,0,0,1,0,0
-74,"clcs@msn.com",0,1,0,0,0,0,0,0
-75,"love   mom",1,0,0,0,0,0,0,0
-76,"mom",0,0,1,0,0,0,0,0
-77,"Thanks ,  Fran  503.464.7973",1,0,0,0,0,0,0,0
-78,"Fran",0,0,1,0,0,0,0,0
-79,"Regards ,  Samantha  503 - 464 - 7248",1,0,0,0,0,0,0,0
-80,"Samantha",0,0,1,0,0,0,0,0
-81,"503 - 464 - 7248 ",0,0,0,0,0,1,0,0
-82,"CKL",1,0,1,0,0,0,0,0
-83,"Take care- ",0,0,0,0,0,0,1,0
-84,"Take care-  jen",1,0,0,0,0,0,0,0
-85,"jen",0,0,1,0,0,0,0,0
-86,"-Stacey",1,0,1,0,0,0,0,0
-87,"( H ) 713.864.4149",0,0,0,0,0,1,0,0
-88,"Julie",1,0,1,0,0,0,0,0
-89,"Julie   :-)",1,0,0,0,0,0,0,0
-90,"( C ) 713.306.7940",0,0,0,0,0,1,0,0
-91,"Phillip",1,0,1,0,0,0,0,0
-92,"Eric Benson",0,0,1,0,0,0,0,0
-93,"Eric Benson  Sr . Specialist  Enron Government Affairs - The Americas  713 - 853 - 1711",1,0,0,0,0,0,0,0
-94,"Sr . Specialist",0,0,0,1,0,0,0,0
-95,"Enron Government Affairs - The Americas",0,0,0,0,1,0,0,0
-96,"713 - 853 - 1711",0,0,0,0,1,1,0,0
-97,"later ,  christa  ",1,0,0,0,0,0,0,0
-98,"christa",0,0,1,0,0,0,0,0
-99,"Thank you ,  Matt Lenhart",1,0,0,0,0,0,0,0
-100,"Thank you ,",0,0,0,0,0,0,1,0
-101,"Lenhart@ECT ",0,0,0,0,1,0,0,0
-102,"Kevin A. Boone  Accenture -- Houston  ( Octel ) 713.837.1638  ( Client ) 281.848.1619  ( C ) 713.306.7940  ( H ) 713.864.4149  Kevin.A.Boone@accenture.com  Our web address is http://www.accenture.com                     ",1,0,0,0,0,0,0,0
-103,"( Octel ) 713.837.1638",0,0,0,0,0,1,0,0
-104,"( Client ) 281.848.1619",0,0,0,0,0,1,0,0
-105,"- Doves - Lost Souls - 08 Catch the Sun.mp3",1,0,0,0,0,0,0,0
-106,"Octel ) 713.837.1638",0,0,0,0,0,1,0,0
-107,"C ) 713.306.7940",0,0,0,0,0,1,0,0
-108,"Love -- Grandma ",1,0,0,0,0,0,0,0
-109,"Kristann Shireman",1,0,1,0,0,0,0,0
-110,"Work : ? 713 - 345 - 9357",0,0,0,0,0,1,0,0
-111,"Myers P. Namie  Partner  Cypress Litigation , L.L.C.  667 Laurel Street  Baton Rouge , LA 70802  ( 225 ) 387 - 6511  Fax : ( 225 ) 387 - 6533  clcs@msn.com ",1,0,0,0,0,0,0,0
-112,"- rOutkast - Rosa klParks.mp3",1,0,0,0,0,0,0,0
-113,"Enron North America Corp. 		",1,0,0,0,0,0,0,0
-114,"Enron North America Corp.",0,0,0,0,1,0,0,0
-115,"s. ",1,0,0,0,0,0,0,0
-116,"James D Steffes@ENRON",1,0,1,0,0,0,0,0
-117,"Steffes@ENRON ",0,0,0,0,1,0,0,0
-118,"Regards ,  Samantha  503 - 464 - 7248 ",1,0,0,0,0,0,0,0
-119,"- Jay - Z",1,0,0,0,0,0,0,0
-120,"Take care-",0,0,0,0,0,0,1,0
-121,"H ) 713.864.4149",0,0,0,0,0,1,0,0
-122,"? Grandpa",1,0,0,0,0,0,0,0
-123,") 713.306.7940",0,0,0,0,0,1,0,0
-124,"later ,  christa",1,0,0,0,0,0,0,0
-125,"Jim",1,0,1,0,0,0,0,0
-126,"Grandpa",1,0,1,0,0,0,0,0
-127,"Expedia.com",0,0,0,0,1,0,0,0
-128,"http://expedia.com/",0,0,0,0,0,0,0,1
-129,"Best",0,0,0,0,0,0,1,0
-130,"Best ,  Jeff",1,0,0,0,0,0,0,0
-131,"Jeff",0,0,1,0,0,0,0,0
-132,"Kara Boudreau Lauer ",0,0,1,0,0,0,0,0
-133,"Kara Boudreau Lauer  EnronOnline Marketing  713/853 - 0570  kara.lauer@enron.com",1,0,0,0,0,0,0,0
-134,"EnronOnline",0,0,0,0,1,0,0,0
-135,"Marketing",0,0,0,1,0,0,0,0
-136,"713/853 - 0570 ",0,0,0,0,0,1,0,0
-137,"kara.lauer@enron.com",0,1,0,0,0,0,0,0
-138,"Farideh Namjou ",0,0,1,0,0,0,0,0
-139,"Farideh Namjou  Web Development Team  California Energy Commission  916 - 654 - 4989",1,0,0,0,0,0,0,0
-140,"Web Development Team ",0,0,0,1,0,0,0,0
-141,"California Energy Commission ",0,0,0,0,1,0,0,0
-142,"916 - 654 - 4989 ",0,0,0,0,0,1,0,0
-143,"Your Friends at Egreetings.com",1,0,0,0,1,0,0,0
-144,"Egreetings.com",0,0,0,0,1,0,0,1
-145,"Grigsby",1,0,1,0,0,0,0,0
-146,"Carole C. Frank",0,0,1,0,0,0,0,0
-147,"Carole C. Frank  Enron Net Works  713.345.3960 work  713.446.9307 cell  713.467.3860 home  carole_frank@excite.com",1,0,0,0,0,0,0,0
-148,"Enron",0,0,0,0,1,0,0,0
-149,"Net Works ",0,0,0,1,0,0,0,0
-150,"713.345.3960 work ",0,0,0,0,0,1,0,0
-151,"713.446.9307 cell ",0,0,0,0,0,1,0,0
-152,"713.467.3860 home ",0,0,0,0,0,1,0,0
-153,"carole_frank@excite.com ",0,1,0,0,0,0,0,0
-154,"Thanks ,  A. Lindsey McMurray  Senior Transportation Contract Rep.  505 - 241 - 2686  Cell 505 - 220 - 2662  Fax 505 - 241 - 2339  ",1,0,0,0,0,0,0,0
-155,"A. Lindsey McMurray",0,0,1,0,0,0,0,0
-156,"Senior Transportation Contract Rep.",0,0,0,1,0,0,0,0
-157,"505 - 241 - 2686",0,0,0,0,0,1,0,0
-158,"Cell 505 - 220 - 2662 ",0,0,0,0,0,1,0,0
-159,"Kara Boudreau Lauer",0,0,1,0,0,0,0,0
-160,"EnronOnline Marketing",0,0,0,1,1,0,0,0
-161,"713/853 - 0570",0,0,0,0,0,1,0,0
-162,"Regards ,   Paul",1,0,1,0,0,0,0,0
-163,"Paul",0,0,0,0,1,0,0,0
-164,"Farideh Namjou",0,0,1,0,0,0,0,0
-165,"Web Development Team",0,0,0,1,1,0,0,0
-166,"California Energy Commission",0,0,0,0,1,0,0,0
-167,"916 - 654 - 4989",0,0,0,0,0,1,0,0
-168,"From your friends at 1 - 800 - FLOWERS.COM   Call 1 - 800 - FLOWERS   ( 1 - 800 - 356 - 9377 ) , Click   ( www.1800flowers.com ) or Come in ! AOL Keyword : 1800flowers",1,0,0,0,0,0,0,0
-169,"1 - 800 - FLOWERS.COM",0,0,0,0,1,0,0,0
-170,"1 - 800 - FLOWERS",0,0,0,0,0,1,0,0
-171,"1 - 800 - 356 - 9377",0,0,0,0,0,1,0,0
-172,"www.1800flowers.com",0,0,0,0,0,0,0,1
-173,"Desktop Architecture",1,0,0,0,1,0,0,0
-174,"Sincerely ,    David Obelcz RealNetworks , Inc. Group Product Manager Real.com Accessories",1,0,0,0,0,0,0,0
-175,"David Obelcz",0,0,1,0,0,0,0,0
-176,"RealNetworks , Inc.",0,0,1,0,1,0,0,0
-177,"Group Product Manager",0,0,0,1,0,0,0,0
-178,"Real.com",0,0,0,0,0,0,0,1
-179,"Pat Mulhern",1,0,1,0,0,0,0,0
-180,"Nancy Hassman  California Energy Commission  Web Team",1,0,0,0,0,0,0,0
-181,"Nancy Hassman",0,0,1,0,0,0,0,0
-182,"Web Team",0,0,0,0,1,0,0,0
-183,"Enron Net Works",0,0,0,0,1,0,0,0
-184,"713.345.3960",0,0,0,0,0,1,0,0
-185,"713.446.9307",0,0,0,0,0,1,0,0
-186,"713.467.3860",0,0,0,0,0,1,0,0
-187,"carole_frank@excite.com",0,1,0,0,0,0,0,0
-188,"Thanks ,  A. Lindsey McMurray  Senior Transportation Contract Rep.  505 - 241 - 2686  Cell 505 - 220 - 2662  Fax 505 - 241 - 2339",1,0,0,0,0,0,0,0
-189,"505 - 220 - 2662",0,0,0,0,0,1,0,0
-190,"505 - 241 - 2339",0,0,0,0,0,1,0,0
-191,"Parking & Transportation Desk  3 - 7060",1,0,0,0,0,0,0,0
-192,"Parking & Transportation Desk",1,0,0,0,1,0,0,0
-193,"3 - 7060",0,0,0,0,0,1,0,0
-194,"713.345.3960 work  713.446.9307 cell  713.467.3860 home",0,0,0,0,0,1,0,0
-195,"505 - 241 - 2686  Cell 505 - 220 - 2662  Fax 505 - 241 - 2339",0,0,0,0,0,1,0,0
-196,"Thanks .  Best ,  Jeff",1,0,0,0,0,0,0,0
-197,"Take care ,  Lucy  = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =  Lucy Marshall  Executive Assistant to Jim Fallon  Office of the Chairman  Enron Broadband Services  Office 713 - 853 - 4525  Fax     713 - 345 - 7864  Cell     713 - 417 - 7802  lucy.marshall@enron.com",1,0,0,0,0,0,0,0
-198,"Take",0,0,0,0,0,0,1,0
-199,"care",0,0,0,0,0,0,1,0
-200,"Lucy Marshall  Executive Assistant to Jim Fallon  Office of the Chairman  Enron Broadband Services  Office 713 - 853 - 4525  Fax     713 - 345 - 7864  Cell     713 - 417 - 7802  lucy.marshall@enron.com",1,0,0,0,0,0,0,0
-201,"Lucy Marshall",0,0,1,0,0,0,0,0
-202,"Office 713 - 853 - 4525  Fax     713 - 345 - 7864  Cell     713 - 417 - 7802",0,0,0,0,0,1,0,0
-203,"lucy.marshall@enron.com",0,1,0,0,0,0,0,0
-204,"Happy Holidays and enjoy Houston Ballet . ",1,0,0,0,0,0,0,0
-205,"Bob Aldrich ",0,0,1,0,0,0,0,0
-206,"Bob Aldrich  Web Development Team  California Energy Commission  916 - 654 - 4989 ",1,0,0,0,0,0,0,0
-207,"Take care , ",0,0,0,0,0,0,1,0
-208,"Take care ,  Lucy ",1,0,0,0,0,0,0,0
-209,"Lucy",0,0,1,0,0,0,0,0
-210,"Mat",1,0,1,0,0,0,0,0
-211,"Sincerely , ",0,0,0,0,0,0,1,0
-212,"Sincerely ,  Meredith McArdle  Director of Customer Service",1,0,0,0,0,0,0,0
-213,"Meredith McArdle ",0,0,1,0,0,0,0,0
-214,"Director of Customer Service ",0,0,0,1,0,0,0,0
-215,"Thanks ! ",0,0,0,0,0,0,1,0
-216,"Thanks !  Shirley Crenshaw",1,0,0,0,0,0,0,0
-217,"Shirley Crenshaw ",0,0,1,0,0,0,0,0
-218,"Thank you .",0,0,0,0,0,0,1,0
-219,"Outlook",0,0,0,0,1,0,0,0
-220,"Migration Team",0,0,0,1,0,0,0,0
-221,"Regards ,  Darren Adamik  Mgr.-Trading Technology  Enron Net Works , LLC  713.853.4764 Office  713 - 853 - 9828 Fax  mailto:darren.p.adamik@enron.com",1,0,0,0,0,0,0,0
-222,"Darren Adamik ",0,0,1,0,0,0,0,0
-223,"Mgr.-Trading Technology",0,0,0,1,0,0,0,0
-224,"Enron Net Works , LLC ",0,0,0,0,1,0,0,0
-225,"713.853.4764 Office ",0,0,0,0,0,1,0,0
-226,"mailto:darren.p.adamik@enron.com ",0,1,0,0,0,0,0,0
-227,"Your friends at 1 - 800 - FLOWERS.COMc",1,0,0,0,0,0,0,0
-228,"1 - 800 - FLOWERS.COMc",0,0,0,0,1,0,0,0
-229,"Regards ,   Paul  ",1,0,0,0,0,0,0,0
-230,"Carole C. Frank  Enron Net Works  713.345.3960 work  713.446.9307 cell  713.467.3860 home  carole_frank@excite.com ",1,0,0,0,0,0,0,0
-231,"Cell 505 - 220 - 2662",0,0,0,0,0,1,0,0
-232,"Best ,",0,0,0,0,0,0,1,0
-233,"Joel Greene  ",1,0,0,0,0,0,0,0
-234,"Take care ,  Lucy",1,0,0,0,0,0,0,0
-235,"Take care",0,0,0,0,0,0,1,0
-236,"Meredith McArdle",0,0,1,0,0,0,0,0
-237,"Director of Customer Service",0,0,0,1,0,0,0,0
-238,"Hank Emery",0,0,1,0,0,0,0,0
-239,"Hank Emery  Financial Advisor  Emery Financial Group  UBS PaineWebber Incorporated  Houston , Texas  713 - 957 - 7060 ",1,0,0,0,0,0,0,0
-240,"Financial Advisor ",0,0,0,1,0,0,0,0
-241,"Emery Financial Group",0,0,0,0,1,0,0,0
-242,"UBS PaineWebber Incorporated",0,0,0,0,1,0,0,0
-243,"713 - 957 - 7060",0,0,0,0,0,1,0,0
-244,"Thank you ,  Outlook 2000 Migration Team",1,0,0,0,0,0,0,0
-245,"Outlook 2000",0,0,0,0,1,0,0,0
-246,"Migration Team ",0,0,0,1,0,0,0,0
-247,"Tonya Carpenter ",0,0,1,0,0,0,0,0
-248,"Tonya Carpenter  Burlington Resources  Gas Marketing  ( 713 ) 624 - 9170  E - mail : t_carpenter@br-inc.com",1,0,0,0,0,0,0,0
-249,"Burlington Resources",0,0,0,0,1,0,0,0
-250,"Gas Marketing ",0,0,0,1,0,0,0,0
-251,"( 713 ) 624 - 9170 ",0,0,0,0,0,1,0,0
-252,"E - mail : t_carpenter@br-inc.com  ",0,1,0,0,0,0,0,0
-253,"Thanks  -Ina Rangel",1,0,0,0,0,0,0,0
-254,"-Ina Rangel",0,0,1,0,0,0,0,0
-255,"Thank You , ",0,0,0,0,0,0,1,0
-256,"Thank You ,  Ami Thakkar  EnronOnline",1,0,0,0,0,0,0,0
-257,"Ami Thakkar",0,0,1,0,0,0,0,0
-258,"EnronOnline ",0,0,0,0,1,0,0,0
-259,"Thanks , ",0,0,0,0,0,0,1,0
-260,"Thanks ,  Ellen  x54099",1,0,0,0,0,0,0,0
-261,"Ellen",0,0,1,0,0,0,0,0
-262,"x54099 ",0,0,0,0,0,1,0,0
-263,"Thank you , ",0,0,0,0,0,0,1,0
-264,"The remaining worksheets in this workbook  > are the detailed calculations used to arrive at the individual  > assignments .  >   < < June 12 Proposal   Without J4JB in Mcfd.xls > > ",1,0,0,0,0,0,0,0
-265,"> Bill Healy",0,0,1,0,0,0,0,0
-266,"> Bill Healy  > ( 915 ) 496 - 2144  > healyb@epenergy.com",1,0,0,0,0,0,0,0
-267,"> ( 915 ) 496 - 2144 ",0,0,0,0,0,1,0,0
-268,"> healyb@epenergy.com",0,1,0,0,0,0,0,0
-269,"Thinking about you .",1,0,0,0,0,0,0,0
-270,"Thank you for your patience .",1,0,0,0,0,0,0,0
-271,"Thanks , ?",0,0,0,0,0,0,1,0
-272,"Thanks , ? Bob  Betonte",1,0,0,0,0,0,0,0
-273,"Bob  Betonte  ",0,0,1,0,0,0,0,0
-274,"> Rob Henk ",0,0,1,0,0,0,0,0
-275,"> Rob Henk",1,0,0,0,0,0,0,0
-276,"> Jim Hemmerly ",0,0,1,0,0,0,0,0
-277,"> Jim Hemmerly  > Natural Gas Trader  > Southern California Gas Company  > Telephone Number ( 213 ) 244 - 3864  > jhemmerly@socalgas.com",1,0,0,0,0,0,0,0
-278,"> Natural Gas Trader ",0,0,0,1,0,0,0,0
-279,"> Southern California Gas Company ",0,0,0,0,1,0,0,0
-280,"> Telephone Number ( 213 ) 244 - 3864 ",0,0,0,0,0,1,0,0
-281,"> jhemmerly@socalgas.com ",0,1,0,0,0,0,0,0
+id,text,words_reciever_organization,words_sender_location,words_sender_organization
+0,"head home to  Denver",0,1,0
+1,"I will be skiing in Steambost",0,1,0
+2,"As for SF",0,1,0
+3,"We , at Alberta Energy Company",0,0,1
+4,"monterrey",0,1,0
+5,"vegas",0,1,0
+6,"denver",0,1,0
+7,"Alberta Energy Company",0,0,1
+8,"Alberta",0,1,0
+9,"I do not expect to get to Houston until about 930 pm .",0,1,0
+10,"at the Hotel Monaco downtown",0,1,0
+11,"I 'm going to Athens , TX",0,1,0
+12,"i am  going to butt - fuck mississippi",0,1,0
+13,"i am ready to start tearing up houston",0,1,0
+14,"i was in monterrey , cali",0,1,0
+15,"going to new orleans sat",0,1,0
+16,"new orleans tomorrow .",0,1,0
+17,"i will get to denver tues , aug 8th",0,1,0
+18,"I will probably be heading up to NYC in January",0,1,0
+19,"back to Omah",0,1,0
+20,"CALIFORNIA ENERGY COMMISSION ",0,0,1
+21,"CALIFORNIA ENERGY COMMISSION",0,0,1
+22,"in the Houston area",0,1,0
+23,"leave San Diego",0,1,0
+24,"Couple of weeks ago I had to go to Los Angeles",0,1,0
+25,"I had to go to Vegas a couple of weeks ago",0,1,0
+26,"Going to Grand Cayman Islands",0,1,0
+27,"we leave Houston at 1:15",0,1,0
+28,"get to New York at 5:52",0,1,0
+29,"leave New  York at 3:00",0,1,0
+30,"arrive Houston at 5:49",0,1,0
+31,"I was coming to New York",0,1,0
+32,"going to Las Vegas",0,1,0
+33,"arrives San  Diego",0,1,0
+34,"leaving for Vail",0,1,0
