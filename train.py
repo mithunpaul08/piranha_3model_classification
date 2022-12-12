@@ -182,7 +182,8 @@ if TYPE_OF_RUN=="train":
             precision_global=precision
             torch.save(model.state_dict(), SAVED_MODEL_PATH)
 
-        print(f"precision={metrics.precision_score(targets,outputs_float,average='micro')}")
+        print(f"precision_micro={metrics.precision_score(targets,outputs_float,average='micro')}")
+        print(f"precision_macro={metrics.precision_score(targets,outputs_float,average='macro')}")
         print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
         print(f"Gold labels:{get_label_string_given_index(targets)}")
         print(f"predicted:{get_label_string_given_index(outputs_float)}")
