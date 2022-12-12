@@ -18,6 +18,8 @@ f1_score_global=0
 precision_global=0
 device = 'cuda' if cuda.is_available() else 'cpu'
 NO_OF_CLASSES=len(convert_data_piranha_to_kaggle_format.labels_in_this_training)
+
+print(f"found that the type of run is: {TYPE_OF_RUN}")
 def train(epoch):
     model.train()
     for _, data in enumerate(training_loader, 0):
@@ -110,11 +112,11 @@ def validation(epoch):
     return fin_outputs, fin_targets
 
 
-def testing():
+def testing(loader):
     model.eval()
     fin_outputs=[]
     with torch.no_grad():
-        for _, data in enumerate(testing_loader, 0):
+        for _, data in enumerate(loader, 0):
             ids = data['ids'].to(device, dtype = torch.long)
             mask = data['mask'].to(device, dtype = torch.long)
             token_type_ids = data['token_type_ids'].to(device, dtype = torch.long)
@@ -134,6 +136,11 @@ def get_label_string_given_index(labels_boolvalue):
         all_labels_string_value.append(string_truple_labels)
     return all_labels_string_value
 
+def given_dataframe_return_loader(df):
+    new_df = df[['text', 'list']].copy()
+    testing_dataset = new_df.sample()
+    testing_set = CustomDataset(testing_dataset, tokenizer, MAX_LEN)
+    return DataLoader(testing_set, **test_params)
 
 if TYPE_OF_RUN=="train":
     convert_data_piranha_to_kaggle_format.create_training_data()
@@ -198,27 +205,14 @@ else:
     if TYPE_OF_RUN=="test":
         df = pd.read_csv(TESTING_FILE_PATH, sep=",", on_bad_lines='skip')
         df['list'] = df[df.columns[2:]].values.tolist()
-        new_df = df[['text', 'list']].copy()
-        train_size = 1
-        testing_dataset = new_df.sample(frac=train_size,)
 
-        # print("FULL Dataset: {}".format(new_df.shape))
-        # print("TRAIN Dataset: {}".format(train_dataset.shape))
-        # print("VALIDATION Dataset: {}".format(validation_dataset.shape))
+        df[['text']] = "samnple"
+        testing_loader=given_dataframe_return_loader(df)
 
-        testing_set = CustomDataset(testing_dataset, tokenizer, MAX_LEN)
-
-
-        test_params = {'batch_size': TESTING_BATCH_SIZE,
-                        'shuffle': False,
-                        'num_workers': 0
-                        }
-
-
-        testing_loader = DataLoader(testing_set, **test_params)
-
-        model.load_state_dict(torch.load(SAVED_MODEL_PATH))
+        #SPLIT the incoming email into 4 categories. the full email will directly go as is to the BEST_MODEL_MESSAGE_LEVEL
+        best_model_path=os.path.join(OUTPUT_DIRECTORY,BEST_MODEL_MESSAGE_LEVEL)
+        model.load_state_dict(torch.load(best_model_path))
         model.eval()
-        predictions=testing()
+        predictions=testing(testing_loader)
         print(predictions)
 
