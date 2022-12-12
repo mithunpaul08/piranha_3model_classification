@@ -7,26 +7,17 @@ from sklearn import metrics
 import transformers
 import torch
 from torch.utils.data import Dataset, DataLoader, RandomSampler, SequentialSampler
-from transformers import BertTokenizer, BertModel, BertConfig
-import convert_data_piranha_to_kaggle_format
 
+import convert_data_piranha_to_kaggle_format
+import os
 from torch import cuda
+from configs import *
+
+
+f1_score_global=0
+precision_global=0
 device = 'cuda' if cuda.is_available() else 'cpu'
 NO_OF_CLASSES=len(convert_data_piranha_to_kaggle_format.labels_in_this_training)
-MAX_LEN = 500
-TRAIN_BATCH_SIZE = 8
-VALID_BATCH_SIZE = 4
-TESTING_BATCH_SIZE=1
-EPOCHS = 50
-LEARNING_RATE = 1e-05
-tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-SAVED_MODEL_PATH="./output/best_model.pt"
-TESTING_FILE_PATH="./data/testing_data.csv"
-
-#is it training or testing. testing means will load a saved model and test =["train","test"]all_data.csv
-TYPE_OF_RUN="test"
-
-
 def train(epoch):
     model.train()
     for _, data in enumerate(training_loader, 0):
@@ -154,10 +145,6 @@ if TYPE_OF_RUN=="train":
     validation_dataset = new_df.drop(train_dataset.index).reset_index(drop=True)
     train_dataset = train_dataset.reset_index(drop=True)
 
-    # print("FULL Dataset: {}".format(new_df.shape))
-    # print("TRAIN Dataset: {}".format(train_dataset.shape))
-    # print("VALIDATION Dataset: {}".format(validation_dataset.shape))
-
     training_set = CustomDataset(train_dataset, tokenizer, MAX_LEN)
     validation_set = CustomDataset(validation_dataset, tokenizer, MAX_LEN)
 
@@ -180,13 +167,27 @@ if TYPE_OF_RUN=="train":
         outputs, targets = validation(epoch)
         outputs = np.array(outputs) >= 0.5
         outputs_float = outputs.astype(float)
-        torch.save(model.state_dict(), SAVED_MODEL_PATH)
+
+        precision=metrics.precision_score(targets,outputs_float,average='micro')
+
+        #rewrite the best model every time the f1 score improves
+        if precision> precision_global:
+            precision_global=precision
+            torch.save(model.state_dict(), SAVED_MODEL_PATH)
+
         print(f"precision={metrics.precision_score(targets,outputs_float,average='micro')}")
         print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
         print(f"Gold labels:{get_label_string_given_index(targets)}")
         print(f"predicted:{get_label_string_given_index(outputs_float)}")
         accuracy = metrics.accuracy_score(targets, outputs_float)
         f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
+
+
+        if f1_score_micro>f1_score_global:
+            f1_score_global=f1_score_micro
+
+
+
         f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
         print(f"Validation at epoch : {epoch}")
         print(f"F1 Score (Micro) = {f1_score_micro}")
