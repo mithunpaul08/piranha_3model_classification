@@ -21,6 +21,10 @@ LEARNING_RATE = 1e-05
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 SAVED_MODEL_PATH="./output/best_model.pt"
 
+#is it training or testing. testing means will load a saved model and test
+TYPE_OF_RUN="test"
+
+
 def train(epoch):
     model.train()
     for _, data in enumerate(training_loader, 0):
@@ -89,10 +93,6 @@ class BERTClass(torch.nn.Module):
         output = self.l3(output_2)
         return output
 model = BERTClass()
-
-model.load_state_dict(torch.load(SAVED_MODEL_PATH))
-model.eval()
-
 model.to(device)
 
 def loss_fn(outputs, targets):
@@ -106,16 +106,16 @@ df['list'] = df[df.columns[2:]].values.tolist()
 new_df = df[['text', 'list']].copy()
 train_size = 0.8
 train_dataset=new_df.sample(frac=train_size,random_state=200)
-test_dataset=new_df.drop(train_dataset.index).reset_index(drop=True)
+validation_dataset=new_df.drop(train_dataset.index).reset_index(drop=True)
 train_dataset = train_dataset.reset_index(drop=True)
 
 
-print("FULL Dataset: {}".format(new_df.shape))
-print("TRAIN Dataset: {}".format(train_dataset.shape))
-print("TEST Dataset: {}".format(test_dataset.shape))
+# print("FULL Dataset: {}".format(new_df.shape))
+# print("TRAIN Dataset: {}".format(train_dataset.shape))
+# print("VALIDATION Dataset: {}".format(validation_dataset.shape))
 
 training_set = CustomDataset(train_dataset, tokenizer, MAX_LEN)
-testing_set = CustomDataset(test_dataset, tokenizer, MAX_LEN)
+validation_set = CustomDataset(validation_dataset, tokenizer, MAX_LEN)
 
 
 train_params = {'batch_size': TRAIN_BATCH_SIZE,
@@ -123,13 +123,13 @@ train_params = {'batch_size': TRAIN_BATCH_SIZE,
                 'num_workers': 0
                 }
 
-test_params = {'batch_size': VALID_BATCH_SIZE,
+validation_params = {'batch_size': VALID_BATCH_SIZE,
                 'shuffle': True,
                 'num_workers': 0
-                }
+                     }
 
 training_loader = DataLoader(training_set, **train_params)
-testing_loader = DataLoader(testing_set, **test_params)
+validation_loader = DataLoader(validation_set, **validation_params)
 
 
 
@@ -139,7 +139,7 @@ def validation(epoch):
     fin_targets=[]
     fin_outputs=[]
     with torch.no_grad():
-        for _, data in enumerate(testing_loader, 0):
+        for _, data in enumerate(validation_loader, 0):
             ids = data['ids'].to(device, dtype = torch.long)
             mask = data['mask'].to(device, dtype = torch.long)
             token_type_ids = data['token_type_ids'].to(device, dtype = torch.long)
@@ -162,25 +162,28 @@ def get_label_string_given_index(labels_boolvalue):
     return all_labels_string_value
 
 
-
-
-print(f"************found that the device is {device}\n")
-for epoch in range(EPOCHS):
-    train(epoch)
-    outputs, targets = validation(epoch)
-    outputs = np.array(outputs) >= 0.5
-    outputs_float = outputs.astype(float)
-    torch.save(model.state_dict(), SAVED_MODEL_PATH)
-    print(f"precision={metrics.precision_score(targets,outputs_float,average='micro')}")
-    print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
-    print(f"Gold labels:{get_label_string_given_index(targets)}")
-    print(f"predicted:{get_label_string_given_index(outputs_float)}")
-    accuracy = metrics.accuracy_score(targets, outputs_float)
-    f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
-    f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
-    print(f"Validation at epoch : {epoch}")
-    print(f"F1 Score (Micro) = {f1_score_micro}")
-    print(f"F1 Score (Macro) = {f1_score_macro}")
-    print(f"end of epoch {epoch}")
-    print(f"---------------------------")
+if TYPE_OF_RUN=="train":
+    print(f"************found that the device is {device}\n")
+    for epoch in range(EPOCHS):
+        train(epoch)
+        outputs, targets = validation(epoch)
+        outputs = np.array(outputs) >= 0.5
+        outputs_float = outputs.astype(float)
+        torch.save(model.state_dict(), SAVED_MODEL_PATH)
+        print(f"precision={metrics.precision_score(targets,outputs_float,average='micro')}")
+        print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
+        print(f"Gold labels:{get_label_string_given_index(targets)}")
+        print(f"predicted:{get_label_string_given_index(outputs_float)}")
+        accuracy = metrics.accuracy_score(targets, outputs_float)
+        f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
+        f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
+        print(f"Validation at epoch : {epoch}")
+        print(f"F1 Score (Micro) = {f1_score_micro}")
+        print(f"F1 Score (Macro) = {f1_score_macro}")
+        print(f"end of epoch {epoch}")
+        print(f"---------------------------")
+else:
+    if TYPE_OF_RUN=="test":
+        model.load_state_dict(torch.load(SAVED_MODEL_PATH))
+        model.eval()
 
