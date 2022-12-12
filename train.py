@@ -206,13 +206,16 @@ else:
         df = pd.read_csv(TESTING_FILE_PATH, sep=",", on_bad_lines='skip')
         df['list'] = df[df.columns[2:]].values.tolist()
 
+        #SPLIT the incoming email into 4 categories. the full email will directly go as is to the BEST_MODEL_MESSAGE_LEVEL
         df[['text']] = "samnple"
         testing_loader=given_dataframe_return_loader(df)
 
-        #SPLIT the incoming email into 4 categories. the full email will directly go as is to the BEST_MODEL_MESSAGE_LEVEL
+
         best_model_path=os.path.join(OUTPUT_DIRECTORY,BEST_MODEL_MESSAGE_LEVEL)
         model.load_state_dict(torch.load(best_model_path))
         model.eval()
         predictions=testing(testing_loader)
-        print(predictions)
+        outputs = np.array(predictions) >= 0.5
+        outputs_float = outputs.astype(float)
+        print(f"predicted:{get_label_string_given_index(outputs_float)}")
 
