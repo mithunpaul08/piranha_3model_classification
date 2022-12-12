@@ -21,8 +21,8 @@ LEARNING_RATE = 1e-05
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 SAVED_MODEL_PATH="./output/best_model.pt"
 
-#is it training or testing. testing means will load a saved model and test
-TYPE_OF_RUN="test"
+#is it training or testing. testing means will load a saved model and test =["train","test"]
+TYPE_OF_RUN="train"
 
 
 def train(epoch):
@@ -100,39 +100,6 @@ def loss_fn(outputs, targets):
 optimizer = torch.optim.Adam(params =  model.parameters(), lr=LEARNING_RATE)
 
 
-convert_data_piranha_to_kaggle_format.create_training_data()
-df = pd.read_csv("./data/all_data.csv", sep=",", on_bad_lines='skip')
-df['list'] = df[df.columns[2:]].values.tolist()
-new_df = df[['text', 'list']].copy()
-train_size = 0.8
-train_dataset=new_df.sample(frac=train_size,random_state=200)
-validation_dataset=new_df.drop(train_dataset.index).reset_index(drop=True)
-train_dataset = train_dataset.reset_index(drop=True)
-
-
-# print("FULL Dataset: {}".format(new_df.shape))
-# print("TRAIN Dataset: {}".format(train_dataset.shape))
-# print("VALIDATION Dataset: {}".format(validation_dataset.shape))
-
-training_set = CustomDataset(train_dataset, tokenizer, MAX_LEN)
-validation_set = CustomDataset(validation_dataset, tokenizer, MAX_LEN)
-
-
-train_params = {'batch_size': TRAIN_BATCH_SIZE,
-                'shuffle': True,
-                'num_workers': 0
-                }
-
-validation_params = {'batch_size': VALID_BATCH_SIZE,
-                'shuffle': True,
-                'num_workers': 0
-                     }
-
-training_loader = DataLoader(training_set, **train_params)
-validation_loader = DataLoader(validation_set, **validation_params)
-
-
-
 
 def validation(epoch):
     model.eval()
@@ -163,6 +130,36 @@ def get_label_string_given_index(labels_boolvalue):
 
 
 if TYPE_OF_RUN=="train":
+
+    convert_data_piranha_to_kaggle_format.create_training_data()
+    df = pd.read_csv("./data/all_data.csv", sep=",", on_bad_lines='skip')
+    df['list'] = df[df.columns[2:]].values.tolist()
+    new_df = df[['text', 'list']].copy()
+    train_size = 0.8
+    train_dataset = new_df.sample(frac=train_size, random_state=200)
+    validation_dataset = new_df.drop(train_dataset.index).reset_index(drop=True)
+    train_dataset = train_dataset.reset_index(drop=True)
+
+    # print("FULL Dataset: {}".format(new_df.shape))
+    # print("TRAIN Dataset: {}".format(train_dataset.shape))
+    # print("VALIDATION Dataset: {}".format(validation_dataset.shape))
+
+    training_set = CustomDataset(train_dataset, tokenizer, MAX_LEN)
+    validation_set = CustomDataset(validation_dataset, tokenizer, MAX_LEN)
+
+    train_params = {'batch_size': TRAIN_BATCH_SIZE,
+                    'shuffle': True,
+                    'num_workers': 0
+                    }
+
+    validation_params = {'batch_size': VALID_BATCH_SIZE,
+                         'shuffle': True,
+                         'num_workers': 0
+                         }
+
+    training_loader = DataLoader(training_set, **train_params)
+    validation_loader = DataLoader(validation_set, **validation_params)
+
     print(f"************found that the device is {device}\n")
     for epoch in range(EPOCHS):
         train(epoch)
