@@ -19,7 +19,7 @@ VALID_BATCH_SIZE = 4
 EPOCHS = 50
 LEARNING_RATE = 1e-05
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-SAVED_MODEL_PATH="./output/"
+SAVED_MODEL_PATH="./output/best_model.pt"
 
 def train(epoch):
     model.train()
@@ -89,6 +89,10 @@ class BERTClass(torch.nn.Module):
         output = self.l3(output_2)
         return output
 model = BERTClass()
+
+model.load_state_dict(torch.load(SAVED_MODEL_PATH))
+model.eval()
+
 model.to(device)
 
 def loss_fn(outputs, targets):
@@ -166,6 +170,7 @@ for epoch in range(EPOCHS):
     outputs, targets = validation(epoch)
     outputs = np.array(outputs) >= 0.5
     outputs_float = outputs.astype(float)
+    torch.save(model.state_dict(), SAVED_MODEL_PATH)
     print(f"precision={metrics.precision_score(targets,outputs_float,average='micro')}")
     print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
     print(f"Gold labels:{get_label_string_given_index(targets)}")
