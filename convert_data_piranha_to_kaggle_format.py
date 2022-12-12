@@ -12,8 +12,8 @@
 import json
 import csv
 import hashlib
-TYPE_OF_LABEL="words"
-OUTPUT_FILE_NAME= "data/all_data.csv"
+TYPE_OF_LABEL="message" #["message","words","signature","sentence","all"]
+OUTPUT_FILE_NAME= "data/training_data.csv"
 header=["id","text"]
 labels_all=["message_contact_person_asking", "message_contact_person_org", "message_org", "sentence_intent_attachment", "sentence_intent_click", "sentence_intent_intro", "sentence_intent_money", "sentence_intent_phonecall", "sentence_intent_products", "sentence_intent_recruiting", "sentence_intent_scheduling", "sentence_intent_service", "sentence_intent_unsubscribe", "sentence_org_used_by_employer", "sentence_passwd", "sentence_tone_polite", "sentence_tone_urgent", "sentence_url_no_name", "sentence_url_third_party", "signature", "signature_email", "signature_fullname", "signature_jobtitle", "signature_org", "signature_phone", "signature_signoff", "signature_url", "signaure_address", "signaure_handle", "words_reciever_organization", "words_sender_location", "words_sender_organization"]
 dict_spantext_to_labels={}
@@ -24,9 +24,14 @@ labels_in_this_training=[]
 
 
 print(f"found that the type of label in this training run is: {TYPE_OF_LABEL}")
-for label in labels_all:
-    if TYPE_OF_LABEL in label:
+if TYPE_OF_LABEL=="all":
+    for label in labels_all:
         labels_in_this_training.append(label)
+
+else:
+    for label in labels_all:
+        if TYPE_OF_LABEL in label:
+            labels_in_this_training.append(label)
 
 assert len(labels_in_this_training)>1
 

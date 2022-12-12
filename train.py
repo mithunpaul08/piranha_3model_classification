@@ -16,13 +16,15 @@ NO_OF_CLASSES=len(convert_data_piranha_to_kaggle_format.labels_in_this_training)
 MAX_LEN = 500
 TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
+TESTING_BATCH_SIZE=1
 EPOCHS = 50
 LEARNING_RATE = 1e-05
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 SAVED_MODEL_PATH="./output/best_model.pt"
+TESTING_FILE_PATH="./data/testing_data.csv"
 
-#is it training or testing. testing means will load a saved model and test =["train","test"]
-TYPE_OF_RUN="train"
+#is it training or testing. testing means will load a saved model and test =["train","test"]all_data.csv
+TYPE_OF_RUN="test"
 
 
 def train(epoch):
@@ -116,6 +118,19 @@ def validation(epoch):
             fin_outputs.extend(torch.sigmoid(outputs).cpu().detach().numpy().tolist())
     return fin_outputs, fin_targets
 
+
+def testing():
+    model.eval()
+    fin_outputs=[]
+    with torch.no_grad():
+        for _, data in enumerate(testing_loader, 0):
+            ids = data['ids'].to(device, dtype = torch.long)
+            mask = data['mask'].to(device, dtype = torch.long)
+            token_type_ids = data['token_type_ids'].to(device, dtype = torch.long)
+            outputs = model(ids, mask, token_type_ids)
+            fin_outputs.extend(torch.sigmoid(outputs).cpu().detach().numpy().tolist())
+    return fin_outputs
+
 def get_label_string_given_index(labels_boolvalue):
     all_labels_string_value=[]
     for each_truple in labels_boolvalue:
@@ -130,9 +145,8 @@ def get_label_string_given_index(labels_boolvalue):
 
 
 if TYPE_OF_RUN=="train":
-
     convert_data_piranha_to_kaggle_format.create_training_data()
-    df = pd.read_csv("./data/all_data.csv", sep=",", on_bad_lines='skip')
+    df = pd.read_csv(convert_data_piranha_to_kaggle_format.OUTPUT_FILE_NAME, sep=",", on_bad_lines='skip')
     df['list'] = df[df.columns[2:]].values.tolist()
     new_df = df[['text', 'list']].copy()
     train_size = 0.8
@@ -181,6 +195,29 @@ if TYPE_OF_RUN=="train":
         print(f"---------------------------")
 else:
     if TYPE_OF_RUN=="test":
+        df = pd.read_csv(TESTING_FILE_PATH, sep=",", on_bad_lines='skip')
+        df['list'] = df[df.columns[2:]].values.tolist()
+        new_df = df[['text', 'list']].copy()
+        train_size = 1
+        testing_dataset = new_df.sample(frac=train_size,)
+
+        # print("FULL Dataset: {}".format(new_df.shape))
+        # print("TRAIN Dataset: {}".format(train_dataset.shape))
+        # print("VALIDATION Dataset: {}".format(validation_dataset.shape))
+
+        testing_set = CustomDataset(testing_dataset, tokenizer, MAX_LEN)
+
+
+        test_params = {'batch_size': TESTING_BATCH_SIZE,
+                        'shuffle': False,
+                        'num_workers': 0
+                        }
+
+
+        testing_loader = DataLoader(testing_set, **test_params)
+
         model.load_state_dict(torch.load(SAVED_MODEL_PATH))
         model.eval()
+        predictions=testing()
+        print(predictions)
 
