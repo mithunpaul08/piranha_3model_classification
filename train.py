@@ -207,7 +207,7 @@ else:
         df['list'] = df[df.columns[2:]].values.tolist()
 
         #SPLIT the incoming email into 4 categories. the full email will directly go as is to the BEST_MODEL_MESSAGE_LEVEL
-        df[['text']] = "samnple"
+
         testing_loader=given_dataframe_return_loader(df)
 
 
@@ -218,4 +218,8 @@ else:
         outputs = np.array(predictions) >= 0.5
         outputs_float = outputs.astype(float)
         print(f"predicted:{get_label_string_given_index(outputs_float)}")
+
+
+        #split the incoming text based into sentences
+        df[['text']] = "samnple"
 
