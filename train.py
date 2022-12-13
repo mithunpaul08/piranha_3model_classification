@@ -137,7 +137,7 @@ def get_label_string_given_index(labels_boolvalue):
     return all_labels_string_value
 
 
-def print_per_label_accuracy(gold_labels_boolean_tuples, pred_labels_boolean_tuples):
+def print_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boolean_tuples):
 
 
     # to calculate per label accuracy- increase counter for each true positive
@@ -199,30 +199,37 @@ def print_per_label_accuracy(gold_labels_boolean_tuples, pred_labels_boolean_tup
 
                 #finding true positive
                 if int(gold_truple[index]) ==1:
-                    if label_tp in true_positive_true_negative_etc_per_label:
-                        old_value=true_positive_true_negative_etc_per_label[label_tp]
-                        true_positive_true_negative_etc_per_label[label_tp]=old_value+1
+                    current_label_tp=label_string+"_TP"
+                    if current_label_tp in true_positive_true_negative_etc_per_label:
+                        old_value=true_positive_true_negative_etc_per_label[current_label_tp]
+                        true_positive_true_negative_etc_per_label[current_label_tp]=old_value+1
                     else:
-                        true_positive_true_negative_etc_per_label[label_tp]=1
+                        true_positive_true_negative_etc_per_label[current_label_tp]=1
 
+                #true negative
                 if int(gold_truple[index]) ==0:
-                    if label_tn in true_positive_true_negative_etc_per_label:
-                        old_value=true_positive_true_negative_etc_per_label[label_tn]
-                        true_positive_true_negative_etc_per_label[label_tn]=old_value+1
+                    current_label_tn = label_string + "_TN"
+                    if current_label_tn in true_positive_true_negative_etc_per_label:
+                        old_value=true_positive_true_negative_etc_per_label[current_label_tn]
+                        true_positive_true_negative_etc_per_label[current_label_tn]=old_value+1
                     else:
-                        true_positive_true_negative_etc_per_label[label_tn]=1
+                        true_positive_true_negative_etc_per_label[current_label_tn]=1
+
+            #false negative
             else:
                 if int(gold_truple[index]) == 1 and int(pred_truple[index])==0:
-                    if label_fn in true_positive_true_negative_etc_per_label:
-                        old_value=true_positive_true_negative_etc_per_label[label_fn]
-                        true_positive_true_negative_etc_per_label[label_fn]=old_value+1
+                    current_label_fn = label_string + "_FN"
+                    if current_label_fn in true_positive_true_negative_etc_per_label:
+                        old_value=true_positive_true_negative_etc_per_label[current_label_fn]
+                        true_positive_true_negative_etc_per_label[current_label_fn]=old_value+1
                     else:
-                        true_positive_true_negative_etc_per_label[label_fn]=1
+                        true_positive_true_negative_etc_per_label[current_label_fn]=1
                 else:
                     if int(gold_truple[index]) == 0 and int(pred_truple[index]) == 1:
-                        if label_fp in true_positive_true_negative_etc_per_label:
-                            old_value = true_positive_true_negative_etc_per_label[label_fp]
-                            true_positive_true_negative_etc_per_label[label_fp] = old_value + 1
+                        current_label_fp = label_string + "_FP"
+                        if current_label_fp in true_positive_true_negative_etc_per_label:
+                            old_value = true_positive_true_negative_etc_per_label[current_label_fp]
+                            true_positive_true_negative_etc_per_label[current_label_fp] = old_value + 1
                         else:
                             true_positive_true_negative_etc_per_label[label_fp] = 1
 
@@ -236,18 +243,33 @@ def print_per_label_accuracy(gold_labels_boolean_tuples, pred_labels_boolean_tup
     for label, v in label_counter_accuracy.items():
         total = label_counter_overall[label]
 
-        print(f"per label {label}={v / total}")
+        print(f"------\nFor the  label {label}:")
         print(f"accuracy {label}={v / total}")
         tp=true_positive_true_negative_etc_per_label[label+"_TP"]
         tn = true_positive_true_negative_etc_per_label[label + "_TN"]
-        tp = true_positive_true_negative_etc_per_label[label + "_TP"]
-        tp=true_positive_true_negative_etc_per_label[label+"_TP"]
-        print(f"accuracy of label {label}={v / total}")
+        fp = true_positive_true_negative_etc_per_label[label + "_FP"]
+        fn=true_positive_true_negative_etc_per_label[label+"_FN"]
+
+        if (tp+fp)==0:
+            precision=0
+        else:
+            precision =tp / (tp + fp)
+
+        if (tp + fn) == 0:
+            recall=0
+        else:
+            recall =tp / (tp + fn)
+        if (precision+recall)==0:
+            F1=0
+        else:
+            F1 = 2 * (precision * recall) / (precision + recall)
+
+        print(f"precision={precision}")
+        print(f"recall={recall}")
+        print(f"F1={F1}")
 
 
 
-    for label, v in true_positive_true_negative_etc_per_label.items():
-        print(f" label {label}={v}")
 def given_dataframe_return_loader(df):
     new_df = df[['text', 'list']].copy()
     testing_dataset = new_df.sample()
@@ -296,10 +318,10 @@ if TYPE_OF_RUN=="train":
 
 
 
-        print(f"precision_micro={metrics.precision_score(targets,outputs_float,average='micro')}")
-        print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
+        # print(f"precision_micro={metrics.precision_score(targets,outputs_float,average='micro')}")
+        # print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
 
-        print_per_label_accuracy(targets, outputs_float)
+        print_per_label_metrics(targets, outputs_float)
         gold=get_label_string_given_index(targets)
         predicted=get_label_string_given_index(outputs_float)
 
@@ -318,8 +340,8 @@ if TYPE_OF_RUN=="train":
 
 
         f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
-        print(f"Validation at epoch : {epoch}")
-        print(f"F1 Score (Micro) = {f1_score_micro}")
+        # print(f"Validation at epoch : {epoch}")
+        # print(f"F1 Score (Micro) = {f1_score_micro}")
 
         print(f"end of epoch {epoch}")
         print(f"---------------------------")
