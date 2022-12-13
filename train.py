@@ -142,26 +142,28 @@ def print_per_label_accuracy(gold_labels_boolean_tuples, pred_labels_boolean_tup
 
     # to calculate per label accuracy- increase counter for each true positive
     assert len(gold_labels_boolean_tuples) == len(pred_labels_boolean_tuples)
-    label_counter_true_positive = {}
+    label_counter_accuracy = {}
     label_counter_overall = {}
 
+    # have a dictionary inside a dictionary to keep track of TP,FN etc for each label
+    # e.g.,{"words_location_TP:24}
+    true_positive_true_negative_etc_per_label = {}
+
+    #initializing the dictionaries with zeores
     for x in range(len(gold_labels_boolean_tuples[0])):
         label_string = convert_data_piranha_to_kaggle_format.dict_all_index_labels[x]
-        label_counter_true_positive[label_string] = 0
+        label_counter_accuracy[label_string] = 0
+
+        label_tp = label_string + "_TP"
+        true_positive_true_negative_etc_per_label[label_tp] = 0
+        label_tn = label_string + "_TN"
+        true_positive_true_negative_etc_per_label[label_tn] = 0
+        label_fp = label_string + "_FP"
+        true_positive_true_negative_etc_per_label[label_fp] = 0
+        label_fn = label_string + "_FN"
+        true_positive_true_negative_etc_per_label[label_fn] = 0
 
 
-    #have a dictionary inside a dictionary to keep track of TP,FN etc for each label
-    #e.g.,{"words_location":{TP:24,TN:3,FN:2,FP:34, Total=2}}
-    true_positive_true_negative_etc_per_label={}
-    inside_dict={
-        "TP":0,
-        "FP": 0,
-        "TN": 0,
-        "FN": 0,
-                 }
-    for x in range(len(gold_labels_boolean_tuples[0])):
-        label_string = convert_data_piranha_to_kaggle_format.dict_all_index_labels[x]
-        true_positive_true_negative_etc_per_label[label_string] = inside_dict
 
 
     all_labels_string_value = []
@@ -183,25 +185,69 @@ def print_per_label_accuracy(gold_labels_boolean_tuples, pred_labels_boolean_tup
             else:
                 label_counter_overall[label_string] = 1
 
+
+
+
             if gold_truple[index] == pred_truple[index]:
-                #finding true positive
-                if gold_truple[index] ==1.0:
-                    inside_dict_this_label=true_positive_true_negative_etc_per_label[label_string]
-                    old_tp=inside_dict_this_label["TP"]
-                    new_tp=old_tp+1
-                    inside_dict_this_label["TP"]=new_tp
-                    true_positive_true_negative_etc_per_label[label_string]=inside_dict_this_label
 
-
-                if label_string in label_counter_true_positive:
-                    current_count = label_counter_true_positive[label_string]
-                    label_counter_true_positive[label_string] = current_count + 1
+                # calculate accuracy as long as both gold and pred match- irrespective of TP, FP etc
+                if label_string in label_counter_accuracy:
+                    current_count = label_counter_accuracy[label_string]
+                    label_counter_accuracy[label_string] = current_count + 1
                 else:
-                    label_counter_true_positive[label_string] = 1
+                    label_counter_accuracy[label_string] = 1
 
-    for k, v in label_counter_true_positive.items():
-        total = label_counter_overall[k]
-        print(f"accuracy of label {k}={v / total}")
+                #finding true positive
+                if int(gold_truple[index]) ==1:
+                    if label_tp in true_positive_true_negative_etc_per_label:
+                        old_value=true_positive_true_negative_etc_per_label[label_tp]
+                        true_positive_true_negative_etc_per_label[label_tp]=old_value+1
+                    else:
+                        true_positive_true_negative_etc_per_label[label_tp]=1
+
+                if int(gold_truple[index]) ==0:
+                    if label_tn in true_positive_true_negative_etc_per_label:
+                        old_value=true_positive_true_negative_etc_per_label[label_tn]
+                        true_positive_true_negative_etc_per_label[label_tn]=old_value+1
+                    else:
+                        true_positive_true_negative_etc_per_label[label_tn]=1
+            else:
+                if int(gold_truple[index]) == 1 and int(pred_truple[index])==0:
+                    if label_fn in true_positive_true_negative_etc_per_label:
+                        old_value=true_positive_true_negative_etc_per_label[label_fn]
+                        true_positive_true_negative_etc_per_label[label_fn]=old_value+1
+                    else:
+                        true_positive_true_negative_etc_per_label[label_fn]=1
+                else:
+                    if int(gold_truple[index]) == 0 and int(pred_truple[index]) == 1:
+                        if label_fp in true_positive_true_negative_etc_per_label:
+                            old_value = true_positive_true_negative_etc_per_label[label_fp]
+                            true_positive_true_negative_etc_per_label[label_fp] = old_value + 1
+                        else:
+                            true_positive_true_negative_etc_per_label[label_fp] = 1
+
+
+
+
+
+
+
+
+    for label, v in label_counter_accuracy.items():
+        total = label_counter_overall[label]
+
+        print(f"per label {label}={v / total}")
+        print(f"accuracy {label}={v / total}")
+        tp=true_positive_true_negative_etc_per_label[label+"_TP"]
+        tn = true_positive_true_negative_etc_per_label[label + "_TN"]
+        tp = true_positive_true_negative_etc_per_label[label + "_TP"]
+        tp=true_positive_true_negative_etc_per_label[label+"_TP"]
+        print(f"accuracy of label {label}={v / total}")
+
+
+
+    for label, v in true_positive_true_negative_etc_per_label.items():
+        print(f" label {label}={v}")
 def given_dataframe_return_loader(df):
     new_df = df[['text', 'list']].copy()
     testing_dataset = new_df.sample()
