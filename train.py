@@ -137,7 +137,7 @@ def get_label_string_given_index(labels_boolvalue):
     return all_labels_string_value
 
 
-def get_per_label_accuracy(gold_labels_boolean_tuples, pred_labels_boolean_tuples):
+def print_per_label_accuracy(gold_labels_boolean_tuples, pred_labels_boolean_tuples):
 
 
     # to calculate per label accuracy- increase counter for each true positive
@@ -148,6 +148,21 @@ def get_per_label_accuracy(gold_labels_boolean_tuples, pred_labels_boolean_tuple
     for x in range(len(gold_labels_boolean_tuples[0])):
         label_string = convert_data_piranha_to_kaggle_format.dict_all_index_labels[x]
         label_counter_true_positive[label_string] = 0
+
+
+    #have a dictionary inside a dictionary to keep track of TP,FN etc for each label
+    #e.g.,{"words_location":{TP:24,TN:3,FN:2,FP:34, Total=2}}
+    true_positive_true_negative_etc_per_label={}
+    inside_dict={
+        "TP":0,
+        "FP": 0,
+        "TN": 0,
+        "FN": 0,
+                 }
+    for x in range(len(gold_labels_boolean_tuples[0])):
+        label_string = convert_data_piranha_to_kaggle_format.dict_all_index_labels[x]
+        true_positive_true_negative_etc_per_label[label_string] = inside_dict
+
 
     all_labels_string_value = []
     for gold_truple, pred_truple in zip(gold_labels_boolean_tuples, pred_labels_boolean_tuples):
@@ -169,6 +184,15 @@ def get_per_label_accuracy(gold_labels_boolean_tuples, pred_labels_boolean_tuple
                 label_counter_overall[label_string] = 1
 
             if gold_truple[index] == pred_truple[index]:
+                #finding true positive
+                if gold_truple[index] ==1.0:
+                    inside_dict_this_label=true_positive_true_negative_etc_per_label[label_string]
+                    old_tp=inside_dict_this_label["TP"]
+                    new_tp=old_tp+1
+                    inside_dict_this_label["TP"]=new_tp
+                    true_positive_true_negative_etc_per_label[label_string]=inside_dict_this_label
+
+
                 if label_string in label_counter_true_positive:
                     current_count = label_counter_true_positive[label_string]
                     label_counter_true_positive[label_string] = current_count + 1
@@ -229,7 +253,7 @@ if TYPE_OF_RUN=="train":
         print(f"precision_micro={metrics.precision_score(targets,outputs_float,average='micro')}")
         print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
 
-        get_per_label_accuracy(targets,outputs_float)
+        print_per_label_accuracy(targets, outputs_float)
         gold=get_label_string_given_index(targets)
         predicted=get_label_string_given_index(outputs_float)
 
@@ -250,7 +274,7 @@ if TYPE_OF_RUN=="train":
         f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
         print(f"Validation at epoch : {epoch}")
         print(f"F1 Score (Micro) = {f1_score_micro}")
-        
+
         print(f"end of epoch {epoch}")
         print(f"---------------------------")
 else:
