@@ -227,10 +227,7 @@ if TYPE_OF_RUN=="train":
 
 
         print(f"precision_micro={metrics.precision_score(targets,outputs_float,average='micro')}")
-        print(f"precision_macro={metrics.precision_score(targets,outputs_float,average='macro')}")
         print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
-
-        print(f"accuracy={metrics.accuracy_score(targets, outputs_float)}")
 
         get_per_label_accuracy(targets,outputs_float)
         gold=get_label_string_given_index(targets)
@@ -239,7 +236,7 @@ if TYPE_OF_RUN=="train":
 
 
 
-        print(f"Gold labels:\n\n")
+        print(f"Gold labels:{get_label_string_given_index(targets)}\n\n")
         print(f"predicted:{get_label_string_given_index(outputs_float)}")
         accuracy = metrics.accuracy_score(targets, outputs_float)
         f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
