@@ -250,7 +250,7 @@ if TYPE_OF_RUN=="train":
         f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
         print(f"Validation at epoch : {epoch}")
         print(f"F1 Score (Micro) = {f1_score_micro}")
-        print(f"F1 Score (Macro) = {f1_score_macro}")
+        
         print(f"end of epoch {epoch}")
         print(f"---------------------------")
 else:
