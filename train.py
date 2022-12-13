@@ -133,9 +133,51 @@ def get_label_string_given_index(labels_boolvalue):
                 string_truple_labels.append(convert_data_piranha_to_kaggle_format.dict_all_index_labels[index])
             else:
                 string_truple_labels.append(0)
-        all_labels_string_value.append(string_truple_labels)
+        all_labels_string_value.extend(string_truple_labels)
     return all_labels_string_value
 
+
+def get_per_label_accuracy(gold_labels_boolean_tuples, pred_labels_boolean_tuples):
+
+
+    # to calculate per label accuracy- increase counter for each true positive
+    assert len(gold_labels_boolean_tuples) == len(pred_labels_boolean_tuples)
+    label_counter_true_positive = {}
+    label_counter_overall = {}
+
+    for x in range(len(gold_labels_boolean_tuples[0])):
+        label_string = convert_data_piranha_to_kaggle_format.dict_all_index_labels[x]
+        label_counter_true_positive[label_string] = 0
+
+    all_labels_string_value = []
+    for gold_truple, pred_truple in zip(gold_labels_boolean_tuples, pred_labels_boolean_tuples):
+
+        assert len(gold_truple)==len(pred_truple)
+
+
+
+        for index,value in enumerate(gold_truple):
+
+            #increase the counter to calculate how many such labels were there- should be same as len(gold)
+            label_string=convert_data_piranha_to_kaggle_format.dict_all_index_labels[index]
+
+
+            if label_string in label_counter_overall:
+                current_count = label_counter_overall[label_string]
+                label_counter_overall[label_string] = current_count + 1
+            else:
+                label_counter_overall[label_string] = 1
+
+            if gold_truple[index] == pred_truple[index]:
+                if label_string in label_counter_true_positive:
+                    current_count = label_counter_true_positive[label_string]
+                    label_counter_true_positive[label_string] = current_count + 1
+                else:
+                    label_counter_true_positive[label_string] = 1
+
+    for k, v in label_counter_true_positive.items():
+        total = label_counter_overall[k]
+        print(f"accuracy of label {k}={v / total}")
 def given_dataframe_return_loader(df):
     new_df = df[['text', 'list']].copy()
     testing_dataset = new_df.sample()
@@ -182,10 +224,22 @@ if TYPE_OF_RUN=="train":
             precision_global=precision
             torch.save(model.state_dict(), SAVED_MODEL_PATH)
 
+
+
         print(f"precision_micro={metrics.precision_score(targets,outputs_float,average='micro')}")
         print(f"precision_macro={metrics.precision_score(targets,outputs_float,average='macro')}")
         print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
-        print(f"Gold labels:{get_label_string_given_index(targets)}")
+
+        print(f"accuracy={metrics.accuracy_score(targets, outputs_float)}")
+
+        get_per_label_accuracy(targets,outputs_float)
+        gold=get_label_string_given_index(targets)
+        predicted=get_label_string_given_index(outputs_float)
+
+
+
+
+        print(f"Gold labels:\n\n")
         print(f"predicted:{get_label_string_given_index(outputs_float)}")
         accuracy = metrics.accuracy_score(targets, outputs_float)
         f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
