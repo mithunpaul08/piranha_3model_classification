@@ -18,6 +18,12 @@ dict_spantext_to_labels={}
 dict_all_labels_index = {}
 dict_all_index_labels = {}
 labels_in_this_training=[]
+
+#to capture negative examples. i.e emails which dont have the given label .
+# there are two types of negative examples
+#emails that dont have any labels at all, and emails that dont have this particular label. both needs to be captured and added to training data
+list_emails_with_no_annotations=[]
+list_emails_with_no_annotations_of_given_label=[]
 #creating  different input data for each of messsage level, sentence level, signature, word
 
 
@@ -66,6 +72,8 @@ def given_label_retrieve_gold_text(in_file,label_to_check):
 def get_text_for_label_from_all_spans(Lines):
     for index, line in enumerate(Lines):
         annotations = json.loads(line)
+
+        #existence of label spans means there was atleast one label in this email that was annotated
         if "spans" in annotations:
             for entry in annotations["spans"]:
                 label = entry["label"]
@@ -88,6 +96,9 @@ def get_text_for_label_from_all_spans(Lines):
                     else:
                         #if it is sentence or word level or signature level label, get the actual span text
                         text=get_spans_text_given_start_end_tokens(entry['token_start'],entry['token_end'],annotations )
+
+                        #if there are only non message level labels, they still need to be added as negative examples for message level labels
+                        
                         if text is not None:
                             text=text.replace("\n","")
                             if text in dict_spantext_to_labels:
@@ -97,7 +108,10 @@ def get_text_for_label_from_all_spans(Lines):
                                     dict_spantext_to_labels[text] = old_value
                             else:
                                 dict_spantext_to_labels[text] = [label]
-
+        else:
+            #if there are no spans, which means that email had no label annotated, we still want to add that into data to serve as negative example
+            print(annotations)
+            list_emails_with_no_annotations.append(annotations['text'])
 
 #given the start and end of a span return the collection of the tokens corresponding to this in string format
 def get_spans_text_given_start_end_tokens(token_start_of_span, token_end_of_span, annotations):
