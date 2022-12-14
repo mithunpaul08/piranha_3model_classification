@@ -19,11 +19,7 @@ dict_all_labels_index = {}
 dict_all_index_labels = {}
 labels_in_this_training=[]
 
-#to capture negative examples. i.e emails which dont have the given label .
-# there are two types of negative examples
-#emails that dont have any labels at all, and emails that dont have this particular label. both needs to be captured and added to training data
-list_emails_with_no_annotations=[]
-list_emails_with_no_annotations_of_given_label=[]
+
 #creating  different input data for each of messsage level, sentence level, signature, word
 
 
@@ -108,10 +104,7 @@ def get_text_for_label_from_all_spans(Lines):
                                     dict_spantext_to_labels[text] = old_value
                             else:
                                 dict_spantext_to_labels[text] = [label]
-        else:
-            #if there are no spans, which means that email had no label annotated, we still want to add that into data to serve as negative example
-            print(annotations)
-            list_emails_with_no_annotations.append(annotations['text'])
+
 
 #given the start and end of a span return the collection of the tokens corresponding to this in string format
 def get_spans_text_given_start_end_tokens(token_start_of_span, token_end_of_span, annotations):
@@ -143,7 +136,8 @@ def create_training_data():
         with open(OUTPUT_FILE_NAME, 'a') as out:
             counter=0
             line_counter=0
-
+            positive_examples_counter=0
+            negative_examples_counter = 0
             for datapoint, labels in dict_spantext_to_labels.items():
                 line_counter+=1
                 #one hot vector to finally write the datapoint vs labels as to disk e.g., text,[1,0,1]
@@ -153,11 +147,13 @@ def create_training_data():
                 if datapoint!=None:
                     #if there is more than one label for the given span update the one hot vector to 1
                     if len(labels) > 1:
-                        for label in labels:
+                        for lblindx,label in enumerate(labels):
                             if label in dict_all_labels_index:
+
                                 label_index=dict_all_labels_index[label]
                                 labels_onehot[label_index]=1
-                        if sum(labels_onehot)>0: #if atleast one label was found for this datapoint
+
+                        #if sum(labels_onehot)>0: #if atleast one label was found for this datapoint
                             write_flag=True
                     else:
                         #if that span has only one label it will be in labels[0]
@@ -168,12 +164,19 @@ def create_training_data():
 
                 #maximum one hot vector must be all 1s
                 assert sum(labels_onehot)<=len(labels_in_this_training)
+                if sum(labels_onehot) == 0:
+                    negative_examples_counter += 1
+                else:
+                    positive_examples_counter += 1
+
                 # writing to the disk
                 # Note: this is an IO bottleneck. Should store everything in memory and write once ideally.
                 if(write_flag==True):
                     oneHotString=",".join([str(x) for x in labels_onehot])
-                    out.write(f"{counter},\"{sentence}\",{oneHotString}\n")
+                    out.write(f"{counter},\"{datapoint}\",{oneHotString}\n")
                     counter = counter + 1
+            print(f"total data points for label of type {TYPE_OF_LABEL} is {len(dict_spantext_to_labels)} of which "
+                  f"there are {positive_examples_counter} positive examples and {negative_examples_counter} negative examples")
 
 
 create_training_data()
