@@ -66,12 +66,21 @@ def given_label_retrieve_gold_text(in_file,label_to_check):
                     full_text = get_spans_text_given_start_end_tokens(entry['start'], entry['end'], annotations)
                     return full_text
 
+def get_negative_examples(dict_spantext_to_labels,plain_text_whole_email,empty_labels):
+    if TYPE_OF_LABEL=="message":
+        dict_spantext_to_labels[plain_text_whole_email]=empty_labels
+        return
+
 
 #go through each of the spans, find each of the labels in the spans, and check if that label is one of the labels we are
 #searching for. if yes, add it to a dictionary which maps text->label
 def get_text_for_label_from_all_spans(Lines):
     for index, line in enumerate(Lines):
         annotations = json.loads(line)
+        # for adding negative examples as text, 0,0,0
+        empty_labels = [""] * len(labels_in_this_training)
+        plain_text_whole_email=annotations['text'].replace("\n","")
+        get_negative_examples(((dict_spantext_to_labels)),plain_text_whole_email,empty_labels)
 
         #existence of label spans means there was atleast one label in this email that was annotated
         if "spans" in annotations:
@@ -79,26 +88,17 @@ def get_text_for_label_from_all_spans(Lines):
                 label = entry["label"]
                 if label in labels_in_this_training:
                     if "message" in label:
-                        # if its a message level annotation
-                        # get the entire text of the email.
-                        # note, this is being done only for message level labels.
-                        # DO NOT USE THIS FOR SENTENCE LEVEL OR LESS- USE SPANS
-                        text = annotations['text']
-                        if text is not None:
-                            text=text.replace("\n","")
+                        #explicitly picking same text of the email because we want the empty entry in dict_spantext_to_labels to be replaced by
+                        text=plain_text_whole_email
+                        if text is not None :
                             if text in dict_spantext_to_labels:
                                 old_value = dict_spantext_to_labels[text]
-                                if label not in old_value:
-                                    old_value.append(label)
-                                    dict_spantext_to_labels[text] = old_value
-                            else:
-                                dict_spantext_to_labels[text] = [label]
+                                idx=dict_all_labels_index[label]
+                                old_value[idx]=label
+                                dict_spantext_to_labels[text] = old_value
                     else:
-                        #if it is sentence or word level or signature level label, get the actual span text
-                        text=get_spans_text_given_start_end_tokens(entry['token_start'],entry['token_end'],annotations )
-
-                        #if there are only non message level labels, they still need to be added as negative examples for message level labels
-                        
+                        text = get_spans_text_given_start_end_tokens(entry['token_start'], entry['token_end'],
+                                                                     annotations)
                         if text is not None:
                             text=text.replace("\n","")
                             if text in dict_spantext_to_labels:
@@ -136,27 +136,28 @@ def create_training_data():
 
     with open("data/query_file.jsonl", 'r') as in_file:
         Lines = in_file.readlines()
+        create_label_index_mapping_both_directions()
         # go through each of the annotated data point, extract text and its label into a dictionary dict_spantext_to_labels
         get_text_for_label_from_all_spans(Lines)
         # once the dict_spantext_to_labels is filled with a mapping from spantext to corresponding labels, write it out in a one hot vector
         with open(OUTPUT_FILE_NAME, 'a') as out:
             counter=0
             line_counter=0
-            create_label_index_mapping_both_directions()
-            for sentence, labels in dict_spantext_to_labels.items():
+
+            for datapoint, labels in dict_spantext_to_labels.items():
                 line_counter+=1
-                #to check gold sentences for this label has been retreieved or not
-                # maximum one hot vector must be all 1s
+                #one hot vector to finally write the datapoint vs labels as to disk e.g., text,[1,0,1]
+                # i.e.,maximum one hot vector will be all 1s
                 labels_onehot = [0]*len(labels_in_this_training)
                 write_flag=False
-                if sentence!=None:
-                    #if there is more than one label for the given span
+                if datapoint!=None:
+                    #if there is more than one label for the given span update the one hot vector to 1
                     if len(labels) > 1:
                         for label in labels:
                             if label in dict_all_labels_index:
                                 label_index=dict_all_labels_index[label]
                                 labels_onehot[label_index]=1
-                        if sum(labels_onehot)>0:
+                        if sum(labels_onehot)>0: #if atleast one label was found for this datapoint
                             write_flag=True
                     else:
                         #if that span has only one label it will be in labels[0]
@@ -166,9 +167,9 @@ def create_training_data():
                             write_flag = True
 
                 #maximum one hot vector must be all 1s
-                #writing to the disk
-                #Note: this is an IO bottleneck. Should store everything in memory and write once ideally.
                 assert sum(labels_onehot)<=len(labels_in_this_training)
+                # writing to the disk
+                # Note: this is an IO bottleneck. Should store everything in memory and write once ideally.
                 if(write_flag==True):
                     oneHotString=",".join([str(x) for x in labels_onehot])
                     out.write(f"{counter},\"{sentence}\",{oneHotString}\n")
