@@ -2,7 +2,7 @@ from transformers import BertTokenizer, BertModel, BertConfig
 import os
 import pysbd
 
-TYPE_OF_LABEL="sentence" #["message","words","signature","sentence","all"]
+TYPE_OF_LABEL="words" #["message","words","signature","sentence","all"]
 #is it training or testing. testing means will load a saved model and test
 TYPE_OF_RUN="train" # ["train","test"]
 
@@ -30,3 +30,6 @@ test_params = {'batch_size': TESTING_BATCH_SIZE,
                'shuffle': False,
                'num_workers': 0
                }
+import spacy
+NER = spacy.load("en_core_web_sm")
+raw_text="The Indian Space Research Organisation or is the national space agency of India, headquartered in Bengaluru. It operates under Department of Space which is directly overseen by the Prime Minister of India while Chairman of ISRO acts as executive of DOS as well."

@@ -62,6 +62,11 @@ def given_label_retrieve_gold_text(in_file,label_to_check):
                     full_text = get_spans_text_given_start_end_tokens(entry['start'], entry['end'], annotations)
                     return full_text
 
+
+
+# we are adding negative examples also. i.e sentences/messages which had zero labels. we will still add it as 0,0,0
+#e.g.,,"Your encrypted password was protected so your actual passwordwas not visible.",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
 def get_negative_examples(dict_spantext_to_labels,plain_text_whole_email,empty_labels):
     if TYPE_OF_LABEL=="message":
         dict_spantext_to_labels[plain_text_whole_email]=empty_labels
@@ -70,6 +75,15 @@ def get_negative_examples(dict_spantext_to_labels,plain_text_whole_email,empty_l
             email_split_sentences = seg.segment(plain_text_whole_email)
             for each_sent in email_split_sentences:
                 dict_spantext_to_labels[each_sent] = empty_labels
+        else:
+            if TYPE_OF_LABEL == "words":
+                email_split_sentences = seg.segment(plain_text_whole_email)
+                for each_sent in email_split_sentences:
+                    text1 = NER(each_sent)
+                    for word in text1.ents:
+                        print(word.text, word.label_)
+
+
     return
 
 
