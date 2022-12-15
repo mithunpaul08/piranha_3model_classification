@@ -76,12 +76,40 @@ def get_negative_examples(dict_spantext_to_labels,plain_text_whole_email,empty_l
             for each_sent in email_split_sentences:
                 dict_spantext_to_labels[each_sent] = empty_labels
         else:
+            #to find negative examples for word level
+            # For GPEs and LOCs and ORGs, classify +/- 5 tokens
+            #Run a name finder over the whole document to collect candidate spans (i.e. +/- N words of “things of a type we care about”)
             if TYPE_OF_LABEL == "words":
                 email_split_sentences = seg.segment(plain_text_whole_email)
                 for each_sent in email_split_sentences:
                     text1 = NER(each_sent)
-                    for word in text1.ents:
-                        print(word.text, word.label_)
+                    words_this_sentence=[]
+                    #collect all the words in that sentence first
+                    for word in enumerate(text1):
+                        words_this_sentence.append(str(word[1]))
+                    for word in (text1.ents):
+
+                        #collect +/- N words of “things of a type we care about”)
+                        if word.label_ in ["GPE","LOC","ORG"]:
+                            print(word.text, word.label_)
+                            #there are some weird edge cases where the tokenizer's token doesnt match with that of NER> fucking maa ka lavda
+                            if word.text not in words_this_sentence:
+                                this_word_index_in_sent = words_this_sentence.index(word.text)
+                                start_index=this_word_index_in_sent-SPAN_LENGTH_NEGATIVE_EXAMPLE_SPAN_WORDS
+                                if (start_index<0):
+                                    start_index=0
+                                end_index = this_word_index_in_sent + SPAN_LENGTH_NEGATIVE_EXAMPLE_SPAN_WORDS
+                                if  (end_index> len(text1)):
+                                    end_index=len(text1)
+                                #get those n tokens before and after this token
+                                span_tokens=words_this_sentence[start_index:end_index]
+                                #add that as a negative example and move on with life
+                                dict_spantext_to_labels[" ".join(span_tokens)] = empty_labels
+                            else:
+                                print(word.text, word.label_)
+
+
+
 
 
     return
