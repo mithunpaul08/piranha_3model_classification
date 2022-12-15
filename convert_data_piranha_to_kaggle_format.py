@@ -18,7 +18,7 @@ dict_spantext_to_labels={}
 dict_all_labels_index = {}
 dict_all_index_labels = {}
 labels_in_this_training=[]
-
+seg = pysbd.Segmenter(language="en", clean=True)
 
 #creating  different input data for each of messsage level, sentence level, signature, word
 
@@ -67,10 +67,9 @@ def get_negative_examples(dict_spantext_to_labels,plain_text_whole_email,empty_l
         dict_spantext_to_labels[plain_text_whole_email]=empty_labels
     else:
         if TYPE_OF_LABEL=="sentence":
-            seg = pysbd.Segmenter(language="en", clean=True)
-            email_split_sentences = seg.segment(each_retrieved_email)
+            email_split_sentences = seg.segment(plain_text_whole_email)
             for each_sent in email_split_sentences:
-                dict_spantext_to_labels[plain_text_whole_email] = empty_labels
+                dict_spantext_to_labels[each_sent] = empty_labels
     return
 
 
@@ -89,7 +88,7 @@ def get_text_for_label_from_all_spans(Lines):
             for entry in annotations["spans"]:
                 label = entry["label"]
                 if label in labels_in_this_training:
-                    if "message" in label:
+                    if "message" in label and TYPE_OF_LABEL=="message":
                         #explicitly picking same text of the email because we want the empty entry in dict_spantext_to_labels to be replaced by
                         text=plain_text_whole_email
                         if text is not None :
