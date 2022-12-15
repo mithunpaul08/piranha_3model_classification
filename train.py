@@ -175,7 +175,7 @@ def print_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boolean_tupl
 
         for index,value in enumerate(gold_truple):
 
-            #increase the counter to calculate how many such labels were there- should be same as len(gold)
+            #to calculate overall count of labels... should be same as len(gold)
             label_string=convert_data_piranha_to_kaggle_format.dict_all_index_labels[index]
 
 
@@ -249,6 +249,11 @@ def print_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boolean_tupl
         tn = true_positive_true_negative_etc_per_label[label + "_TN"]
         fp = true_positive_true_negative_etc_per_label[label + "_FP"]
         fn=true_positive_true_negative_etc_per_label[label+"_FN"]
+
+        print(f"true positive:{tp}")
+        print(f"true negative:{tn}")
+        print(f"false positive:{fp}")
+        print(f"false negative :{fn}")
 
         if (tp+fp)==0:
             precision=0
