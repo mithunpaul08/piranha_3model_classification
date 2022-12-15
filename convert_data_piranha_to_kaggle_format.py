@@ -65,7 +65,13 @@ def given_label_retrieve_gold_text(in_file,label_to_check):
 def get_negative_examples(dict_spantext_to_labels,plain_text_whole_email,empty_labels):
     if TYPE_OF_LABEL=="message":
         dict_spantext_to_labels[plain_text_whole_email]=empty_labels
-        return
+    else:
+        if TYPE_OF_LABEL=="sentence":
+            seg = pysbd.Segmenter(language="en", clean=True)
+            email_split_sentences = seg.segment(each_retrieved_email)
+            for each_sent in email_split_sentences:
+                dict_spantext_to_labels[plain_text_whole_email] = empty_labels
+    return
 
 
 #go through each of the spans, find each of the labels in the spans, and check if that label is one of the labels we are
