@@ -144,6 +144,8 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
     label_counter_accuracy = {}
     label_counter_overall = {}
 
+    avg_f1=0
+    sum_f1=0
     # have a dictionary inside a dictionary to keep track of TP,FN etc for each label
     # e.g.,{"words_location_TP:24}
     true_positive_true_negative_etc_per_label = {}
@@ -249,8 +251,10 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
         print(f"precision={precision}")
         print(f"recall={recall}")
         print(f"F1={F1}")
+        sum_f1=sum_f1+F1
 
-        return F1
+    avg_f1=sum_f1/len(label_counter_accuracy.items())
+    return avg_f1
 
 
 
@@ -293,10 +297,11 @@ if TYPE_OF_RUN=="train":
         outputs = np.array(outputs) >= 0.5
         outputs_float = outputs.astype(float)
 
-        f1_validation_this_epoch = print_return_per_label_metrics(targets, outputs_float)
+        #avg f1 is used only for saving a better model
+        avg_f1_validation_this_epoch = print_return_per_label_metrics(targets, outputs_float)
         #rewrite the best model every time the f1 score improves
-        if f1_validation_this_epoch > global_f1_validation:
-            global_f1_validation = f1_validation_this_epoch
+        if avg_f1_validation_this_epoch > global_f1_validation:
+            global_f1_validation = avg_f1_validation_this_epoch
             torch.save(model.state_dict(), SAVED_MODEL_PATH)
 
         gold=get_label_string_given_index(targets)
