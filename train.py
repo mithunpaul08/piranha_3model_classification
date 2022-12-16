@@ -32,8 +32,8 @@ def train(epoch):
 
         optimizer.zero_grad()
         loss = loss_fn(outputs, targets)
-        if _ % 5000 == 0:
-            print(f'Epoch: {epoch}, Loss:  {loss.item()}')
+        #if _ % 10 == 0:
+        print(f'Epoch: {epoch}, Loss:  {loss.item()}')
 
         optimizer.zero_grad()
         loss.backward()
