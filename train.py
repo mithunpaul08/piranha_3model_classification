@@ -313,10 +313,8 @@ if TYPE_OF_RUN=="train":
         else:
             patience_counter+=1
 
-        print(f'Epoch: {epoch}, Loss:  {loss.item()}')
 
-        wandb.log({"my_custom_id": wandb.plot.line_series(xs=train_loss,ys=validation_loss,keys=["train loss", "validation loss"],title="both train and validation loss")})
-
+        
         wandb.log({'validation_loss': validation_loss,'epoch': epoch})
         predictions_validation = np.array(predictions_validation) >= 0.5
         #accuracy_validation = metrics.accuracy_score(gold_validation, predictions_validation)
