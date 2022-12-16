@@ -307,7 +307,8 @@ if TYPE_OF_RUN=="train":
         gold=get_label_string_given_index(targets)
         predicted=get_label_string_given_index(outputs_float)
 
-        print(f"Gold labels:{get_label_string_given_index(targets)}\n\n")
+        print(f"avg F1:{avg_f1_validation_this_epoch}\n")
+        print(f"Gold labels:{get_label_string_given_index(targets)}\n")
         print(f"predicted:{get_label_string_given_index(outputs_float)}")
         print(f"end of epoch {epoch}")
         print(f"---------------------------")
