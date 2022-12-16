@@ -15,14 +15,14 @@ OUTPUT_FILE_NAME= "data/training_data.csv"
 header=["id","text"]
 labels_all=["message_contact_person_asking", "message_contact_person_org", "message_org", "sentence_intent_attachment", "sentence_intent_click", "sentence_intent_intro", "sentence_intent_money", "sentence_intent_phonecall", "sentence_intent_products", "sentence_intent_recruiting", "sentence_intent_scheduling", "sentence_intent_service", "sentence_intent_unsubscribe", "sentence_org_used_by_employer", "sentence_passwd", "sentence_tone_polite", "sentence_tone_urgent", "sentence_url_no_name", "sentence_url_third_party", "signature", "signature_email", "signature_fullname", "signature_jobtitle", "signature_org", "signature_phone", "signature_signoff", "signature_url", "signaure_address", "signaure_handle", "words_reciever_organization", "words_sender_location", "words_sender_organization"]
 
-PATIENCE=10
+PATIENCE=100
 SPAN_LENGTH_NEGATIVE_EXAMPLE_SPAN_WORDS=5
 OUTPUT_DIRECTORY="./output/"
 MAX_LEN = 500
 TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
 TESTING_BATCH_SIZE=1
-EPOCHS = 100
+EPOCHS = 1000
 LEARNING_RATE = 1e-06
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 

@@ -314,7 +314,7 @@ if TYPE_OF_RUN=="train":
             patience_counter+=1
 
 
-        
+
         wandb.log({'validation_loss': validation_loss,'epoch': epoch})
         predictions_validation = np.array(predictions_validation) >= 0.5
         #accuracy_validation = metrics.accuracy_score(gold_validation, predictions_validation)
