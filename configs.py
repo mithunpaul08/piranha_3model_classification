@@ -23,7 +23,7 @@ TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
 TESTING_BATCH_SIZE=1
 EPOCHS = 1000
-LEARNING_RATE = 1e-06
+LEARNING_RATE = 1e-05
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
 TESTING_FILE_PATH="./data/testing_data.csv"
