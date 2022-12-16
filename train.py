@@ -39,16 +39,11 @@ def train(epoch):
         loss.backward()
         optimizer.step()
 
-        # if device == "cuda":
-        #     accuracy_training = sklearn.metrics.accuracy_score(targets.cpu().data.numpy(), outputs.cpu().data.numpy())
-        # else:
-        #     detached_targets=targets.detach().numpy()
-        #     detached_outputs = outputs.detach().numpy()
-        #     accuracy_training = sklearn.metrics.accuracy_score(detached_targets, detached_outputs)
+        return loss
 
-        print(f'Epoch: {epoch}, Loss:  {loss.item()}')
-        wandb.log({'loss_training': loss, 'epoch': epoch})
-        #wandb.log({'accuracy_training': accuracy_training, 'epoch': epoch})
+
+
+
 class CustomDataset(Dataset):
 
     def __init__(self, dataframe, tokenizer, max_len):
@@ -309,7 +304,7 @@ if TYPE_OF_RUN=="train":
             print(f"found that validation loss is not improving after hitting patience of {PATIENCE}. Quitting")
             sys.exit()
 
-        train(epoch)
+        train_loss=train(epoch)
         predictions_validation, gold_validation ,validation_loss = validation(epoch)
 
 
@@ -317,6 +312,10 @@ if TYPE_OF_RUN=="train":
             global_validation_loss=validation_loss
         else:
             patience_counter+=1
+
+        print(f'Epoch: {epoch}, Loss:  {loss.item()}')
+
+        wandb.log({"my_custom_id": wandb.plot.line_series(xs=train_loss,ys=validation_loss,keys=["train loss", "validation loss"],title="both train and validation loss")})
 
         wandb.log({'validation_loss': validation_loss,'epoch': epoch})
         predictions_validation = np.array(predictions_validation) >= 0.5
