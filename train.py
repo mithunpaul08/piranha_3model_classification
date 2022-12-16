@@ -1,5 +1,6 @@
 #to train a model to predict message, sentence and token level labels
 #Note: run convert_data_piranha_to_kaggle_format.py before this train.py
+#dedication/reference:https://github.com/abhimishra91/transformers-tutorials/blob/master/transformers_multi_label_classification.ipynb
 
 import numpy as np
 import pandas as pd
@@ -310,7 +311,7 @@ if TYPE_OF_RUN=="train":
 
         train(epoch)
         predictions_validation, gold_validation ,validation_loss = validation(epoch)
-        accuracy_validation = sklearn.metrics.accuracy_score(gold_validation, predictions_validation)
+
 
         if validation_loss<global_validation_loss:
             global_validation_loss=validation_loss
@@ -321,6 +322,7 @@ if TYPE_OF_RUN=="train":
         wandb.log({'validation_loss': validation_loss,'epoch': epoch})
         wandb.log({'accuracy_validation': accuracy_validation,'epoch': epoch})
         predictions_validation = np.array(predictions_validation) >= 0.5
+        #accuracy_validation = metrics.accuracy_score(gold_validation, predictions_validation)
         outputs_float = predictions_validation.astype(float)
 
         #avg f1 is used only for saving a better model
