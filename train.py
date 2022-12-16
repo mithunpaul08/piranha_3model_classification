@@ -292,6 +292,7 @@ if TYPE_OF_RUN=="train":
 
     print(f"************found that the device is {device}\n")
     for epoch in range(EPOCHS):
+
         train(epoch)
         outputs, targets = validation(epoch)
         outputs = np.array(outputs) >= 0.5

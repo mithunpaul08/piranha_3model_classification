@@ -62,6 +62,11 @@ def given_label_retrieve_gold_text(in_file,label_to_check):
                     full_text = get_spans_text_given_start_end_tokens(entry['start'], entry['end'], annotations)
                     return full_text
 
+
+
+# we are adding negative examples also. i.e sentences/messages which had zero labels. we will still add it as 0,0,0
+#e.g.,,"Your encrypted password was protected so your actual passwordwas not visible.",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+
 def get_negative_examples(dict_spantext_to_labels,plain_text_whole_email,empty_labels):
     if TYPE_OF_LABEL=="message":
         dict_spantext_to_labels[plain_text_whole_email]=empty_labels
@@ -70,6 +75,50 @@ def get_negative_examples(dict_spantext_to_labels,plain_text_whole_email,empty_l
             email_split_sentences = seg.segment(plain_text_whole_email)
             for each_sent in email_split_sentences:
                 dict_spantext_to_labels[each_sent] = empty_labels
+        else:
+            #to find negative examples for ner_span level
+            # For GPEs and LOCs and ORGs, classify +/- 5 tokens
+            #Run a name finder over the whole document to collect candidate spans (i.e. +/- N words of “things of a type we care about”)
+            if TYPE_OF_LABEL == "words":
+                email_split_sentences = seg.segment(plain_text_whole_email)
+                for each_sent in email_split_sentences:
+                    text1 = NER(each_sent)
+                    words_this_sentence=[]
+                    #collect all the words in that sentence first
+                    # for ner_span in enumerate(text1):
+                    #     words_this_sentence.append(str(ner_span[1]))
+                    for ner_span in text1.ents:
+                        #collect +/- N words of “things of a type we care about”)
+                        if ner_span.label_ in ["GPE","LOC","ORG"]:
+                            #there are some weird edge cases where the tokenizer's token doesnt match with that of NER> fucking maa ka lavda
+                            #if ner_span.text in text1.doc:
+                            #split the foundNER span, get its first token, and
+                            #split_ner_text=NER(ner_span.text )
+                            #if ner_span.text in words_this_sentence:
+                                #this_word_index_in_sent = words_this_sentence.index(ner_span.text)
+                            start_index=ner_span.start-SPAN_LENGTH_NEGATIVE_EXAMPLE_SPAN_WORDS
+                            end_index=ner_span.end+SPAN_LENGTH_NEGATIVE_EXAMPLE_SPAN_WORDS
+                            if (start_index < 0):
+                                start_index = 0
+                            if (end_index > len(text1)):
+                                end_index = len(text1)
+                            span_tokens=str(text1[start_index:end_index])
+                            #this_word_index_in_sent-SPAN_LENGTH_NEGATIVE_EXAMPLE_SPAN_WORDS
+
+                            # end_index = this_word_index_in_sent + SPAN_LENGTH_NEGATIVE_EXAMPLE_SPAN_WORDS
+                            #
+                            # #get those n tokens before and after this token
+                            # span_tokens=words_this_sentence[start_index:end_index]
+                            #add that as a negative example and move on with life
+                            dict_spantext_to_labels[span_tokens] = empty_labels
+                            # else:
+                            #     print("test")
+
+
+
+
+
+
     return
 
 
@@ -77,6 +126,7 @@ def get_negative_examples(dict_spantext_to_labels,plain_text_whole_email,empty_l
 #searching for. if yes, add it to a dictionary which maps text->label
 def get_text_for_label_from_all_spans(Lines):
     for index, line in enumerate(Lines):
+
         annotations = json.loads(line)
         # for adding negative examples as text, 0,0,0
         empty_labels = [""] * len(labels_in_this_training)
