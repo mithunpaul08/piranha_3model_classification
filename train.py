@@ -34,13 +34,20 @@ def train(epoch):
 
         optimizer.zero_grad()
         loss = loss_fn(outputs, targets)
-        accuracy_training=sklearn.metrics.accuracy_score(targets,outputs)
-        print(f'Epoch: {epoch}, Loss:  {loss.item()}')
-        wandb.log({ 'loss_training': loss,'epoch': epoch})
-        wandb.log({'accuracy_training': accuracy_training,'epoch': epoch})
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
+
+        # if device == "cuda":
+        #     accuracy_training = sklearn.metrics.accuracy_score(targets.cpu().data.numpy(), outputs.cpu().data.numpy())
+        # else:
+        #     detached_targets=targets.detach().numpy()
+        #     detached_outputs = outputs.detach().numpy()
+        #     accuracy_training = sklearn.metrics.accuracy_score(detached_targets, detached_outputs)
+
+        print(f'Epoch: {epoch}, Loss:  {loss.item()}')
+        wandb.log({'loss_training': loss, 'epoch': epoch})
+        #wandb.log({'accuracy_training': accuracy_training, 'epoch': epoch})
 class CustomDataset(Dataset):
 
     def __init__(self, dataframe, tokenizer, max_len):
