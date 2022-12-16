@@ -3,6 +3,7 @@
 
 import numpy as np
 import pandas as pd
+import sklearn.metrics
 from sklearn import metrics
 import transformers
 import torch
@@ -32,9 +33,10 @@ def train(epoch):
 
         optimizer.zero_grad()
         loss = loss_fn(outputs, targets)
-        #if _ % 10 == 0:
+        accuracy_training=sklearn.metrics.accuracy_score(targets,outputs)
         print(f'Epoch: {epoch}, Loss:  {loss.item()}')
-        wandb.log({ 'loss': loss})
+        wandb.log({ 'loss_training': loss,'epoch': epoch})
+        wandb.log({'accuracy_training': accuracy_training,'epoch': epoch})
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
@@ -294,23 +296,27 @@ if TYPE_OF_RUN=="train":
     for epoch in range(EPOCHS):
 
         train(epoch)
-        outputs, targets = validation(epoch)
-        outputs = np.array(outputs) >= 0.5
-        outputs_float = outputs.astype(float)
+        predictions_validation, gold_validation = validation(epoch)
+        accuracy_validation = sklearn.metrics.accuracy_score(gold_validation, predictions_validation)
+
+
+        wandb.log({'accuracy_validation': accuracy_validation,'epoch': epoch})
+        predictions_validation = np.array(predictions_validation) >= 0.5
+        outputs_float = predictions_validation.astype(float)
 
         #avg f1 is used only for saving a better model
-        avg_f1_validation_this_epoch = print_return_per_label_metrics(targets, outputs_float)
+        avg_f1_validation_this_epoch = print_return_per_label_metrics(gold_validation, outputs_float)
         #rewrite the best model every time the f1 score improves
         if avg_f1_validation_this_epoch > global_f1_validation:
             global_f1_validation = avg_f1_validation_this_epoch
             torch.save(model.state_dict(), SAVED_MODEL_PATH)
 
-        gold=get_label_string_given_index(targets)
+        gold=get_label_string_given_index(gold_validation)
         predicted=get_label_string_given_index(outputs_float)
 
         print(f"avg F1:{avg_f1_validation_this_epoch}\n")
         wandb.log({'avg_f1_validation_this_epoch': avg_f1_validation_this_epoch})
-        print(f"Gold labels:{get_label_string_given_index(targets)}\n")
+        print(f"Gold labels:{get_label_string_given_index(gold_validation)}\n")
         print(f"predicted:{get_label_string_given_index(outputs_float)}")
         print(f"end of epoch {epoch}")
         print(f"---------------------------")
@@ -328,8 +334,8 @@ else:
         model.load_state_dict(torch.load(best_model_path))
         model.eval()
         predictions=testing(testing_loader)
-        outputs = np.array(predictions) >= 0.5
-        outputs_float = outputs.astype(float)
+        predictions_validation = np.array(predictions) >= 0.5
+        outputs_float = predictions_validation.astype(float)
         print(f"predicted:{get_label_string_given_index(outputs_float)}")
 
 
