@@ -16,6 +16,7 @@ from configs import *
 
 
 global_f1_validation=0
+global_validation_loss=999999
 precision_global=0
 device = 'cuda' if cuda.is_available() else 'cpu'
 NO_OF_CLASSES=len(convert_data_piranha_to_kaggle_format.labels_in_this_training)
@@ -109,9 +110,10 @@ def validation(epoch):
             token_type_ids = data['token_type_ids'].to(device, dtype = torch.long)
             targets = data['targets'].to(device, dtype = torch.float)
             outputs = model(ids, mask, token_type_ids)
+            validation_loss = loss_fn(outputs, targets)
             fin_targets.extend(targets.cpu().detach().numpy().tolist())
             fin_outputs.extend(torch.sigmoid(outputs).cpu().detach().numpy().tolist())
-    return fin_outputs, fin_targets
+    return fin_outputs, fin_targets,validation_loss
 
 
 def testing(loader):
@@ -293,13 +295,23 @@ if TYPE_OF_RUN=="train":
     validation_loader = DataLoader(validation_set, **validation_params)
 
     print(f"************found that the device is {device}\n")
+    patience_counter=0
     for epoch in range(EPOCHS):
+        if(patience_counter>PATIENCE):
+            print(f"found that validation loss is not improving after hitting patience of {PATIENCE}. Quitting")
+            sys.exit()
 
         train(epoch)
-        predictions_validation, gold_validation = validation(epoch)
+        predictions_validation, gold_validation ,validation_loss = validation(epoch)
         accuracy_validation = sklearn.metrics.accuracy_score(gold_validation, predictions_validation)
 
+        if validation_loss<global_validation_loss:
+            global_validation_loss=validation_loss
+        else:
+            patience_counter+=1
 
+
+        wandb.log({'validation_loss': validation_loss,'epoch': epoch})
         wandb.log({'accuracy_validation': accuracy_validation,'epoch': epoch})
         predictions_validation = np.array(predictions_validation) >= 0.5
         outputs_float = predictions_validation.astype(float)
