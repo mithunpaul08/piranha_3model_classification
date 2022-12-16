@@ -34,7 +34,7 @@ def train(epoch):
         loss = loss_fn(outputs, targets)
         #if _ % 10 == 0:
         print(f'Epoch: {epoch}, Loss:  {loss.item()}')
-
+        wandb.log({ 'loss': loss})
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
@@ -309,6 +309,7 @@ if TYPE_OF_RUN=="train":
         predicted=get_label_string_given_index(outputs_float)
 
         print(f"avg F1:{avg_f1_validation_this_epoch}\n")
+        wandb.log({'avg_f1_validation_this_epoch': avg_f1_validation_this_epoch})
         print(f"Gold labels:{get_label_string_given_index(targets)}\n")
         print(f"predicted:{get_label_string_given_index(outputs_float)}")
         print(f"end of epoch {epoch}")

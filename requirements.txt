@@ -4,7 +4,7 @@ numpy
 scikit-learn
 pysbd
 sentence_transformers
-
+wandb
 #spacy
 #pip install -U pip setuptools wheel
 #pip install -U 'spacy[apple]'
