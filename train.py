@@ -14,7 +14,7 @@ from torch import cuda
 from configs import *
 
 
-f1_score_global=0
+global_f1_validation=0
 precision_global=0
 device = 'cuda' if cuda.is_available() else 'cpu'
 NO_OF_CLASSES=len(convert_data_piranha_to_kaggle_format.labels_in_this_training)
@@ -137,14 +137,15 @@ def get_label_string_given_index(labels_boolvalue):
     return all_labels_string_value
 
 
-def print_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boolean_tuples):
-
+def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boolean_tuples):
 
     # to calculate per label accuracy- increase counter for each true positive
     assert len(gold_labels_boolean_tuples) == len(pred_labels_boolean_tuples)
     label_counter_accuracy = {}
     label_counter_overall = {}
 
+    avg_f1=0
+    sum_f1=0
     # have a dictionary inside a dictionary to keep track of TP,FN etc for each label
     # e.g.,{"words_location_TP:24}
     true_positive_true_negative_etc_per_label = {}
@@ -153,7 +154,6 @@ def print_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boolean_tupl
     for x in range(len(gold_labels_boolean_tuples[0])):
         label_string = convert_data_piranha_to_kaggle_format.dict_all_index_labels[x]
         label_counter_accuracy[label_string] = 0
-
         label_tp = label_string + "_TP"
         true_positive_true_negative_etc_per_label[label_tp] = 0
         label_tn = label_string + "_TN"
@@ -163,33 +163,19 @@ def print_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boolean_tupl
         label_fn = label_string + "_FN"
         true_positive_true_negative_etc_per_label[label_fn] = 0
 
-
-
-
     all_labels_string_value = []
     for gold_truple, pred_truple in zip(gold_labels_boolean_tuples, pred_labels_boolean_tuples):
-
         assert len(gold_truple)==len(pred_truple)
-
-
-
         for index,value in enumerate(gold_truple):
-
             #to calculate overall count of labels... should be same as len(gold)
             label_string=convert_data_piranha_to_kaggle_format.dict_all_index_labels[index]
-
-
             if label_string in label_counter_overall:
                 current_count = label_counter_overall[label_string]
                 label_counter_overall[label_string] = current_count + 1
             else:
                 label_counter_overall[label_string] = 1
 
-
-
-
             if gold_truple[index] == pred_truple[index]:
-
                 # calculate accuracy as long as both gold and pred match- irrespective of TP, FP etc
                 if label_string in label_counter_accuracy:
                     current_count = label_counter_accuracy[label_string]
@@ -233,13 +219,6 @@ def print_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boolean_tupl
                         else:
                             true_positive_true_negative_etc_per_label[label_fp] = 1
 
-
-
-
-
-
-
-
     for label, v in label_counter_accuracy.items():
         total = label_counter_overall[label]
 
@@ -272,6 +251,10 @@ def print_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boolean_tupl
         print(f"precision={precision}")
         print(f"recall={recall}")
         print(f"F1={F1}")
+        sum_f1=sum_f1+F1
+
+    avg_f1=sum_f1/len(label_counter_accuracy.items())
+    return avg_f1
 
 
 
@@ -315,40 +298,19 @@ if TYPE_OF_RUN=="train":
         outputs = np.array(outputs) >= 0.5
         outputs_float = outputs.astype(float)
 
-        precision=metrics.precision_score(targets,outputs_float,average='micro')
-
+        #avg f1 is used only for saving a better model
+        avg_f1_validation_this_epoch = print_return_per_label_metrics(targets, outputs_float)
         #rewrite the best model every time the f1 score improves
-        if precision> precision_global:
-            precision_global=precision
+        if avg_f1_validation_this_epoch > global_f1_validation:
+            global_f1_validation = avg_f1_validation_this_epoch
             torch.save(model.state_dict(), SAVED_MODEL_PATH)
 
-
-
-        # print(f"precision_micro={metrics.precision_score(targets,outputs_float,average='micro')}")
-        # print(f"recall={metrics.recall_score(targets, outputs_float,average='micro')}")
-
-        print_per_label_metrics(targets, outputs_float)
         gold=get_label_string_given_index(targets)
         predicted=get_label_string_given_index(outputs_float)
 
-
-
-
-        print(f"Gold labels:{get_label_string_given_index(targets)}\n\n")
+        print(f"avg F1:{avg_f1_validation_this_epoch}\n")
+        print(f"Gold labels:{get_label_string_given_index(targets)}\n")
         print(f"predicted:{get_label_string_given_index(outputs_float)}")
-        accuracy = metrics.accuracy_score(targets, outputs_float)
-        f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
-
-
-        if f1_score_micro>f1_score_global:
-            f1_score_global=f1_score_micro
-
-
-
-        f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
-        # print(f"Validation at epoch : {epoch}")
-        # print(f"F1 Score (Micro) = {f1_score_micro}")
-
         print(f"end of epoch {epoch}")
         print(f"---------------------------")
 else:

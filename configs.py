@@ -17,7 +17,7 @@ MAX_LEN = 500
 TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
 TESTING_BATCH_SIZE=1
-EPOCHS = 50
+EPOCHS = 100
 LEARNING_RATE = 1e-05
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
