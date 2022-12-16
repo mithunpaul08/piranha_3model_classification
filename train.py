@@ -152,7 +152,11 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
     label_counter_overall = {}
 
     avg_f1=0
+    avg_precision=0
+    avg_recall=0
     sum_f1=0
+    sum_precision=0
+    sum_recall=0
     # have a dictionary inside a dictionary to keep track of TP,FN etc for each label
     # e.g.,{"words_location_TP:24}
     true_positive_true_negative_etc_per_label = {}
@@ -258,9 +262,17 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
         print(f"precision={precision}")
         print(f"recall={recall}")
         print(f"F1={F1}")
+
+        wandb.log({'precision': precision,'epoch': epoch})
+        wandb.log({'recall': recall, 'epoch': epoch})
+
         sum_f1=sum_f1+F1
+        sum_precision = sum_precision + precision
+        sum_recall = sum_recall + recall
 
     avg_f1=sum_f1/len(label_counter_accuracy.items())
+    wandb.log({'average_precision': sum_precision/len(label_counter_accuracy.items()), 'epoch': epoch})
+    wandb.log({'average recall': sum_recall/len(label_counter_accuracy.items()), 'epoch': epoch})
     return avg_f1
 
 
