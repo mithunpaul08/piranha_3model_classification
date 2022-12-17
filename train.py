@@ -263,8 +263,12 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
         print(f"recall={recall}")
         print(f"F1={F1}")
 
-        wandb.log({'precision': precision,'epoch': epoch})
-        wandb.log({'recall': recall, 'epoch': epoch})
+        precision_label_name="precision"+"_"+label
+        recall_label_name = "recall" + "_" + label
+        f1_label_name = "f1" + "_" + label
+        wandb.log({precision_label_name: precision,'epoch': epoch})
+        wandb.log({recall_label_name: recall, 'epoch': epoch})
+        wandb.log({f1_label_name: F1, 'epoch': epoch})
 
         sum_f1=sum_f1+F1
         sum_precision = sum_precision + precision
