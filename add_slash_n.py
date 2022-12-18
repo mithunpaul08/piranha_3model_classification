@@ -3,8 +3,8 @@
 import json
 import pysbd
 
-INPUT_FILE="./output/combined_retrieved_emails_dec5th_6th.jsonl"
-OUTPUT_FILE="./output/combined_retrieved_emails_dec5th_6th_with_slash_n.jsonl"
+INPUT_FILE="./output/similarity_retrieved_fraud_emaildec9thonwards.jsonl"
+OUTPUT_FILE="./output/with_slashn_similarity_retrieved_fraud_emaildec9thonwards.jsonl"
 
 all_emails=[]
 with open(INPUT_FILE) as input_file:
