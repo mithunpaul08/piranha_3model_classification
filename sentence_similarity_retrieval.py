@@ -20,7 +20,7 @@ print(f"***********found that the device available is a {device}\n")
 #how many emails do you want ot retireve for each label. if you hit this number break the loop and move onto the next label
 NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=10
 
-COSINE_SIM_THRESHOLD=0.25
+COSINE_SIM_THRESHOLD=0.5
 #how many emails in the unannotated dataset should we search through. i.e we cant search through all of 600k emails in enron
 #so even after searching NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH emails, we can't find 50 emails of the given label, we quit and move onto next label.
 NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=10000
@@ -32,7 +32,7 @@ model.to(device)
 
 str(datetime.now())
 datetime_underscore="{:%Y_%m_%d_%H_%M_%S}".format(datetime.now())
-PATH_RETRIEVED_EMAILS_FILE="output/retrieved_emails"+str(datetime_underscore)+".jsonl"
+(PATH_RETRIEVED_EMAILS_FILE)="output/retrieved_emails"+str(datetime_underscore)+".jsonl"
 PATH_PER_LABEL_RETREIVED_EMAILS= "output/per_label_retrieved_emails" + str(datetime_underscore) + ".jsonl"
 
 
