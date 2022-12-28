@@ -3,12 +3,11 @@
 import json
 import pysbd
 
-INPUT_FILE="./data/fraud_email_.csv"
-OUTPUT_FILE="./output/with_slashn_similarity_retrieved_fraud_emaildec9thonwards.jsonl"
+INPUT_FILE="./data/fraud_db_focused_retrieval_dec27th2022.jsonl"
+OUTPUT_FILE="./output/with_slashn_fraud_db_focused_retrieval_dec27th2022.jsonl"
 
 all_emails=[]
-try:
-    with open(INPUT_FILE) as input_file:
+with open(INPUT_FILE) as input_file:
         lines=input_file.readlines()
         for each_email in lines:
             dict_input_email=json.loads(each_email)
@@ -20,16 +19,13 @@ try:
             all_emails.append(dict_emails_with_slashn)
 
         input_file.close()
-    with open(OUTPUT_FILE,"w") as output_file:
-        output_file.write("")
+with open(OUTPUT_FILE,"w") as output_file:
+    output_file.write("")
 
-    with open(OUTPUT_FILE,"a") as output_file:
+with open(OUTPUT_FILE,"a") as output_file:
         for each_slashn_email in all_emails:
             json.dump(each_slashn_email,output_file)
             output_file.write("\n")
-except:
-    print("found exception")
-
 
 
 
