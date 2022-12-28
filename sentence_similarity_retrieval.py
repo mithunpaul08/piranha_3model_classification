@@ -20,7 +20,7 @@ print(f"***********found that the device available is a {device}\n")
 #how many emails do you want ot retireve for each label. if you hit this number break the loop and move onto the next label
 NO_OF_EMAILS_TO_RETRIEVE_PER_LABEL=10
 
-COSINE_SIM_THRESHOLD=0.5
+COSINE_SIM_THRESHOLD=0.6
 #how many emails in the unannotated dataset should we search through. i.e we cant search through all of 600k emails in enron
 #so even after searching NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH emails, we can't find 50 emails of the given label, we quit and move onto next label.
 NO_OF_MAX_EMAILS_TO_SEARCH_THROUGH=10000
@@ -49,7 +49,11 @@ PATH_PER_LABEL_RETREIVED_EMAILS= "output/per_label_retrieved_emails" + str(datet
 #LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org",]
 
 #$full list of 40 labels
-LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org","sentence_org_used_by_employer","signature_jobtitle","sentence_passwd","signature_email","sentence_intent_recruiting","signature_address","signature_url","words_receiver_organization","sentence_intent_intro","words_sender_organization"]
+#LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org","sentence_org_used_by_employer","signature_jobtitle","sentence_passwd","signature_email","sentence_intent_recruiting","signature_address","signature_url","words_receiver_organization","sentence_intent_intro","words_sender_organization"]
+
+#half got run and kicked out after 24 hours on dec 26th 2022. left over ones
+LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "words_sender_location",  "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org","sentence_org_used_by_employer","sentence_passwd","sentence_intent_recruiting","signature_url","words_receiver_organization","sentence_intent_intro","words_sender_organization"]
+
 
 #a serial number assigning dict - to use in bit vector
 label_index={}
