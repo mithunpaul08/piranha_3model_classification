@@ -8,7 +8,7 @@ import sys
 #wandb.init(project="training_3model_piranha")
 
 TYPE_OF_LABEL="sentence" #["message","words","signature","sentence","all"]
-#is it training or testing. testing means will load a saved model and test
+#is it training or testing. testing means will load a saved modeland test
 TYPE_OF_RUN="train" # ["train","test"]
 
 OUTPUT_FILE_NAME= "data/training_data.csv"
