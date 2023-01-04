@@ -277,6 +277,8 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
     avg_f1=sum_f1/len(label_counter_accuracy.items())
     wandb.log({'average_precision': sum_precision/len(label_counter_accuracy.items()), 'epoch': epoch})
     wandb.log({'average recall': sum_recall/len(label_counter_accuracy.items()), 'epoch': epoch})
+
+
     return avg_f1
 
 
@@ -288,6 +290,7 @@ def given_dataframe_return_loader(df):
     return DataLoader(testing_set, **test_params)
 
 if TYPE_OF_RUN=="train":
+    wandb.log({'LEARNING_RATE': LEARNING_RATE})
     convert_data_piranha_to_kaggle_format.create_training_data()
     df = pd.read_csv(convert_data_piranha_to_kaggle_format.OUTPUT_FILE_NAME, sep=",", on_bad_lines='skip')
     df['list'] = df[df.columns[2:]].values.tolist()
