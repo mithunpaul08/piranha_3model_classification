@@ -2,10 +2,10 @@ from transformers import BertTokenizer, BertModel, BertConfig
 import os
 import pysbd
 from tqdm import tqdm
-#import wandb
+import wandb
 import sys
 
-#wandb.init(project="training_3model_piranha")
+wandb.init(project="training_3model_piranha")
 
 TYPE_OF_LABEL="sentence" #["message","words","signature","sentence","all"]
 #is it training or testing. testing means will load a saved modeland test
