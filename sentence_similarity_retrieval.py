@@ -52,7 +52,8 @@ PATH_PER_LABEL_RETREIVED_EMAILS= "output/per_label_retrieved_emails" + str(datet
 #LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org","sentence_org_used_by_employer","signature_jobtitle","sentence_passwd","signature_email","sentence_intent_recruiting","signature_address","signature_url","words_receiver_organization","sentence_intent_intro","words_sender_organization"]
 
 #half got run and kicked out after 24 hours on dec 26th 2022. left over ones
-LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products",]
+LABELS_TO_RETRIEVE=["signature_fullname", "signature_fullname", "signature_signoff", "signature_org","signature_jobtitle"
+                    ,"signaure_address","signaure_handle","signature_email","signature_url","signature_phone"]
 #"words_sender_location",  "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org","sentence_org_used_by_employer","sentence_passwd","sentence_intent_recruiting","signature_url","words_receiver_organization","sentence_intent_intro","words_sender_organization"]
 
 
