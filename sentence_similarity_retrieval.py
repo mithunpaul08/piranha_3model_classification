@@ -91,7 +91,9 @@ with open(path_annotated_emails, 'r') as annotated_file:
                 for entry in annotations["spans"]:
                     label = entry["label"]
                     if label in label_index:
-                        print(line)
+                        #todo-delete this. for printing one  of email per label type
+                        print(label)
+                        print(annotations['text'])
                         break
                         lbl_index=label_index[label]
                         if bit_vector_retrieved_labels[lbl_index]==0:
