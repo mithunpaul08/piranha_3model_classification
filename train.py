@@ -15,7 +15,8 @@ import os
 from torch import cuda
 from configs import *
 
-
+import spacy
+NER = spacy.load("en_core_web_sm")
 global_f1_validation=0
 global_validation_loss=999999
 precision_global=0

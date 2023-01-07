@@ -52,7 +52,8 @@ PATH_PER_LABEL_RETREIVED_EMAILS= "output/per_label_retrieved_emails" + str(datet
 #LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "signature_signoff", "words_sender_location", "signature_phone", "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org","sentence_org_used_by_employer","signature_jobtitle","sentence_passwd","signature_email","sentence_intent_recruiting","signature_address","signature_url","words_receiver_organization","sentence_intent_intro","words_sender_organization"]
 
 #half got run and kicked out after 24 hours on dec 26th 2022. left over ones
-LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products", "words_sender_location",  "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org","sentence_org_used_by_employer","sentence_passwd","sentence_intent_recruiting","signature_url","words_receiver_organization","sentence_intent_intro","words_sender_organization"]
+LABELS_TO_RETRIEVE=["signature_fullname", "sentence_tone_urgent", "sentence_url_no_name", "sentence_intent_products",]
+#"words_sender_location",  "sentence_url_third_party", "sentence_intent_unsubscribe", "sentence_intent_attachment", "signature_org","sentence_org_used_by_employer","sentence_passwd","sentence_intent_recruiting","signature_url","words_receiver_organization","sentence_intent_intro","words_sender_organization"]
 
 
 #a serial number assigning dict - to use in bit vector
@@ -90,6 +91,8 @@ with open(path_annotated_emails, 'r') as annotated_file:
                 for entry in annotations["spans"]:
                     label = entry["label"]
                     if label in label_index:
+                        print(line)
+                        break
                         lbl_index=label_index[label]
                         if bit_vector_retrieved_labels[lbl_index]==0:
                             full_text = convert_data_piranha_to_kaggle_format.get_spans_text_given_start_end_tokens(entry['token_start'], entry['token_end'], annotations)

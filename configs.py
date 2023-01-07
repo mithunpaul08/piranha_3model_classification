@@ -37,7 +37,6 @@ test_params = {'batch_size': TESTING_BATCH_SIZE,
                'shuffle': False,
                'num_workers': 0
                }
-import spacy
-NER = spacy.load("en_core_web_sm")
+
 
 raw_text="The Indian Space Research Organisation or is the national space agency of India, headquartered in Bengaluru. It operates under Department of Space which is directly overseen by the Prime Minister of India while Chairman of ISRO acts as executive of DOS as well."
