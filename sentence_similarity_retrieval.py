@@ -93,6 +93,7 @@ with open(path_annotated_emails, 'r') as annotated_file:
                     label = entry["label"]
                     if label in label_index:
                         #todo-delete this. for printing one  of email per label type
+                        print("---------------")
                         print(label)
                         print(annotations['text'])
                         break
