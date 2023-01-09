@@ -32,7 +32,7 @@ model.to(device)
 
 str(datetime.now())
 datetime_underscore="{:%Y_%m_%d_%H_%M_%S}".format(datetime.now())
-(PATH_RETRIEVED_EMAILS_FILE)="output/retrieved_emails"+str(datetime_underscore)+".jsonl"
+PATH_RETRIEVED_EMAILS_FILE="output/retrieved_emails"+str(datetime_underscore)+".jsonl"
 PATH_PER_LABEL_RETREIVED_EMAILS= "output/per_label_retrieved_emails" + str(datetime_underscore) + ".jsonl"
 
 
@@ -92,11 +92,6 @@ with open(path_annotated_emails, 'r') as annotated_file:
                 for entry in annotations["spans"]:
                     label = entry["label"]
                     if label in label_index:
-                        #todo-delete this. for printing one  of email per label type
-                        print("---------------")
-                        print(label)
-                        print(annotations['text'])
-                        break
                         lbl_index=label_index[label]
                         if bit_vector_retrieved_labels[lbl_index]==0:
                             full_text = convert_data_piranha_to_kaggle_format.get_spans_text_given_start_end_tokens(entry['token_start'], entry['token_end'], annotations)
