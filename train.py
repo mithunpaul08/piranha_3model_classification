@@ -16,7 +16,7 @@ from torch import cuda
 from configs import *
 
 import spacy
-NER = spacy.load("en_core_web_sm")
+
 global_f1_validation=0
 global_validation_loss=999999
 precision_global=0
@@ -156,6 +156,7 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
     avg_precision=0
     avg_recall=0
     sum_f1=0
+    sum_accuracy=0
     sum_precision=0
     sum_recall=0
     # have a dictionary inside a dictionary to keep track of TP,FN etc for each label
@@ -235,12 +236,14 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
         total = label_counter_overall[label]
 
         print(f"------\nFor the  label {label}:")
-        print(f"accuracy {label}={v / total}")
+        accuracy=v / total
+
         tp=true_positive_true_negative_etc_per_label[label+"_TP"]
         tn = true_positive_true_negative_etc_per_label[label + "_TN"]
         fp = true_positive_true_negative_etc_per_label[label + "_FP"]
         fn=true_positive_true_negative_etc_per_label[label+"_FN"]
 
+        print(f"accuracy ={accuracy}")
         print(f"true positive:{tp}")
         print(f"true negative:{tn}")
         print(f"false positive:{fp}")
@@ -267,18 +270,22 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
         precision_label_name="precision"+"_"+label
         recall_label_name = "recall" + "_" + label
         f1_label_name = "f1" + "_" + label
+        accuracy_label_name = "accuracy" + "_" + label
         wandb.log({precision_label_name: precision,'epoch': epoch})
         wandb.log({recall_label_name: recall, 'epoch': epoch})
         wandb.log({f1_label_name: F1, 'epoch': epoch})
+        wandb.log({accuracy_label_name: accuracy, 'epoch': epoch})
 
+        sum_accuracy = sum_accuracy+accuracy
         sum_f1=sum_f1+F1
         sum_precision = sum_precision + precision
         sum_recall = sum_recall + recall
 
     avg_f1=sum_f1/len(label_counter_accuracy.items())
+    avg_accuracy=sum_accuracy/len(label_counter_accuracy.items())
     wandb.log({'average_precision': sum_precision/len(label_counter_accuracy.items()), 'epoch': epoch})
     wandb.log({'average recall': sum_recall/len(label_counter_accuracy.items()), 'epoch': epoch})
-
+    wandb.log({'avg_accuracy': avg_accuracy, 'epoch': epoch})
 
     return avg_f1
 
@@ -319,6 +326,8 @@ if TYPE_OF_RUN=="train":
 
     print(f"************found that the device is {device}\n")
     patience_counter=0
+    overall_accuracy=0
+    accuracy_validation=0
     for epoch in range(EPOCHS):
         if(patience_counter>PATIENCE):
             print(f"found that validation loss is not improving after hitting patience of {PATIENCE}. Quitting")
@@ -338,10 +347,12 @@ if TYPE_OF_RUN=="train":
         wandb.log({'train_loss': train_loss,'epoch': epoch})
         wandb.log({'validation_loss': validation_loss,'epoch': epoch})
         predictions_validation = np.array(predictions_validation) >= 0.5
-        #accuracy_validation = metrics.accuracy_score(gold_validation, predictions_validation)
+        accuracy_validation_scikit_version = metrics.accuracy_score(gold_validation, predictions_validation)
+        overall_accuracy=overall_accuracy+accuracy_validation
+        avg_accuracy_scikit_version=overall_accuracy/(epoch+1)
         outputs_float = predictions_validation.astype(float)
 
-        #avg f1 is used only for saving a better model
+
         avg_f1_validation_this_epoch = print_return_per_label_metrics(gold_validation, outputs_float)
         #rewrite the best model every time the f1 score improves
         if avg_f1_validation_this_epoch > global_f1_validation:
