@@ -329,6 +329,7 @@ if TYPE_OF_RUN=="train":
     overall_accuracy=0
     accuracy_validation=0
     for epoch in range(EPOCHS):
+        wandb.log({'patience_counter': patience_counter, 'epoch': epoch})
         if(patience_counter>PATIENCE):
             print(f"found that validation loss is not improving after hitting patience of {PATIENCE}. Quitting")
             sys.exit()
