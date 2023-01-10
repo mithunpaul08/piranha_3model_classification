@@ -284,8 +284,8 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
     avg_f1=sum_f1/len(label_counter_accuracy.items())
     avg_accuracy=sum_accuracy/len(label_counter_accuracy.items())
     wandb.log({'average_precision': sum_precision/len(label_counter_accuracy.items()), 'epoch': epoch})
-    wandb.log({'average recall': sum_recall/len(label_counter_accuracy.items()), 'epoch': epoch})
-    wandb.log({'avg_accuracy': avg_accuracy, 'epoch': epoch})
+    wandb.log({'average_recall': sum_recall/len(label_counter_accuracy.items()), 'epoch': epoch})
+    wandb.log({'average_accuracy': avg_accuracy, 'epoch': epoch})
 
     return avg_f1
 
@@ -363,7 +363,7 @@ if TYPE_OF_RUN=="train":
         predicted=get_label_string_given_index(outputs_float)
 
         print(f"avg F1:{avg_f1_validation_this_epoch}\n")
-        wandb.log({'avg_f1_validation_this_epoch': avg_f1_validation_this_epoch})
+        wandb.log({'average_f1': avg_f1_validation_this_epoch})
         print(f"Gold labels:{get_label_string_given_index(gold_validation)}\n")
         print(f"predicted:{get_label_string_given_index(outputs_float)}")
         print(f"end of epoch {epoch}")
