@@ -17,8 +17,7 @@ best way to view the progress of training is
 
 to use the wandb graph link pasted at the beginnning of log file
 
-#steps for internal isi run server
-
+#For internal isi reference- steps to run on HPC cluster SAGA
 
 - connect to isi vpn
 ```
