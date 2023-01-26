@@ -247,6 +247,8 @@ for index, hash_annotator_id in enumerate(intersecting_annotations.keys()):
 
             #find intersection-print
             count_labels_intersection+= len(set(list_labels_annotator1_shortlist_with_stub_label).intersection(set(list_labels_annotator2_shortlist_with_stub_label)))
+            if(count_labels_intersection)>0:
+                print()
             labels_per_email+= max(len(set(list_labels_annotator1_shortlist_with_stub_label)),len(set(list_labels_annotator2_shortlist_with_stub_label)))
             cumulative_of_per_email_agreement += (count_labels_intersection/labels_per_email)
             count_emails_both += 1
