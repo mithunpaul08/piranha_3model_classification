@@ -3,7 +3,8 @@
 ### install pytorch from their website
 
 `pip install -r requirements.txt`
-
+go to config.py and pick the type of data
+`TYPE_OF_LABEL="sentence" #["message","words","signature","sentence","all"]`
 `python train.py`
 
 ## steps
@@ -32,3 +33,6 @@ to use the wandb graph link pasted at the beginnning of log file
 - tail -f classification_3model_message_level-73787.out 
 ```
 
+# For QNLP experiments
+- set `QNLP=1` in configs.py
+`python train.py`

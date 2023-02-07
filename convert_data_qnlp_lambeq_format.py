@@ -176,65 +176,6 @@ def get_spans_text_given_start_end_tokens(token_start_of_span, token_end_of_span
     assert len(starts_ends_tokens) >0
     return " ".join(starts_ends_tokens)
 
-def create_training_data():
-    with open(OUTPUT_FILE_NAME, 'w') as out:
-        out.write(",".join(header))
-        out.write("\n")
-
-
-    with open("data/query_file.jsonl", 'r') as in_file:
-        Lines = in_file.readlines()
-        create_label_index_mapping_both_directions()
-        # go through each of the annotated data point, extract text and its label into a dictionary dict_spantext_to_labels
-        get_text_for_label_from_all_spans(Lines)
-        # once the dict_spantext_to_labels is filled with a mapping from spantext to corresponding labels, write it out in a one hot vector
-        with open(OUTPUT_FILE_NAME, 'a') as out:
-            counter=0
-            line_counter=0
-            positive_examples_counter=0
-            negative_examples_counter = 0
-            for datapoint, labels in dict_spantext_to_labels.items():
-                line_counter+=1
-                #one hot vector to finally write the datapoint vs labels as to disk e.g., text,[1,0,1]
-                # i.e.,maximum one hot vector will be all 1s
-                labels_onehot = [0]*len(labels_in_this_training)
-                write_flag=False
-                if datapoint!=None:
-                    #if there is more than one label for the given span update the one hot vector to 1
-                    if len(labels) > 1:
-                        for lblindx,label in enumerate(labels):
-                            if label in dict_all_labels_index:
-
-                                label_index=dict_all_labels_index[label]
-                                labels_onehot[label_index]=1
-
-                        #if sum(labels_onehot)>0: #if atleast one label was found for this datapoint
-                            write_flag=True
-                    else:
-                        #if that span has only one label it will be in labels[0]
-                        if labels[0] in dict_all_labels_index:
-                            label_index = dict_all_labels_index[labels[0]]
-                            labels_onehot[label_index] = 1
-                            write_flag = True
-
-                #maximum one hot vector must be all 1s
-                assert sum(labels_onehot)<=len(labels_in_this_training)
-                if sum(labels_onehot) == 0:
-                    negative_examples_counter += 1
-                else:
-                    positive_examples_counter += 1
-
-                # writing to the disk
-                # Note: this is an IO bottleneck. Should store everything in memory and write once ideally.
-                if(write_flag==True):
-                    oneHotString=",".join([str(x) for x in labels_onehot])
-                    out.write(f"{counter},\"{datapoint}\",{oneHotString}\n")
-                    counter = counter + 1
-            print(f"total data points for label of type {TYPE_OF_LABEL} is {len(dict_spantext_to_labels)} of which "
-                  f"there are {positive_examples_counter} positive examples and {negative_examples_counter} negative examples")
-
-
-
 
 #creating data for this tutorial: https://cqcl.github.io/lambeq/tutorials/trainer_classical.html
 def create_training_data_lambeq():
@@ -253,18 +194,18 @@ def create_training_data_lambeq():
                 outline=""
                 if "sentence_tone_urgent" in labels:
                     outline="1\t"+datapoint
-                    out.write(f"{outline}\n")
                 # else:
                 #     outline="0\t"+datapoint
-
+                out.write(f"{outline}\n")
                 counter+=1
                 if counter % 10 == 0:
                     out.flush()
-        import sys
-        sys.exit()
 
 
 
 
-create_training_data()
+
+create_training_data_lambeq()
+import sys
+sys.exit()
 

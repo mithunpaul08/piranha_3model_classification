@@ -6,11 +6,17 @@ import wandb
 import sys
 import spacy
 
-wandb.init(project="training_3model_piranha")
 
-TYPE_OF_LABEL="message" #["message","words","signature","sentence","all"]
+
+TYPE_OF_LABEL="sentence" #["message","words","signature","sentence","all"]
 #is it training or testing. testing means will load a saved modeland test
 TYPE_OF_RUN="train" # ["train","test"]
+
+#for experiments with qnlp.[0,1] if =1, will create data in that format
+QNLP=1
+
+#if you dont want to trace graphs of training
+WANDB=1
 
 OUTPUT_FILE_NAME= "data/training_data.csv"
 header=["id","text"]
@@ -38,6 +44,6 @@ test_params = {'batch_size': TESTING_BATCH_SIZE,
                'shuffle': False,
                'num_workers': 0
                }
-
+wandb.init(project="training_3model_piranha")
 
 raw_text="The Indian Space Research Organisation or is the national space agency of India, headquartered in Bengaluru. It operates under Department of Space which is directly overseen by the Prime Minister of India while Chairman of ISRO acts as executive of DOS as well."

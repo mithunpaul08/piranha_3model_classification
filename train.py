@@ -10,7 +10,7 @@ import transformers
 import torch
 from torch.utils.data import Dataset, DataLoader, RandomSampler, SequentialSampler
 
-import convert_data_piranha_to_kaggle_format
+import convert_data_piranha_to_kaggle_format,convert_data_qnlp_lambeq_format
 import os
 from torch import cuda
 from configs import *
@@ -299,7 +299,10 @@ def given_dataframe_return_loader(df):
 
 if TYPE_OF_RUN=="train":
     wandb.log({'LEARNING_RATE': LEARNING_RATE})
-    convert_data_piranha_to_kaggle_format.create_training_data()
+    if QNLP==1:
+        convert_data_qnlp_lambeq_format()
+    else:
+        convert_data_piranha_to_kaggle_format.create_training_data()
     df = pd.read_csv(convert_data_piranha_to_kaggle_format.OUTPUT_FILE_NAME, sep=",", on_bad_lines='skip')
     df['list'] = df[df.columns[2:]].values.tolist()
     new_df = df[['text', 'list']].copy()
