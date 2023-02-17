@@ -10,6 +10,8 @@
 
 - copy your training data to data/query_file.jsonl. Should be in the format produced by prodigy tool used for annotation
 - `cp combined_all_annotation_jan9th2023.jsonl query_file.jsonl`
+open `configs.py` and pick the TYPE_OF_LABEL on which you want to train on . i.e pick one from ["message","words","signature","sentence","all"]
+- 
 - `python train.py`
 
  
