@@ -191,8 +191,10 @@ def create_training_data():
         with open(OUTPUT_FILE_NAME, 'a') as out:
             counter=0
             line_counter=0
-            positive_examples_counter=0
-            negative_examples_counter = 0
+            overall_positive_examples_counter=0
+            overall_negative_examples_counter = 0
+            dict_per_label_positive_examples={}
+            dict_per_label_negative_examples={}
             for datapoint, labels in dict_spantext_to_labels.items():
                 line_counter+=1
                 #one hot vector to finally write the datapoint vs labels as to disk e.g., text,[1,0,1]
@@ -219,10 +221,31 @@ def create_training_data():
 
                 #maximum one hot vector must be all 1s
                 assert sum(labels_onehot)<=len(labels_in_this_training)
+
+                #to get per label positive and negative example distribution
+                for index,value in enumerate(labels_onehot):
+                    label_string=dict_all_index_labels[index]
+                    if value==1:
+                        if label_string in dict_per_label_positive_examples:
+                            old_value=dict_per_label_positive_examples[label_string]
+                            dict_per_label_positive_examples[label_string]=old_value+1
+
+                        else:
+                            dict_per_label_positive_examples[label_string] = 1
+                    else:
+                        if label_string in dict_per_label_negative_examples:
+                            dict_per_label_negative_examples[label_string] += 1
+                            old_value = dict_per_label_negative_examples[label_string]
+                            dict_per_label_negative_examples[label_string] = old_value + 1
+                        else:
+                            dict_per_label_negative_examples[label_string] = 1
+
+
+
                 if sum(labels_onehot) == 0:
-                    negative_examples_counter += 1
+                    overall_negative_examples_counter += 1
                 else:
-                    positive_examples_counter += 1
+                    overall_positive_examples_counter += 1
 
                 # writing to the disk
                 # Note: this is an IO bottleneck. Should store everything in memory and write once ideally.
@@ -230,9 +253,13 @@ def create_training_data():
                     oneHotString=",".join([str(x) for x in labels_onehot])
                     out.write(f"{counter},\"{datapoint}\",{oneHotString}\n")
                     counter = counter + 1
+            print(f"dict_per_label_positive_examples={dict_per_label_positive_examples}")
+            print(f"dict_per_label_negative_examples={dict_per_label_negative_examples}")
             print(f"total data points for label of type {TYPE_OF_LABEL} is {len(dict_spantext_to_labels)} of which "
-                  f"there are {positive_examples_counter} positive examples and {negative_examples_counter} negative examples")
-
-
+                  f"there are {overall_positive_examples_counter} positive examples and {overall_negative_examples_counter} negative examples")
+    import sys
+    sys.exit()
 create_training_data()
+
+
 
