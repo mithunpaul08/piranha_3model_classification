@@ -20,6 +20,8 @@ dict_all_index_labels = {}
 labels_in_this_training=[]
 seg = pysbd.Segmenter(language="en", clean=True)
 CREATE_LABEL_BALANCED_DATASET=True
+LABELS_TO_BALANCE=["message_org"]
+RATIO_TO_CHECK=0.9
 
 
 #creating  different input data for each of messsage level, sentence level, signature, word
@@ -228,7 +230,7 @@ def create_training_data():
                                     label_string=dict_all_index_labels[idx]
                                     if label_string in dict_per_label_positive_examples and label_string in dict_per_label_negative_examples:
                                         ration=dict_per_label_positive_examples[label_string] / dict_per_label_negative_examples[label_string]
-                                        if label_string=="message_org" and  ration<0.9:
+                                        if label_string in LABELS_TO_BALANCE and  ration<RATIO_TO_CHECK:
                                                     # and overall_negative_examples_counter%2==0):
                                                     write_flag=False
                                                     break
@@ -288,8 +290,7 @@ def create_training_data():
                 print(f"ratio of positive to negative examples in label {pkey} is={pvalue/dict_per_label_negative_examples[pkey]}")
             print(f"total data points for label of type {TYPE_OF_LABEL} is {len(dict_spantext_to_labels)} of which "
                   f"there are {overall_positive_examples_counter} positive examples and {overall_negative_examples_counter} negative examples")
-    import sys
-    sys.exit()
+
 create_training_data()
 
 
