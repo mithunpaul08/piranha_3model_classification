@@ -19,9 +19,7 @@ dict_all_labels_index = {}
 dict_all_index_labels = {}
 labels_in_this_training=[]
 seg = pysbd.Segmenter(language="en", clean=True)
-CREATE_LABEL_BALANCED_DATASET=True
-LABELS_TO_BALANCE=["message_org"]
-RATIO_TO_CHECK=0.9
+
 
 
 #creating  different input data for each of messsage level, sentence level, signature, word
@@ -206,16 +204,17 @@ def create_training_data():
                 #one hot vector to finally write the datapoint vs labels as to disk e.g., text,[1,0,1]
                 # i.e.,maximum one hot vector will be all 1s
                 labels_onehot = [0]*len(labels_in_this_training)
-                write_flag=False
+
                 if datapoint!=None:
-                    #if there is more than one label for the given span update the one hot vector to 1
+                    write_flag = True
+                    #if there is more than one label for the given span update the one hot vector to include 1s
                     if len(labels) > 1:
                         for lblindx,label in enumerate(labels):
                             if label in dict_all_labels_index:
                                 label_index=dict_all_labels_index[label]
                                 labels_onehot[label_index]=1
                                 # if sum(labels_onehot)>0: #if atleast one posiitve label was found for this datapoint-write to disk
-                                write_flag = True
+
 
 
                         # dont add that datapoint if adding it will make the number of negative examples more than positive examples
@@ -229,7 +228,7 @@ def create_training_data():
                                 if label_status==0:
                                     label_string=dict_all_index_labels[idx]
                                     if label_string in dict_per_label_positive_examples and label_string in dict_per_label_negative_examples:
-                                        ration=dict_per_label_positive_examples[label_string] / dict_per_label_negative_examples[label_string]
+                                        ration=dict_per_label_positive_examples[label_string] / (dict_per_label_negative_examples[label_string]+1)
                                         if label_string in LABELS_TO_BALANCE and  ration<RATIO_TO_CHECK:
                                                     # and overall_negative_examples_counter%2==0):
                                                     write_flag=False
@@ -249,7 +248,7 @@ def create_training_data():
                 #to get per label positive and negative example distribution
                 # this is an experiment to train with all labels balanced
                 #if its a negative label for message_org, skip every 10th such instance
-                if (CREATE_LABEL_BALANCED_DATASET and write_flag):
+                if ( write_flag):
                     for index,value in enumerate(labels_onehot):
                         label_string=dict_all_index_labels[index]
                         if value==1:
@@ -290,7 +289,8 @@ def create_training_data():
                 print(f"ratio of positive to negative examples in label {pkey} is={pvalue/dict_per_label_negative_examples[pkey]}")
             print(f"total data points for label of type {TYPE_OF_LABEL} is {len(dict_spantext_to_labels)} of which "
                   f"there are {overall_positive_examples_counter} positive examples and {overall_negative_examples_counter} negative examples")
-
+import sys
+sys.exit()
 create_training_data()
 
 
