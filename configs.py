@@ -28,7 +28,7 @@ VALID_BATCH_SIZE = 4
 TESTING_BATCH_SIZE=1
 EPOCHS = 1000
 LEARNING_RATE = 1e-5
-tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
 TESTING_FILE_PATH="./data/testing_data.csv"
 
