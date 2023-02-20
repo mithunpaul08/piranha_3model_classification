@@ -210,6 +210,8 @@ def create_training_data():
                     #if there is more than one label for the given span update the one hot vector to include 1s
                     if len(labels) > 1:
                         for lblindx,label in enumerate(labels):
+                            if label.lower()=="signature_address":
+                                print("found signature_address")
                             if label in dict_all_labels_index:
                                 label_index=dict_all_labels_index[label]
                                 labels_onehot[label_index]=1
