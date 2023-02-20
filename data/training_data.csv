@@ -1,523 +1,545 @@
-id,text,signature,signature_email,signature_fullname,signature_jobtitle,signature_org,signature_phone,signature_signoff,signature_url
-0,"Shirley S. Elliott  Citibank , N.A. - Global Energy & Mining  Two Allen Center  1200 Smith Street , Suite 2000  Houston , Texas 77002  Tel :   ( 713 ) 654 - 2868  Fax :   ( 713 ) 654 - 2849",1,0,0,0,0,0,0,0
-1,"-PLK ",1,0,0,0,0,0,0,0
-2,"Matthew Lenhart@ECT",1,0,1,0,0,0,0,0
-3,"Matthew Lenhart@ECT ",0,0,0,0,1,0,0,0
-4,"Regards ,",0,0,0,0,0,0,1,0
-5,"Kevin A. Boone  Accenture -- Houston  ( Octel ) 713.837.1638  ( Client ) 281.848.1619  ( C ) 713.306.7940  ( H ) 713.864.4149  Kevin.A.Boone@accenture.com  Our web address is http://www.accenture.com",1,0,0,0,0,0,0,0
-6,"Accenture -- Houston",0,0,0,0,1,0,0,0
-7,"Shirley S. Elliott",0,0,1,0,0,0,0,0
-8,"Citibank , N.A.",0,0,0,0,1,0,0,0
-9,"Global Energy & Mining",0,0,0,1,0,0,0,0
-10,"Tel :   ( 713 ) 654 - 2868",0,0,0,0,0,1,0,0
-11,"Regards , ",0,0,0,0,0,0,1,0
-12,"Regards ,  Kevin A. Boone  Accenture -- Houston  ( Octel ) 713.837.1638  ( Client ) 281.848.1619  ( C ) 713.306.7940  ( H ) 713.864.4149  Kevin.A.Boone@accenture.com  Our web address is http://www.accenture.com",1,0,0,0,0,0,0,0
-13,"Kevin A. Boone ",0,0,1,0,0,0,0,0
-14,"Accenture",0,0,0,0,1,0,0,0
-15,"Kevin.A.Boone@accenture.com ",0,1,0,0,0,0,0,0
-16,"http://www.accenture.com                     ",0,0,0,0,0,0,0,1
-17,"Kevin A. Boone",0,0,1,0,0,0,0,0
-18,"( C ) 713.306.7940 ",0,0,0,0,0,1,0,0
-19,"( H ) 713.864.4149 ",0,0,0,0,0,1,0,0
-20,"http://www.accenture.com",0,0,0,0,0,0,0,1
-21,"Thanks",1,0,0,0,0,0,1,0
-22,"Thanks  Kris Shireman",1,0,0,0,0,0,0,0
-23,"Kris Shireman ",0,0,1,0,0,0,0,0
-24,"Sincerely",0,0,0,0,0,0,1,0
-25,"Emmanuel",0,0,1,0,0,0,0,0
-26,"Emmanuel Mangin ",0,0,1,0,0,0,0,0
-27,"Outlook Migration Team Lead",0,0,0,1,1,0,0,0
-28,"Emmanuel.Mangin@Enron.com",0,1,0,0,0,0,0,0
-29,"Work : ? 713 - 345 - 9357 ",0,0,0,0,0,1,0,0
-30,"Regards",0,0,0,0,0,0,1,0
-31,"( Octel ) 713.837.1638  ( Client ) 281.848.1619  ( C ) 713.306.7940  ( H ) 713.864.4149",0,0,0,0,0,1,0,0
-32,"Kevin.A.Boone@accenture.com",0,1,0,0,0,0,0,0
-33,"Our web address is http://www.accenture.com",0,0,0,0,0,0,0,1
-34,"Love -- Grandma",1,0,0,0,0,0,1,0
-35,"Emmanuel Mangin  Outlook Migration Team Lead  Emmanuel.Mangin@Enron.com  Work : ? 713 - 345 - 9357  Pager : 713 - 415 - 5091",1,0,0,0,0,0,0,0
-36,"Work : ? 713 - 345 - 9357  Pager : 713 - 415 - 5091",0,0,0,0,0,1,0,0
-37,"Myers P. Namie  Partner  Cypress Litigation , L.L.C.  667 Laurel Street  Baton Rouge , LA 70802  ( 225 ) 387 - 6511  Fax : ( 225 ) 387 - 6533  clcs@msn.com",1,0,0,0,0,0,0,0
-38,"Myers P. Namie",0,0,1,0,0,0,0,0
-39,"Partner",0,0,0,1,0,0,0,0
-40,"Cypress Litigation , L.L.C.",0,0,0,0,1,0,0,0
-41,"( 225 ) 387 - 6511",0,0,0,0,0,1,0,0
-42,"clcs@msn.com ",0,1,0,0,0,0,0,0
-43,"-PLK",1,0,1,0,0,0,0,0
-44,"s.",1,0,0,0,0,0,0,0
-45,"love",0,0,0,0,0,0,1,0
-46,"Samantha  503 - 464 - 7248 ",1,0,0,0,0,0,0,0
-47,"503 - 464 - 7248",0,0,0,0,0,1,0,0
-48,"Fran  503.464.7973",1,0,0,0,0,0,0,0
-49,"503.464.7973",0,0,0,0,0,1,0,0
-50,"later",0,0,0,0,0,0,1,0
-51,"Expedia.com  Do n't just travel .   Travel right . http://expedia.com/",1,0,0,0,0,0,0,0
-52,"Travel right . http://expedia.com/",0,0,0,0,0,0,0,1
-53,"Thank you ,  Matt Lenhart ",1,0,0,0,0,0,0,0
-54,"Thank you",0,0,0,0,0,0,1,0
-55,"Matt Lenhart",1,0,1,0,0,0,0,0
-56,"Thanks for your help",0,0,0,0,0,0,1,0
-57,"matt",1,0,1,0,0,0,0,0
-58,"Citibank , N.A. - Global Energy & Mining",0,0,0,0,1,0,0,0
-59,"Fax :   ( 713 ) 654 - 2849",0,0,0,0,0,1,0,0
-60,"713.837.1638",0,0,0,0,0,1,0,0
-61,"Client ) 281.848.1619",0,0,0,0,0,1,0,0
-62,"281.848.1619",0,0,0,0,0,1,0,0
-63,"713.306.7940",0,0,0,0,0,1,0,0
-64,"713.864.4149",0,0,0,0,0,1,0,0
-65,"Love",0,0,0,0,0,0,1,0
-66,"Grandma",1,0,1,0,0,0,0,0
-67,"Kris Shireman",0,0,1,0,0,0,0,0
-68,"Sincerely ,  Emmanuel  Emmanuel Mangin  Outlook Migration Team Lead  Emmanuel.Mangin@Enron.com  Work : ? 713 - 345 - 9357  Pager : 713 - 415 - 5091",1,0,0,0,0,0,0,0
-69,"Emmanuel Mangin",0,0,1,0,0,0,0,0
-70,"713 - 345 - 9357",0,0,0,0,0,1,0,0
-71,"713 - 415 - 5091",0,0,0,0,0,1,0,0
-72,"225 ) 387 - 6511",0,0,0,0,0,1,0,0
-73,"225 ) 387 - 6533",0,0,0,0,0,1,0,0
-74,"clcs@msn.com",0,1,0,0,0,0,0,0
-75,"love   mom",1,0,0,0,0,0,0,0
-76,"mom",0,0,1,0,0,0,0,0
-77,"Thanks ,  Fran  503.464.7973",1,0,0,0,0,0,0,0
-78,"Fran",0,0,1,0,0,0,0,0
-79,"Regards ,  Samantha  503 - 464 - 7248",1,0,0,0,0,0,0,0
-80,"Samantha",0,0,1,0,0,0,0,0
-81,"503 - 464 - 7248 ",0,0,0,0,0,1,0,0
-82,"CKL",1,0,1,0,0,0,0,0
-83,"Take care- ",0,0,0,0,0,0,1,0
-84,"Take care-  jen",1,0,0,0,0,0,0,0
-85,"jen",0,0,1,0,0,0,0,0
-86,"-Stacey",1,0,1,0,0,0,0,0
-87,"( H ) 713.864.4149",0,0,0,0,0,1,0,0
-88,"Julie",1,0,1,0,0,0,0,0
-89,"Julie   :-)",1,0,0,0,0,0,0,0
-90,"( C ) 713.306.7940",0,0,0,0,0,1,0,0
-91,"Phillip",1,0,1,0,0,0,0,0
-92,"Eric Benson",0,0,1,0,0,0,0,0
-93,"Eric Benson  Sr . Specialist  Enron Government Affairs - The Americas  713 - 853 - 1711",1,0,0,0,0,0,0,0
-94,"Sr . Specialist",0,0,0,1,0,0,0,0
-95,"Enron Government Affairs - The Americas",0,0,0,0,1,0,0,0
-96,"713 - 853 - 1711",0,0,0,0,1,1,0,0
-97,"later ,  christa  ",1,0,0,0,0,0,0,0
-98,"christa",0,0,1,0,0,0,0,0
-99,"Thank you ,  Matt Lenhart",1,0,0,0,0,0,0,0
-100,"Thank you ,",0,0,0,0,0,0,1,0
-101,"Lenhart@ECT ",0,0,0,0,1,0,0,0
-102,"Kevin A. Boone  Accenture -- Houston  ( Octel ) 713.837.1638  ( Client ) 281.848.1619  ( C ) 713.306.7940  ( H ) 713.864.4149  Kevin.A.Boone@accenture.com  Our web address is http://www.accenture.com                     ",1,0,0,0,0,0,0,0
-103,"( Octel ) 713.837.1638",0,0,0,0,0,1,0,0
-104,"( Client ) 281.848.1619",0,0,0,0,0,1,0,0
-105,"- Doves - Lost Souls - 08 Catch the Sun.mp3",1,0,0,0,0,0,0,0
-106,"Octel ) 713.837.1638",0,0,0,0,0,1,0,0
-107,"C ) 713.306.7940",0,0,0,0,0,1,0,0
-108,"Love -- Grandma ",1,0,0,0,0,0,0,0
-109,"Kristann Shireman",1,0,1,0,0,0,0,0
-110,"Work : ? 713 - 345 - 9357",0,0,0,0,0,1,0,0
-111,"Myers P. Namie  Partner  Cypress Litigation , L.L.C.  667 Laurel Street  Baton Rouge , LA 70802  ( 225 ) 387 - 6511  Fax : ( 225 ) 387 - 6533  clcs@msn.com ",1,0,0,0,0,0,0,0
-112,"- rOutkast - Rosa klParks.mp3",1,0,0,0,0,0,0,0
-113,"Enron North America Corp. 		",1,0,0,0,0,0,0,0
-114,"Enron North America Corp.",0,0,0,0,1,0,0,0
-115,"s. ",1,0,0,0,0,0,0,0
-116,"James D Steffes@ENRON",1,0,1,0,0,0,0,0
-117,"Steffes@ENRON ",0,0,0,0,1,0,0,0
-118,"Regards ,  Samantha  503 - 464 - 7248 ",1,0,0,0,0,0,0,0
-119,"- Jay - Z",1,0,0,0,0,0,0,0
-120,"Take care-",0,0,0,0,0,0,1,0
-121,"H ) 713.864.4149",0,0,0,0,0,1,0,0
-122,"? Grandpa",1,0,0,0,0,0,0,0
-123,") 713.306.7940",0,0,0,0,0,1,0,0
-124,"later ,  christa",1,0,0,0,0,0,0,0
-125,"Jim",1,0,1,0,0,0,0,0
-126,"Grandpa",1,0,1,0,0,0,0,0
-127,"Expedia.com",0,0,0,0,1,0,0,0
-128,"http://expedia.com/",0,0,0,0,0,0,0,1
-129,"Sincerely ,",0,0,0,0,0,0,1,0
-130,"Sincerely ,   Phillip Allen",1,0,0,0,0,0,0,0
-131,"Phillip Allen",0,0,1,0,0,0,0,0
-132,"Phillip Allen Enron 713 - 853 - 7041",1,0,0,0,0,0,0,0
-133,"Enron",0,0,0,0,1,0,0,0
-134,"713 - 853 - 7041",0,0,0,0,0,1,0,0
-135,"Phillip 713 - 853 - 7041",1,0,0,0,0,0,0,0
-136,"Sincerely ,   Howard Gordon Network Administrator hgordon@state-bank.com",1,0,0,0,0,0,0,0
-137,"Howard Gordon",0,0,1,0,0,0,0,0
-138,"Network Administrator",0,0,0,1,0,0,0,0
-139,"hgordon@state-bank.com",0,1,0,0,0,0,0,0
-140,"Sincerely ,   Howard Gordon Network Manager",1,0,0,0,0,0,0,0
-141,"Gordon Network Manager",0,0,0,1,0,0,0,0
-142,"Regards , Ken Lay",1,0,0,0,0,0,0,0
-143,"Ken Lay",0,0,1,0,0,0,0,0
-144,"Sarah - Joy Hunter",0,0,1,0,0,0,0,0
-145,"Sarah - Joy Hunter Manager , Global Strategic Sourcing Business Development Enron Corporation # ( 713)-345 - 6541",1,0,0,0,0,0,0,0
-146,"Manager , Global Strategic Sourcing Business Development",0,0,0,1,0,0,0,0
-147,"Enron Corporation",0,0,0,0,1,0,0,0
-148,"# ( 713)-345 - 6541",0,0,0,0,0,1,0,0
-149,"Phillip Allen pallen@enron.com 713 - 853 - 7041",1,0,0,0,0,0,0,0
-150,"pallen@enron.com",0,1,0,0,0,0,0,0
-151,"Thanks . ",0,0,0,0,0,0,1,0
-152,"Thanks .  Michelle L. Simpkins Winstead Sechrest & Minick P.C. 100 Congress Avenue , Suite 800 Austin , Texas   78701 ( 512 ) 370 - 2836 ( 512 ) 370 - 2850 Fax msimpkins@winstead.com",1,0,0,0,0,0,0,0
-153,"Michelle L. Simpkins",0,0,1,0,0,0,0,0
-154,"Winstead Sechrest & Minick P.C.",0,0,0,0,1,0,0,0
-155,"( 512 ) 370 - 2836",0,0,0,0,0,1,0,0
-156,"( 512 ) 370 - 2850",0,0,0,0,0,1,0,0
-157,"msimpkins@winstead.com",0,1,0,0,0,0,0,0
-158,"Jeff Smith",0,0,1,0,0,0,0,0
-159,"Jeff Smith The Smith Company 9400 Circle Drive Austin , Texas   78736 512 - 394 - 0908 office 512 - 394 - 0913 fax 512 - 751 - 9728 mobile jsmith@austintx.com",1,0,0,0,0,0,0,0
-160,"The Smith Company",0,0,0,0,1,0,0,0
-161,"512 - 394 - 0908 office",0,0,0,0,0,1,0,0
-162,"512 - 751 - 9728 mobile",0,0,0,0,0,1,0,0
-163,"jsmith@austintx.com",0,1,0,0,0,0,0,0
-164,"Candy Haase",0,0,1,0,0,0,0,0
-165,"Candy Haase 3100 Main Street , Suite 900 Houston , TX 77002 USA 713 - 335 - 5253 713 - 335 - 8144 fax info@prosRM.com / www.prosRM.com",1,0,0,0,0,0,0,0
-166,"713 - 335 - 5253",0,0,0,0,0,1,0,0
-167,"info@prosRM.com",0,1,0,0,0,0,0,0
-168,"www.prosRM.com",0,0,0,0,0,0,0,1
-169,"Jeff Smith The Smith Company 9400 Circle Drive Austin , TX   78736 512 - 394 - 0908 office 512 - 394 - 0913 fax 512 - 751 - 9728 mobile jsmith@austintx.com",1,0,0,0,0,0,0,0
-170,"Richard Morgan",0,0,1,0,0,0,0,0
-171,"Richard Morgan Manager , Green Building Program Austin Energy 721 Barton Springs Rd .  Austin , TX 78704 - 1194 Ph . 512.505.3709 Fax 512.505.3711 e - mail richard.morgan@austinenergy.com",1,0,0,0,0,0,0,0
-172,"Manager , Green Building Program",0,0,0,1,0,0,0,0
-173,"Austin Energy",0,0,0,0,1,0,0,0
-174,"Ph . 512.505.3709",0,0,0,0,0,1,0,0
-175,"e - mail richard.morgan@austinenergy.com",0,1,0,0,0,0,0,0
-176,"Thanks , Monica L. Brown Accenture Houston - 2929 Allen Parkway Direct Dial : +1 713 837 1749 VPN & Octel : 83 / 71749 Fax : +1 713 257 7211 email : monica.l .  brown@accenture.com",1,0,0,0,0,0,0,0
-177,"Monica L. Brown",0,0,1,0,0,0,0,0
-178,"Direct Dial : +1 713 837 1749",0,0,0,0,0,1,0,0
-179,"email : monica.l .  brown@accenture.com",0,1,0,0,0,0,0,0
-180,"Christi L. Smith",0,0,1,0,0,0,0,0
-181,"Christi L. Smith Project Manager for Client Services Keilty , Goldsmith & Company 858/450 - 2554",1,0,0,0,0,0,0,0
-182,"Project Manager for Client Services",0,0,0,1,0,0,0,0
-183,"Keilty , Goldsmith & Company",0,0,0,0,1,0,0,0
-184,"858/450 - 2554",0,0,0,0,0,1,0,0
-185,"Cheers",0,0,0,0,0,0,1,0
-186,"Cheers Kirk",1,0,0,0,0,0,0,0
-187,"Thanks !",0,0,0,0,0,0,1,0
-188,"Thanks !  Adrianne x57302",1,0,0,0,0,0,0,0
-189,"x57302",0,0,0,0,0,1,0,0
-190,"Sheri A. Righi",0,0,1,0,0,0,0,0
-191,"Sheri A. Righi Accenture Human Performance Service Line Hartford - One Financial Plaza Direct Dial : 860 756 2245 VPN & Octel : 765 2245 e - mail : sheri.a .  righi@Accenture.com",1,0,0,0,0,0,0,0
-192,"Human Performance Service Line",0,0,0,1,0,0,0,0
-193,"Direct Dial : 860 756 2245",0,0,0,0,0,1,0,0
-194,"e - mail : sheri.a .  righi@Accenture.com",0,1,0,0,0,0,0,0
-195,"Phillip Allen 	  8855 Merlin Ct Houston , TX 77055 pallen70@hotmail.com wk 713 - 853 - 7041 hm 713 - 463 - 8626",1,0,0,0,0,0,0,0
-196,"pallen70@hotmail.com",0,1,0,0,0,0,0,0
-197,"wk 713 - 853 - 7041",0,0,0,0,0,1,0,0
-198,"hm 713 - 463 - 8626",0,0,0,0,0,1,0,0
-199,"Phillip Allen 713 - 463 - 8626 pallen70@hotmail.com",1,0,0,0,0,0,0,0
-200,"713 - 463 - 8626",0,0,0,0,0,1,0,0
-201,"Regards ,   Kevin A. Boone Accenture -- Houston ( Octel ) 713.837.1638 ( Client ) 281.848.1619 ( C ) 713.306.7940 ( H ) 713.864.4149 Kevin . A.  Boone@accenture.com   Our web address is http://www.accenture.com",1,0,0,0,0,0,0,0
-202,"Kevin . A.  Boone@accenture.com",0,1,0,0,0,0,0,0
-203,"Thanks .  Bob Shults EnronOnline LLC Houston , Texas 77002 - 7361 713 853 - 0397 713 825 - 6372 cell 713 646 - 2126 bob.shults@enron.com",1,0,0,0,0,0,0,0
-204,"Bob Shults",0,0,1,0,0,0,0,0
-205,"EnronOnline LLC",0,0,0,0,1,0,0,0
-206,"713 853 - 0397",0,0,0,0,0,1,0,0
-207,"713 825 - 6372",0,0,0,0,0,1,0,0
-208,"cell 713 646 - 2126",0,0,0,0,0,1,0,0
-209,"bob.shults@enron.com",0,1,0,0,0,0,0,0
-210,"Enron Global Technology",1,0,0,0,0,0,0,0
-211,"Global Technology",0,0,0,1,0,0,0,0
-212,"Thank you ,   Outlook 2000 Migration Team",1,0,0,0,0,0,0,0
-213,"Outlook 2000 Migration Team",0,0,0,1,0,0,0,0
-214,"Thank you . ",0,0,0,0,0,0,1,0
-215,"Thank you .  Outlook 2000 Migration Team",1,0,0,0,0,0,0,0
-216,"Enron Messaging Administration",1,0,0,0,0,0,0,0
-217,"Messaging Administration",0,0,0,1,0,0,0,0
-218,"Thanks , Mike Mc .",1,0,0,0,0,0,0,0
-219,"Thanks ,   Phillip Allen",1,0,0,0,0,0,0,0
-220,"Sincerely ,    [ IMAGE ]   David   Risher   Senior VP and Amazon Customer of Five Years ( and Counting )   Amazon.com",1,0,0,0,0,0,0,0
-221,"David   Risher",0,0,1,0,0,0,0,0
-222,"Senior VP",0,0,0,1,0,0,0,0
-223,"Amazon.com",0,0,0,0,1,0,0,1
-224,"Dell Premier Pages Service",0,0,0,0,1,0,0,0
-225,"Sincerely , Legal NetEx Administrator",1,0,0,0,0,0,0,0
-226,"Legal NetEx",0,0,0,0,1,0,0,0
-227,"Administrator",0,0,0,1,0,0,0,0
-228,"Sincerely ,   Cheap Tickets , Inc.  ( R ) http://www.cheaptickets.com 888 - 922 - 8849",1,0,0,0,0,0,0,0
-229,"Cheap Tickets , Inc. ",0,0,0,0,1,0,0,0
-230,"http://www.cheaptickets.com",0,0,0,0,0,0,0,1
-231,"888 - 922 - 8849",0,0,0,0,0,1,0,0
-232,"Thank You . ",0,0,0,0,0,0,1,0
-233,"Thank You .  Brian O'Connell   Publisher",1,0,0,0,0,0,0,0
-234,"Brian O'Connell",0,0,1,0,0,0,0,0
-235,"Publisher",0,0,0,1,0,0,0,0
-236,"Thank you .  John Adamiak PGS Energy Training",1,0,0,0,0,0,0,0
-237,"John Adamiak",0,0,1,0,0,0,0,0
-238,"PGS Energy Training",0,0,0,0,1,0,0,0
-239,"Best",0,0,0,0,0,0,1,0
-240,"Best , Brian O'Connell Publisher , VentureWire events@venturewire.com http://events.venturewire.com",1,0,0,0,0,0,0,0
-241,"VentureWire",0,0,0,0,1,0,0,0
-242,"events@venturewire.com",0,1,0,0,0,0,0,0
-243,"http://events.venturewire.com",0,0,0,0,0,0,0,1
-244,"Yours trulyStephen",0,0,0,0,0,0,1,0
-245,"Yours trulyStephen Ayling .",1,0,0,0,0,0,0,0
-246,"trulyStephen Ayling .",0,0,1,0,0,0,0,0
-247,"Kind Regards ,",0,0,0,0,0,0,1,0
-248,"Mr Cheung Pui.___________________________________________________________________________Mail",0,0,1,0,0,0,0,0
-249,"responds=2EYours sincerely=2CRobert",0,0,0,0,0,0,1,0
-250,"responds=2EYours sincerely=2CRobert Williams Esq=2E",1,0,0,0,0,0,0,0
-251,"sincerely=2CRobert Williams Esq=2E",0,0,1,0,0,0,0,0
-252,"nzangamobutu@myself.comBest regards ,",0,0,0,0,0,0,1,0
-253,"nzangamobutu@myself.comBest regards , MR .  NZANGA MOBUTU .",1,0,0,0,0,0,0,0
-254,"MR .  NZANGA MOBUTU . ",0,0,1,0,0,0,0,0
-255,"bgovou@hotmail.comRespectfully submitted,>From",0,0,0,0,0,0,1,0
-256,"bgovou@hotmail.comRespectfully submitted,>From Mr Edward Govou",1,0,0,0,0,0,0,0
-257,"Mr Edward Govou",0,0,1,0,0,0,0,0
-258,"Happy Holidays -- HU.S.  Department of StateCase",1,0,0,0,0,0,0,0
-259,"Happy Holidays",1,0,0,0,0,0,1,0
-260,"Department of StateCase",0,0,0,0,1,0,0,0
-261,"Best regardsDr",0,0,0,0,0,0,1,0
-262,"Best regardsDr .  Usman ali",1,0,0,0,0,0,0,0
-263,"regardsDr .  Usman ali",0,0,1,0,0,0,0,0
-264,"Mrs. Elena Owen . ",0,0,1,0,0,0,0,0
-265,"Mrs. Elena Owen .  Benefactor",1,0,0,0,0,0,0,0
-266,"Benefactor",0,0,0,1,0,0,0,0
-267,"RegardsTom",1,0,0,0,0,0,1,0
-268,"Sincerely yours ,",0,0,0,0,0,0,1,0
-269,"Sincerely yours , Tony LeungProject officer",1,0,0,0,0,0,0,0
-270,"Tony LeungProject",0,0,1,0,0,0,0,0
-271,"LeungProject officer",0,0,0,1,0,0,0,0
-272,"CAPT . JAMES C. WILLIAMSUNITED",0,0,1,0,0,0,0,0
-273,"CAPT . JAMES C. WILLIAMSUNITED NATIONS , LONDON UKUNITED NATION MONETARY FUND ( UNMF )",1,0,0,0,0,0,0,0
-274,"WILLIAMSUNITED NATIONS",0,0,0,0,1,0,0,0
-275,"UKUNITED NATION MONETARY FUND ( UNMF )",0,0,0,1,0,0,0,0
-276,"Dan",1,0,0,0,0,0,0,0
-277,"Yours Sincerely ,",0,0,0,0,0,0,1,0
-278,"Yours Sincerely , MR .  HASSAN IBRAHIM._________________________________________________________________FREE",1,0,0,0,0,0,0,0
-279,"MR .  HASSAN IBRAHIM._________________________________________________________________FREE",0,0,1,0,0,0,0,0
-280,"Yours Faithfully=2C",0,0,0,0,0,0,1,0
-281,"Yours Faithfully=2C Mike Charles Kobi=2E",1,0,0,0,0,0,0,0
-282,"Mike Charles Kobi=2E",0,0,1,0,0,0,0,0
-283,"Thanks and God bless . ",0,0,0,0,0,0,1,0
-284,"Thanks and God bless .  Mr. Bala Kabore._________________________________________________________________Gagnez",1,0,0,0,0,0,0,0
-285,"Mr. Bala Kabore._________________________________________________________________Gagnez",0,0,1,0,0,0,0,0
-286,"BEST REGARDSMS.MUDIWA",0,0,0,0,0,0,1,0
-287,"BEST REGARDSMS.MUDIWA   ZUKA",1,0,0,0,0,0,0,0
-288,"REGARDSMS.MUDIWA   ZUKA",0,0,1,0,0,0,0,0
-289,"know=2EThanksBarrister John Mensah",1,0,1,0,0,0,0,0
-290,"know=2EThanksBarrister",0,0,0,0,0,0,1,0
-291,"FAITHFULLY ,",0,0,0,0,0,0,1,0
-292,"FAITHFULLY ,                                                                                                    ENGINEER ADISON KRIST",1,0,0,0,0,0,0,0
-293,"ENGINEER ADISON KRIST 			",0,0,1,0,0,0,0,0
-294,"Yours sincerel = y ,",0,0,0,0,0,0,1,0
-295,"Yours sincerel = y , Mr.  Koutaba Jean . ",1,0,0,0,0,0,0,0
-296,"Mr.  Koutaba Jean .",0,0,1,0,0,0,0,0
-297,"Regards , Nzanga Joseph Desire Mobutu___________________________________________________________________________Mail",1,0,0,0,0,0,0,0
-298,"Nzanga Joseph Desire Mobutu___________________________________________________________________________Mail",0,0,1,0,0,0,0,0
-299,"Google.http://yahoo.businessweek.com/technology/content/dec2006/=20tc20061204_923336.htmTony RajakumarVictrio",0,0,1,0,0,0,0,0
-300,"Google.http://yahoo.businessweek.com/technology/content/dec2006/=20tc20061204_923336.htmTony RajakumarVictrio Inc.tonyr@victrio.com-------------------------------------You",1,0,0,0,0,0,0,0
-301,"Inc.tonyr@victrio.com-------------------------------------You",0,1,0,0,0,0,0,0
-302,"julliet06@3xl.netRegards",1,0,0,0,0,0,1,0
-303,"response=2EThanks and God bless=2E youDavid",0,0,0,0,0,0,1,0
-304,"response=2EThanks and God bless=2E youDavid Bah = 2E",1,0,0,0,0,0,0,0
-305,"youDavid Bah = 2E",0,0,1,0,0,0,0,0
-306,"Best regards ,",0,0,0,0,0,0,1,0
-307,"Best regards , Ron Sinclear .  ronsinclear@netscape.net",1,0,0,0,0,0,0,0
-308,"Ron Sinclear . ",0,0,1,0,0,0,0,0
-309,"ronsinclear@netscape.net",0,1,0,0,0,0,0,0
-310,"Regards , Soo ChoN.B",1,0,0,0,0,0,0,0
-311,"Regards , Soo ChoN.B : Endeavour to send your reply through my alternativee - mail address:soo@financesource.com",1,0,0,0,0,0,0,0
-312,"Soo ChoN.B",0,0,1,0,0,0,0,0
-313,"address:soo@financesource.com",0,1,0,0,0,0,0,0
-314,"Best Regards ,",1,0,0,0,0,0,1,0
-315,"Best Regards , Mr.  Anuka Ifufeh .",1,0,0,0,0,0,0,0
-316,"Mr.  Anuka Ifufeh .",0,0,1,0,0,0,0,0
-317,"eric_stephenxxx@yahoo.com=20Yours faithfully,=20MR.ERIC",0,0,0,0,0,0,1,0
-318,"eric_stephenxxx@yahoo.com=20Yours faithfully,=20MR.ERIC STEPHEN=20",1,0,0,0,0,0,0,0
-319,"faithfully,=20MR.ERIC STEPHEN=20",0,0,1,0,0,0,0,0
-320,"IMMEDIATELY.thanksMR",0,0,0,0,0,0,1,0
-321,"IMMEDIATELY.thanksMR MARK AKIMA_________________________________________________________________Ten",1,0,1,0,0,0,0,0
-322,"Yours faithfully ,",0,0,0,0,0,0,1,0
-323,"Yours faithfully , DR .  JOHNSON KENNETH",1,0,0,0,0,0,0,0
-324,"DR .  JOHNSON KENNETH",0,0,1,0,0,0,0,0
-325,"Thanks and regards,<FONT",0,0,0,0,0,0,1,0
-326,"Thanks and regards,<FONT size=3><FONT color=#333333 > Mr.  Willford Breeks",1,0,0,0,0,0,0,0
-327,"Mr.  Willford Breeks",0,0,1,0,0,0,0,0
-328,"I await your response.Mr.Cheungmailcheung001@yahoo.com",1,0,0,0,0,0,1,0
-329,"response.Mr.Cheungmailcheung001@yahoo.com",0,1,0,0,0,0,0,0
-330,"nbsp;Yours Truly ,",0,0,0,0,0,0,1,0
-331,"nbsp;Yours Truly , & nbsp;Barrister , Fredrick Thambo",1,0,0,0,0,0,0,0
-332,"nbsp;Barrister , Fredrick Thambo",0,0,1,0,0,0,0,0
-333,"/=STRONG>(Attorney - At - Law & amp ; Public Notary",0,0,0,1,0,0,0,0
-334,"Respectfully submitted ,",0,0,0,0,0,0,1,0
-335,"Respectfully submitted , BEST REGARDSMr .  Femi Gidado",1,0,0,0,0,0,0,0
-336,"BEST REGARDSMr",0,0,0,0,0,0,1,0
-337,"REGARDSMr .  Femi Gidado",0,0,1,0,0,0,0,0
-338,"Your=92s fa = ithfully ,",0,0,0,0,0,0,1,0
-339,"Your=92s fa = ithfully , MUSTAFA BRUNU   ( Esq.)FROM ( B.O.A ) OUAGADOUGOU BURKINA - FASO.GOD BLESSINGS , PROTECTIONS AND GUIDIAN = CE TO YOUR ENTIRE FAMILY.POST",1,0,0,0,0,0,0,0
-340,"MUSTAFA BRUNU   ( Esq.)FROM",0,0,1,0,0,0,0,0
-341,"( B.O.A )",0,0,0,0,1,0,0,0
-342,"God bless you . ",0,0,0,0,0,0,1,0
-343,"God bless you .  Mr. Ahmed Usman .  Union Bank PLC , Lagos , Nigeria . ",1,0,0,0,0,0,0,0
-344,"Mr. Ahmed Usman . ",0,0,1,0,0,0,0,0
-345,"Union Bank PLC",0,0,0,0,1,0,0,0
-346,"28Europe=29=2EThanks and God bless you=2EMr=2EFRED",0,0,0,0,0,0,1,0
-347,"28Europe=29=2EThanks and God bless you=2EMr=2EFRED OBITel=3A 234 - 80 - 332 96219Fax=3A 234 - 1 - 7592758",1,0,0,0,0,0,0,0
-348,"you=2EMr=2EFRED OBITel=3A",0,0,1,0,0,0,0,0
-349,"OBITel=3A 234 - 80 - 332 96219Fax=3A",0,0,0,0,0,1,0,0
-350,"Best Regards , Gregory Kabila .  NB : ALTERNATIVE EMAIL ADDRESS(gregorykabila222@post.cz )",1,0,0,0,0,0,0,0
-351,"Gregory Kabila . ",0,0,1,0,0,0,0,0
-352,"ALTERNATIVE EMAIL ADDRESS(gregorykabila222@post.cz )",0,1,0,0,0,0,0,0
-353,"John Allen . ",0,0,1,0,0,0,0,0
-354,"John Allen .  Director , WELLKANG INTERNATIONAL , IMPORT / EXPORT",1,0,0,0,0,0,0,0
-355,"Director",0,0,0,1,0,0,0,0
-356,"WELLKANG INTERNATIONAL , IMPORT / EXPORT",0,0,0,0,1,0,0,0
-357,"Best regards=2C",0,0,0,0,0,0,1,0
-358,"Best regards=2C Yours Faithfully=2C Musa=2E",1,0,0,0,0,0,0,0
-359,"Regards StrobeStrobe TalbottPresident The Brookings Institution1775 Massachusetts Avenue NWWashington DC 20036702 797 6700",1,0,0,0,0,0,0,0
-360,"StrobeStrobe TalbottPresident",0,0,1,0,0,0,0,0
-361,"TalbottPresident",0,0,0,1,0,0,0,0
-362,"The Brookings Institution1775",0,0,0,0,1,0,0,0
-363,"20036702 797 6700",0,0,0,0,0,1,0,0
-364,"176928755Impatiently awaiting for your orders , ShadowCrew",1,0,0,0,0,0,0,0
-365,"176928755Impatiently awaiting for your orders ,",0,0,0,0,0,0,1,0
-366,"ShadowCrew",0,0,0,0,1,0,0,0
-367,"responseYours faithfully ,",1,0,0,0,0,0,1,0
-368,"knowU.S.  Department of StateCase",0,0,0,0,1,0,0,0
-369,"Yours Truly,=20",0,0,0,0,0,0,1,0
-370,"Barrister , Fredrick Thambo=20(Attorney",0,0,1,0,0,0,0,0
-371,"Thambo=20(Attorney - At - Law & Public Notary)=20_________________________________________________________________News",0,0,0,1,0,0,0,0
-372,"George .  N. Lawson-=20",1,0,1,0,0,0,0,0
-373,"confidential=2EBest regards=2CJOHNSON",0,0,0,0,0,0,1,0
-374,"confidential=2EBest regards=2CJOHNSON SAVIMBI",1,0,0,0,0,0,0,0
-375,"regards=2CJOHNSON SAVIMBI",0,0,1,0,0,0,0,0
-376,"mail=2EThanks and remain bless=2EPHIRI",0,0,0,0,0,0,1,0
-377,"mail=2EThanks and remain bless=2EPHIRI ABOA=2E",1,0,0,0,0,0,0,0
-378,"bless=2EPHIRI ABOA=2E",0,0,1,0,0,0,0,0
-379,"0D=0A=0D=0AThank you and God bless you . ",0,0,0,0,0,0,1,0
-380,"0D=0A=0D=0AThank you and God bless you .  = 0D=0A==0D=0ABarrister Gareth Jones .",1,0,0,0,0,0,0,0
-381,"0D=0A==0D=0ABarrister Gareth Jones",0,0,1,0,0,0,0,0
-382,"BEST WISHES=2C",0,0,0,0,0,0,1,0
-383,"BEST WISHES=2C MRS=2E MARIAM ABACHA = 28WIDOW=29=2E",1,0,0,0,0,0,0,0
-384,"MRS=2E MARIAM ABACHA",0,0,1,0,0,0,0,0
-385,"28WIDOW=29=2E",0,0,0,1,0,0,0,0
-386,"Regards=2CDr=2EBola Harry=2EPLEASE",0,0,1,0,0,0,0,0
-387,"Regards=2CDr=2EBola",0,0,0,0,0,0,1,0
-388,"Regards=2CDr=2EBola Harry=2EPLEASE SEND YOUR REPLY TO=3A bolaharry1=40kukamail=2Ecom = 3Cmailto=3Abolaharry1=40kukamail=2Ecom=3E",0,1,0,0,0,0,0,0
-389,"bolaharry1=40kukamail=2Ecom",0,1,0,0,0,0,0,0
-390,"Engr .  VictorChigoziem",0,0,1,0,0,0,0,0
-391,"f_jewell0013@yahoo.co.ukYours faithfully",0,0,0,0,0,0,1,0
-392,"f_jewell0013@yahoo.co.ukYours faithfully , Mr.  Frank Jewell_________________________________________________________________Get",1,0,0,0,0,0,0,0
-393,"Mr.  Frank Jewell_________________________________________________________________Get",0,0,1,0,0,0,0,0
-394,"Best regards=2CMrs=2EAtiya",0,0,0,0,0,0,1,0
-395,"Best regards=2CMrs=2EAtiya Mohameed",1,0,0,0,0,0,0,0
-396,"regards=2CMrs=2EAtiya Mohameed",0,0,1,0,0,0,0,0
-397,"Jm",1,0,0,0,0,0,0,0
-398,"Regards and God Bless you .",0,0,0,0,0,0,1,0
-399,"Regards and God Bless you . Mrs.  Estelle Mamadou .",1,0,0,0,0,0,0,0
-400,"Mrs.  Estelle Mamadou . ",0,0,1,0,0,0,0,0
-401,"Regards , Mr. Robbin Kuuk",1,0,0,0,0,0,0,0
-402,"Mr. Robbin Kuuk",0,0,1,0,0,0,0,0
-403,"Happy reading ! ",0,0,0,0,0,0,1,0
-404,"Happy reading !  AM",1,0,0,0,0,0,0,0
-405,"Yours truly",0,0,0,0,0,0,1,0
-406,"Yours truly , Richard AND JANETFROM RICHARD AND JANET.contact me on .  richard64sanko@yahoo.itDear",1,0,0,0,0,0,0,0
-407,"richard64sanko@yahoo.itDear",0,1,0,0,0,0,0,0
-408,"Remain blessed ,",0,0,0,0,0,0,1,0
-409,"Remain blessed , MR.FAN JEN - LIANG.SHANGHAI COMMERCIAL BANK LIMITED , UK(London Branch)Private Email : fanjenliang@terrapins.comDirect Telephone:44 - 7031915718 .",1,0,0,0,0,0,0,0
-410,"MR.FAN JEN - LIANG.SHANGHAI",0,0,1,0,0,0,0,0
-411,"LIANG.SHANGHAI COMMERCIAL BANK LIMITED",0,0,0,0,1,0,0,0
-412,"Branch)Private Email : fanjenliang@terrapins.comDirect",0,1,0,0,0,0,0,0
-413,"fanjenliang@terrapins.comDirect Telephone:44 - 7031915718 .",0,0,0,0,0,1,0,0
-414,"Regards , MR Campbell William",1,0,0,0,0,0,0,0
-415,"MR Campbell William",0,0,1,0,0,0,0,0
-416,"I await your reply ,",0,0,0,0,0,0,1,0
-417,"I await your reply ,   BARR.PAUL RICHARD { Esq .  } .  Accra , Ghana - West Africa .",1,0,0,0,0,0,0,0
-418,"BARR.PAUL RICHARD { Esq .  } . ",0,0,1,0,0,0,0,0
-419,"Yours Sincerely , Dr.  Agu Johnson Chairman , Payment Committee",1,0,0,0,0,0,0,0
-420,"Dr.  Agu Johnson Chairman",0,0,1,0,0,0,0,0
-421,"Payment Committee",0,0,0,1,0,0,0,0
-422,"NZANGA MOBUTU . ",0,0,1,0,0,0,0,0
-423,"NZANGA MOBUTU",1,0,0,0,0,0,0,0
-424,"Mr Edward Govou .",0,0,1,0,0,0,0,0
-425,"Yours faithfully",0,0,0,0,0,0,1,0
-426,"Yours faithfully , Dr Idris Ali .",1,0,0,0,0,0,0,0
-427,"Dr Idris Ali .",0,0,1,0,0,0,0,0
-428,"Yours Sincerely",0,0,0,0,0,0,1,0
-429,"Yours Sincerely ,               Chief Anthony Enahoro .  JPCoordinator , Coalition to protect Contractors / Inheritances beneficiaries",1,0,0,0,0,0,0,0
-430,"Chief Anthony Enahoro",0,0,1,0,0,0,0,0
-431,"JPCoordinator",0,0,0,1,0,0,0,0
-432,"Coalition to protect Contractors / Inheritances beneficiaries",0,0,0,0,1,0,0,0
-433,"Yours faithfully , Mr Mohamat Ali .",1,0,0,0,0,0,0,0
-434,"Mr Mohamat Ali .",0,0,1,0,0,0,0,0
-435,"Yours faithfully , Musa Garuba .",1,0,0,0,0,0,0,0
-436,"Musa Garuba .",0,0,1,0,0,0,0,0
-437,"Yours   faithfullyYUSUF",0,0,0,0,0,0,1,0
-438,"Yours   faithfullyYUSUF ALI .  Please mail me with this adress   Email;yusuf_ali778@yahoo.fr",1,0,0,0,0,0,0,0
-439,"faithfullyYUSUF ALI .",0,0,1,0,0,0,0,0
-440,"Email;yusuf_ali778@yahoo.fr",0,1,0,0,0,0,0,0
-441,"Yours faithfully , Dr Hassan Dantata",1,0,0,0,0,0,0,0
-442,"Dr Hassan Dantata",0,0,1,0,0,0,0,0
-443,"Best Regards",0,0,0,0,0,0,1,0
-444,"Best Regards DR PETER CLAPTON",1,0,0,0,0,0,0,0
-445,"DR PETER CLAPTON",0,0,1,0,0,0,0,0
-446,"Yours faithfully , George Path",1,0,0,0,0,0,0,0
-447,"George Path",0,0,1,0,0,0,0,0
-448,"MR . KELLEY KO",0,0,1,0,0,0,0,0
-449,"EMPLOYMENT CO - ORDINATOR(KELLEYKO",0,0,0,1,0,0,0,0
-450,"ORDINATOR(KELLEYKO FABRICS&amp;TEXTILES )",0,0,0,0,1,0,0,0
-451,"Thanks and God bless you . ",0,0,0,0,0,0,1,0
-452,"Thanks and God bless you .  DR . ( MRS . ) MARYAM ABACHA . ",1,0,0,0,0,0,0,0
-453,"DR . ( MRS . ) MARYAM ABACHA",0,0,1,0,0,0,0,0
-454,"Your faithfully . ",0,0,0,0,0,0,1,0
-455,"Your faithfully .  PROF , CHARLES SOLUDO(CBN ) GOVERNOR .  ( FGN)Direct line 234 - 80 - 348 - 53467-",1,0,0,0,0,0,0,0
-456,"PROF , CHARLES SOLUDO(CBN",0,0,1,0,0,0,0,0
-457,"GOVERNOR",0,0,0,1,0,0,0,0
-458,"( FGN)Direct line 234 - 80 - 348 - 53467-",0,0,0,0,0,1,0,0
-459,"Yours faithfully , Ben Maluleke ( ENGR.)DEPARTMENT OF MINERALS AND ENERGYREPUBLIC OF SOUTH AFRICA .",1,0,0,0,0,0,0,0
-460,"Ben Maluleke",0,0,1,0,0,0,0,0
-461,"ENGR.)DEPARTMENT OF MINERALS AND ENERGYREPUBLIC OF SOUTH AFRICA .",0,0,0,0,1,0,0,0
-462,"Judith KiefferExecutive",0,0,1,0,0,0,0,0
-463,"Judith KiefferExecutive DirectorLos Angeles Parks Foundation11973 San Vicente Blvd .  Suite 200Los Angeles CA 90049Office : 310 - 472 - 1990FAX : 310 - 472 - 0992Mobile",1,0,0,0,0,0,0,0
-464,"KiefferExecutive DirectorLos",0,0,0,1,0,0,0,0
-465,"DirectorLos Angeles Parks Foundation11973",0,0,0,0,1,0,0,0
-466,"90049Office : 310 - 472 - 1990FAX",0,0,0,0,0,1,0,0
-467,"Best regards",0,0,0,0,0,0,1,0
-468,"Ron Sinclear .",0,0,1,0,0,0,0,0
-469,"0D=0DRegards,=0DISAAC BAKA",0,0,1,0,0,0,0,0
-470,"0D=0DRegards,=0DISAAC",0,0,0,0,0,0,1,0
-471,"0D=0DRegards,=0DISAAC BAKA .",1,0,0,0,0,0,0,0
-472,"Yours faithfully , Mark Luke",1,0,0,0,0,0,0,0
-473,"Mark Luke",0,0,1,0,0,0,0,0
-474,"Regards Mr YOKO Ono   Executive Director",1,0,0,0,0,0,0,0
-475,"Mr YOKO Ono",0,0,1,0,0,0,0,0
-476,"Executive Director",0,0,0,1,0,0,0,0
-477,"PROCEED.THANKS.MR NOEL PANGA .",1,0,1,0,0,0,0,0
-478,"PROCEED.THANKS.MR",0,0,0,0,0,0,1,0
-479,"Mr_muhammd_amin@yahoo.frYours sincerely",0,0,0,0,0,0,1,0
-480,"Mr_muhammd_amin@yahoo.frYours sincerely , mr .  MUHAMMD    AMIN",1,0,0,0,0,0,0,0
-481,"mr .  MUHAMMD    AMIN",0,0,1,0,0,0,0,0
-482,"Yours Faithfully",0,0,0,0,0,0,1,0
-483,"Yours Faithfully , DR.MIKE   CHIBUZOR.CHIARMAN CONTRACTREVEIW .",1,0,0,0,0,0,0,0
-484,"DR.MIKE   CHIBUZOR.CHIARMAN",0,0,1,0,0,0,0,0
-485,"CONTRACTREVEIW",0,0,0,1,0,0,0,0
-486,"Yours faithfully , Dr. Henry   Salami .  Auditor of   the Federation .",1,0,0,0,0,0,0,0
-487,"Dr. Henry   Salami . ",0,0,1,0,0,0,0,0
-488,"Auditor of   the Federation . ",0,0,0,1,0,0,0,0
-489,"Mr. Christopher Wilson",1,0,1,0,0,0,0,0
-490,"Regards , MR .  MATTHEW MOLEFE .",1,0,0,0,0,0,0,0
-491,"MR .  MATTHEW MOLEFE .",0,0,1,0,0,0,0,0
-492,"Best RegardsDr",0,0,0,0,0,0,1,0
-493,"RegardsDr .  Andrew William",0,0,1,0,0,0,0,0
-494,"Best Regards . ",0,0,0,0,0,0,1,0
-495,"Best Regards .  MRS.SUZANA NUHAN VAYE ( WIDOW )",1,0,0,0,0,0,0,0
-496,"MRS.SUZANA NUHAN VAYE ( WIDOW )",0,0,1,0,0,0,0,0
-497,"Yours sincerely",0,0,0,0,0,0,1,0
-498,"PRINCESS&nbsp;GES = INTA",0,0,1,0,0,0,0,0
-499,"RegardsMr .  YURIY LAGUTIN",1,0,1,0,0,0,0,0
-500,"RegardsMr",0,0,0,0,0,0,1,0
-501,"REGARDS ! ",0,0,0,0,0,0,1,0
-502,"REGARDS !  DR.GAIUS OBASEKIFORMER GROUP MANAGING DIRECTORNIGERIAN NATIONAL PETROLEUM CO - OPERATIONSNIGERIA .",1,0,0,0,0,0,0,0
-503,"DR.GAIUS OBASEKIFORMER",0,0,1,0,0,0,0,0
-504,"OBASEKIFORMER GROUP MANAGING DIRECTORNIGERIAN",0,0,0,1,0,0,0,0
-505,"DIRECTORNIGERIAN NATIONAL PETROLEUM CO - OPERATIONSNIGERIA",0,0,0,0,1,0,0,0
-506,"Yours truly , Robert Zulugan .",1,0,0,0,0,0,0,0
-507,"Robert Zulugan . ",0,0,1,0,0,0,0,0
-508,"ThanksTomicah",1,0,0,0,0,0,1,0
-509,"Regards , Ali Raza Khan",1,0,0,0,0,0,0,0
-510,"Ali Raza Khan . ",0,0,1,0,0,0,0,0
-511,"Regards , Gonzelez",1,0,0,0,0,0,0,0
-512,"Sincerely , Frank kone",1,0,0,0,0,0,0,0
-513,", Frank kone",0,0,1,0,0,0,0,0
-514,"Thanks and regards .  Mr John Obi .",1,0,0,0,0,0,0,0
-515,"John Obi",0,0,1,0,0,0,0,0
-516,"We look forward to working with you .  Dr. Edward Swaraden CookyCon Oil and Gas Ltd.  HACKNEY E50hx LONDON FAX:448709129080,TELEPHONE:+447024096224 .  PLEASE CONTACT US VIA EMAIL:edward4notice@sify.com,zicobee@zwallet.com",1,0,0,0,0,0,0,0
-517,"We look forward to working with you",0,0,0,0,0,0,1,0
-518,"Dr. Edward Swaraden CookyCon",0,0,1,0,0,0,0,0
-519,"CookyCon Oil and Gas Ltd.",0,0,0,0,1,0,0,0
-520,"FAX:448709129080,TELEPHONE:+447024096224",0,0,0,0,0,1,0,0
-521,"EMAIL:edward4notice@sify.com,zicobee@zwallet.com",0,1,0,0,0,0,0,0
+id,text,signature,signature_email,signature_fullname,signature_jobtitle,signature_org,signature_phone,signature_signoff,signature_url,signature_address,signature_handle
+0,"Shirley S. Elliott  Citibank , N.A. - Global Energy & Mining  Two Allen Center  1200 Smith Street , Suite 2000  Houston , Texas 77002  Tel :   ( 713 ) 654 - 2868  Fax :   ( 713 ) 654 - 2849",1,0,0,0,0,0,0,0,0,0
+1,"-PLK ",1,0,0,0,0,0,0,0,0,0
+2,"Matthew Lenhart@ECT",1,0,1,0,0,0,0,0,0,0
+3,"Matthew Lenhart@ECT ",0,0,0,0,1,0,0,0,0,0
+4,"Regards ,",0,0,0,0,0,0,1,0,0,0
+5,"Kevin A. Boone  Accenture -- Houston  ( Octel ) 713.837.1638  ( Client ) 281.848.1619  ( C ) 713.306.7940  ( H ) 713.864.4149  Kevin.A.Boone@accenture.com  Our web address is http://www.accenture.com",1,0,0,0,0,0,0,0,0,0
+6,"Accenture -- Houston",0,0,0,0,1,0,0,0,0,0
+7,"Shirley S. Elliott",0,0,1,0,0,0,0,0,0,0
+8,"Citibank , N.A.",0,0,0,0,1,0,0,0,0,0
+9,"Global Energy & Mining",0,0,0,1,0,0,0,0,0,0
+10,"Two Allen Center  1200 Smith Street , Suite 2000  Houston , Texas 77002",0,0,0,0,0,0,0,0,1,0
+11,"Tel :   ( 713 ) 654 - 2868",0,0,0,0,0,1,0,0,0,0
+12,"Regards , ",0,0,0,0,0,0,1,0,0,0
+13,"Regards ,  Kevin A. Boone  Accenture -- Houston  ( Octel ) 713.837.1638  ( Client ) 281.848.1619  ( C ) 713.306.7940  ( H ) 713.864.4149  Kevin.A.Boone@accenture.com  Our web address is http://www.accenture.com",1,0,0,0,0,0,0,0,0,0
+14,"Kevin A. Boone ",0,0,1,0,0,0,0,0,0,0
+15,"Accenture",0,0,0,0,1,0,0,0,0,0
+16,"Kevin.A.Boone@accenture.com ",0,1,0,0,0,0,0,0,0,0
+17,"http://www.accenture.com                     ",0,0,0,0,0,0,0,1,0,0
+18,"Kevin A. Boone",0,0,1,0,0,0,0,0,0,0
+19,"Houston",0,0,0,0,0,0,0,0,1,0
+20,"( C ) 713.306.7940 ",0,0,0,0,0,1,0,0,0,0
+21,"( H ) 713.864.4149 ",0,0,0,0,0,1,0,0,0,0
+22,"http://www.accenture.com",0,0,0,0,0,0,0,1,0,0
+23,"Thanks",1,0,0,0,0,0,1,0,0,0
+24,"Thanks  Kris Shireman",1,0,0,0,0,0,0,0,0,0
+25,"Kris Shireman ",0,0,1,0,0,0,0,0,0,0
+26,"Sincerely",0,0,0,0,0,0,1,0,0,0
+27,"Emmanuel",0,0,1,0,0,0,0,0,0,0
+28,"Emmanuel Mangin ",0,0,1,0,0,0,0,0,0,0
+29,"Outlook Migration Team Lead",0,0,0,1,1,0,0,0,0,0
+30,"Emmanuel.Mangin@Enron.com",0,1,0,0,0,0,0,0,0,0
+31,"Work : ? 713 - 345 - 9357 ",0,0,0,0,0,1,0,0,0,0
+32,"Regards",0,0,0,0,0,0,1,0,0,0
+33,"( Octel ) 713.837.1638  ( Client ) 281.848.1619  ( C ) 713.306.7940  ( H ) 713.864.4149",0,0,0,0,0,1,0,0,0,0
+34,"Kevin.A.Boone@accenture.com",0,1,0,0,0,0,0,0,1,0
+35,"Our web address is http://www.accenture.com",0,0,0,0,0,0,0,1,0,0
+36,"Love -- Grandma",1,0,0,0,0,0,1,0,0,0
+37,"Emmanuel Mangin  Outlook Migration Team Lead  Emmanuel.Mangin@Enron.com  Work : ? 713 - 345 - 9357  Pager : 713 - 415 - 5091",1,0,0,0,0,0,0,0,0,0
+38,"Work : ? 713 - 345 - 9357  Pager : 713 - 415 - 5091",0,0,0,0,0,1,0,0,0,0
+39,"Myers P. Namie  Partner  Cypress Litigation , L.L.C.  667 Laurel Street  Baton Rouge , LA 70802  ( 225 ) 387 - 6511  Fax : ( 225 ) 387 - 6533  clcs@msn.com",1,0,0,0,0,0,0,0,0,0
+40,"Myers P. Namie",0,0,1,0,0,0,0,0,0,0
+41,"Partner",0,0,0,1,0,0,0,0,0,0
+42,"Cypress Litigation , L.L.C.",0,0,0,0,1,0,0,0,0,0
+43,"667 Laurel Street  Baton Rouge , LA 70802",0,0,0,0,0,0,0,0,1,0
+44,"( 225 ) 387 - 6511",0,0,0,0,0,1,0,0,0,0
+45,"clcs@msn.com ",0,1,0,0,0,0,0,0,0,0
+46,"-PLK",1,0,1,0,0,0,0,0,0,0
+47,"s.",1,0,0,0,0,0,0,0,0,0
+48,"love",0,0,0,0,0,0,1,0,0,0
+49,"Samantha  503 - 464 - 7248 ",1,0,0,0,0,0,0,0,0,0
+50,"503 - 464 - 7248",0,0,0,0,0,1,0,0,0,0
+51,"Fran  503.464.7973",1,0,0,0,0,0,0,0,0,0
+52,"503.464.7973",0,0,0,0,0,1,0,0,0,0
+53,"later",0,0,0,0,0,0,1,0,0,0
+54,"Expedia.com  Do n't just travel .   Travel right . http://expedia.com/",1,0,0,0,0,0,0,0,0,0
+55,"Travel right . http://expedia.com/",0,0,0,0,0,0,0,1,0,0
+56,"Thank you ,  Matt Lenhart ",1,0,0,0,0,0,0,0,0,0
+57,"Thank you",0,0,0,0,0,0,1,0,0,0
+58,"Matt Lenhart",1,0,1,0,0,0,0,0,0,0
+59,"Thanks for your help",0,0,0,0,0,0,1,0,0,0
+60,"matt",1,0,1,0,0,0,0,0,0,0
+61,"Citibank , N.A. - Global Energy & Mining",0,0,0,0,1,0,0,0,0,0
+62,"Fax :   ( 713 ) 654 - 2849",0,0,0,0,0,1,0,0,0,0
+63,"713.837.1638",0,0,0,0,0,1,0,0,0,0
+64,"Client ) 281.848.1619",0,0,0,0,0,1,0,0,0,0
+65,"281.848.1619",0,0,0,0,0,1,0,0,0,0
+66,"713.306.7940",0,0,0,0,0,1,0,0,0,0
+67,"713.864.4149",0,0,0,0,0,1,0,0,0,0
+68,"Love",0,0,0,0,0,0,1,0,0,0
+69,"Grandma",1,0,1,0,0,0,0,0,0,0
+70,"Kris Shireman",0,0,1,0,0,0,0,0,0,0
+71,"Sincerely ,  Emmanuel  Emmanuel Mangin  Outlook Migration Team Lead  Emmanuel.Mangin@Enron.com  Work : ? 713 - 345 - 9357  Pager : 713 - 415 - 5091",1,0,0,0,0,0,0,0,0,0
+72,"Emmanuel Mangin",0,0,1,0,0,0,0,0,0,0
+73,"713 - 345 - 9357",0,0,0,0,0,1,0,0,0,0
+74,"713 - 415 - 5091",0,0,0,0,0,1,0,0,0,0
+75,"225 ) 387 - 6511",0,0,0,0,0,1,0,0,0,0
+76,"225 ) 387 - 6533",0,0,0,0,0,1,0,0,0,0
+77,"clcs@msn.com",0,1,0,0,0,0,0,0,0,0
+78,"love   mom",1,0,0,0,0,0,0,0,0,0
+79,"mom",0,0,1,0,0,0,0,0,0,0
+80,"Thanks ,  Fran  503.464.7973",1,0,0,0,0,0,0,0,0,0
+81,"Fran",0,0,1,0,0,0,0,0,0,0
+82,"Regards ,  Samantha  503 - 464 - 7248",1,0,0,0,0,0,0,0,0,0
+83,"Samantha",0,0,1,0,0,0,0,0,0,0
+84,"503 - 464 - 7248 ",0,0,0,0,0,1,0,0,0,0
+85,"CKL",1,0,1,0,0,0,0,0,0,0
+86,"Take care- ",0,0,0,0,0,0,1,0,0,0
+87,"Take care-  jen",1,0,0,0,0,0,0,0,0,0
+88,"jen",0,0,1,0,0,0,0,0,0,0
+89,"-Stacey",1,0,1,0,0,0,0,0,0,0
+90,"( H ) 713.864.4149",0,0,0,0,0,1,0,0,0,0
+91,"Julie",1,0,1,0,0,0,0,0,0,0
+92,"Julie   :-)",1,0,0,0,0,0,0,0,0,0
+93,"( C ) 713.306.7940",0,0,0,0,0,1,0,0,0,0
+94,"Phillip",1,0,1,0,0,0,0,0,0,0
+95,"Eric Benson",0,0,1,0,0,0,0,0,0,0
+96,"Eric Benson  Sr . Specialist  Enron Government Affairs - The Americas  713 - 853 - 1711",1,0,0,0,0,0,0,0,0,0
+97,"Sr . Specialist",0,0,0,1,0,0,0,0,0,0
+98,"Enron Government Affairs - The Americas",0,0,0,0,1,0,0,0,0,0
+99,"713 - 853 - 1711",0,0,0,0,1,1,0,0,0,0
+100,"later ,  christa  ",1,0,0,0,0,0,0,0,0,0
+101,"christa",0,0,1,0,0,0,0,0,0,0
+102,"Thank you ,  Matt Lenhart",1,0,0,0,0,0,0,0,0,0
+103,"Thank you ,",0,0,0,0,0,0,1,0,0,0
+104,"1200 Smith Street , Suite 2000  Houston , Texas 77002",0,0,0,0,0,0,0,0,1,0
+105,"Lenhart@ECT ",0,0,0,0,1,0,0,0,0,0
+106,"Kevin A. Boone  Accenture -- Houston  ( Octel ) 713.837.1638  ( Client ) 281.848.1619  ( C ) 713.306.7940  ( H ) 713.864.4149  Kevin.A.Boone@accenture.com  Our web address is http://www.accenture.com                     ",1,0,0,0,0,0,0,0,0,0
+107,"( Octel ) 713.837.1638",0,0,0,0,0,1,0,0,0,0
+108,"( Client ) 281.848.1619",0,0,0,0,0,1,0,0,0,0
+109,"- Doves - Lost Souls - 08 Catch the Sun.mp3",1,0,0,0,0,0,0,0,0,0
+110,"Octel ) 713.837.1638",0,0,0,0,0,1,0,0,0,0
+111,"C ) 713.306.7940",0,0,0,0,0,1,0,0,0,0
+112,"Love -- Grandma ",1,0,0,0,0,0,0,0,0,0
+113,"Kristann Shireman",1,0,1,0,0,0,0,0,0,0
+114,"Work : ? 713 - 345 - 9357",0,0,0,0,0,1,0,0,0,0
+115,"Myers P. Namie  Partner  Cypress Litigation , L.L.C.  667 Laurel Street  Baton Rouge , LA 70802  ( 225 ) 387 - 6511  Fax : ( 225 ) 387 - 6533  clcs@msn.com ",1,0,0,0,0,0,0,0,0,0
+116,"- rOutkast - Rosa klParks.mp3",1,0,0,0,0,0,0,0,0,0
+117,"Enron North America Corp. 		",1,0,0,0,0,0,0,0,0,0
+118,"Enron North America Corp.",0,0,0,0,1,0,0,0,0,0
+119,"s. ",1,0,0,0,0,0,0,0,0,0
+120,"James D Steffes@ENRON",1,0,1,0,0,0,0,0,0,0
+121,"Steffes@ENRON ",0,0,0,0,1,0,0,0,0,0
+122,"Regards ,  Samantha  503 - 464 - 7248 ",1,0,0,0,0,0,0,0,0,0
+123,"- Jay - Z",1,0,0,0,0,0,0,0,0,0
+124,"Take care-",0,0,0,0,0,0,1,0,0,0
+125,"H ) 713.864.4149",0,0,0,0,0,1,0,0,0,0
+126,"? Grandpa",1,0,0,0,0,0,0,0,0,0
+127,") 713.306.7940",0,0,0,0,0,1,0,0,0,0
+128,"later ,  christa",1,0,0,0,0,0,0,0,0,0
+129,"Jim",1,0,1,0,0,0,0,0,0,0
+130,"Grandpa",1,0,1,0,0,0,0,0,0,0
+131,"Expedia.com",0,0,0,0,1,0,0,0,0,0
+132,"http://expedia.com/",0,0,0,0,0,0,0,1,0,0
+133,"Sincerely ,",0,0,0,0,0,0,1,0,0,0
+134,"Sincerely ,   Phillip Allen",1,0,0,0,0,0,0,0,0,0
+135,"Phillip Allen",0,0,1,0,0,0,0,0,0,0
+136,"Phillip Allen Enron 713 - 853 - 7041",1,0,0,0,0,0,0,0,0,0
+137,"Enron",0,0,0,0,1,0,0,0,0,0
+138,"713 - 853 - 7041",0,0,0,0,0,1,0,0,0,0
+139,"Phillip 713 - 853 - 7041",1,0,0,0,0,0,0,0,0,0
+140,"Sincerely ,   Howard Gordon Network Administrator hgordon@state-bank.com",1,0,0,0,0,0,0,0,0,0
+141,"Howard Gordon",0,0,1,0,0,0,0,0,0,0
+142,"Network Administrator",0,0,0,1,0,0,0,0,0,0
+143,"hgordon@state-bank.com",0,1,0,0,0,0,0,0,0,0
+144,"Sincerely ,   Howard Gordon Network Manager",1,0,0,0,0,0,0,0,0,0
+145,"Gordon Network Manager",0,0,0,1,0,0,0,0,0,0
+146,"Regards , Ken Lay",1,0,0,0,0,0,0,0,0,0
+147,"Ken Lay",0,0,1,0,0,0,0,0,0,0
+148,"Sarah - Joy Hunter",0,0,1,0,0,0,0,0,0,0
+149,"Sarah - Joy Hunter Manager , Global Strategic Sourcing Business Development Enron Corporation # ( 713)-345 - 6541",1,0,0,0,0,0,0,0,0,0
+150,"Manager , Global Strategic Sourcing Business Development",0,0,0,1,0,0,0,0,0,0
+151,"Enron Corporation",0,0,0,0,1,0,0,0,0,0
+152,"# ( 713)-345 - 6541",0,0,0,0,0,1,0,0,0,0
+153,"Phillip Allen pallen@enron.com 713 - 853 - 7041",1,0,0,0,0,0,0,0,0,0
+154,"pallen@enron.com",0,1,0,0,0,0,0,0,0,0
+155,"Thanks . ",0,0,0,0,0,0,1,0,0,0
+156,"Thanks .  Michelle L. Simpkins Winstead Sechrest & Minick P.C. 100 Congress Avenue , Suite 800 Austin , Texas   78701 ( 512 ) 370 - 2836 ( 512 ) 370 - 2850 Fax msimpkins@winstead.com",1,0,0,0,0,0,0,0,0,0
+157,"Michelle L. Simpkins",0,0,1,0,0,0,0,0,0,0
+158,"Winstead Sechrest & Minick P.C.",0,0,0,0,1,0,0,0,0,0
+159,"100 Congress Avenue , Suite 800 Austin , Texas   78701",0,0,0,0,0,0,0,0,1,0
+160,"( 512 ) 370 - 2836",0,0,0,0,0,1,0,0,0,0
+161,"( 512 ) 370 - 2850",0,0,0,0,0,1,0,0,0,0
+162,"msimpkins@winstead.com",0,1,0,0,0,0,0,0,0,0
+163,"Jeff Smith",0,0,1,0,0,0,0,0,0,0
+164,"Jeff Smith The Smith Company 9400 Circle Drive Austin , Texas   78736 512 - 394 - 0908 office 512 - 394 - 0913 fax 512 - 751 - 9728 mobile jsmith@austintx.com",1,0,0,0,0,0,0,0,0,0
+165,"The Smith Company",0,0,0,0,1,0,0,0,0,0
+166,"9400 Circle Drive Austin , Texas   78736",0,0,0,0,0,0,0,0,1,0
+167,"512 - 394 - 0908 office",0,0,0,0,0,1,0,0,0,0
+168,"512 - 751 - 9728 mobile",0,0,0,0,0,1,0,0,0,0
+169,"jsmith@austintx.com",0,1,0,0,0,0,0,0,0,0
+170,"Candy Haase",0,0,1,0,0,0,0,0,0,0
+171,"Candy Haase 3100 Main Street , Suite 900 Houston , TX 77002 USA 713 - 335 - 5253 713 - 335 - 8144 fax info@prosRM.com / www.prosRM.com",1,0,0,0,0,0,0,0,0,0
+172,"3100 Main Street , Suite 900 Houston , TX 77002 USA",0,0,0,0,0,0,0,0,1,0
+173,"713 - 335 - 5253",0,0,0,0,0,1,0,0,0,0
+174,"info@prosRM.com",0,1,0,0,0,0,0,0,0,0
+175,"www.prosRM.com",0,0,0,0,0,0,0,1,0,0
+176,"Jeff Smith The Smith Company 9400 Circle Drive Austin , TX   78736 512 - 394 - 0908 office 512 - 394 - 0913 fax 512 - 751 - 9728 mobile jsmith@austintx.com",1,0,0,0,0,0,0,0,0,0
+177,"9400 Circle Drive Austin , TX   78736",0,0,0,0,0,0,0,0,1,0
+178,"Richard Morgan",0,0,1,0,0,0,0,0,0,0
+179,"Richard Morgan Manager , Green Building Program Austin Energy 721 Barton Springs Rd .  Austin , TX 78704 - 1194 Ph . 512.505.3709 Fax 512.505.3711 e - mail richard.morgan@austinenergy.com",1,0,0,0,0,0,0,0,0,0
+180,"Manager , Green Building Program",0,0,0,1,0,0,0,0,0,0
+181,"Austin Energy",0,0,0,0,1,0,0,0,0,0
+182,"721 Barton Springs Rd .  Austin , TX 78704 - 1194",0,0,0,0,0,0,0,0,1,0
+183,"Ph . 512.505.3709",0,0,0,0,0,1,0,0,0,0
+184,"e - mail richard.morgan@austinenergy.com",0,1,0,0,0,0,0,0,0,0
+185,"Thanks , Monica L. Brown Accenture Houston - 2929 Allen Parkway Direct Dial : +1 713 837 1749 VPN & Octel : 83 / 71749 Fax : +1 713 257 7211 email : monica.l .  brown@accenture.com",1,0,0,0,0,0,0,0,0,0
+186,"Monica L. Brown",0,0,1,0,0,0,0,0,0,0
+187,"2929 Allen Parkway",0,0,0,0,0,0,0,0,1,0
+188,"Direct Dial : +1 713 837 1749",0,0,0,0,0,1,0,0,0,0
+189,"email : monica.l .  brown@accenture.com",0,1,0,0,0,0,0,0,0,0
+190,"Christi L. Smith",0,0,1,0,0,0,0,0,0,0
+191,"Christi L. Smith Project Manager for Client Services Keilty , Goldsmith & Company 858/450 - 2554",1,0,0,0,0,0,0,0,0,0
+192,"Project Manager for Client Services",0,0,0,1,0,0,0,0,0,0
+193,"Keilty , Goldsmith & Company",0,0,0,0,1,0,0,0,0,0
+194,"858/450 - 2554",0,0,0,0,0,1,0,0,0,0
+195,"Cheers",0,0,0,0,0,0,1,0,0,0
+196,"Cheers Kirk",1,0,0,0,0,0,0,0,0,0
+197,"Thanks !",0,0,0,0,0,0,1,0,0,0
+198,"Thanks !  Adrianne x57302",1,0,0,0,0,0,0,0,0,0
+199,"x57302",0,0,0,0,0,1,0,0,0,0
+200,"Sheri A. Righi",0,0,1,0,0,0,0,0,0,0
+201,"Sheri A. Righi Accenture Human Performance Service Line Hartford - One Financial Plaza Direct Dial : 860 756 2245 VPN & Octel : 765 2245 e - mail : sheri.a .  righi@Accenture.com",1,0,0,0,0,0,0,0,0,0
+202,"Human Performance Service Line",0,0,0,1,0,0,0,0,0,0
+203,"Hartford - One Financial Plaza",0,0,0,0,0,0,0,0,1,0
+204,"Direct Dial : 860 756 2245",0,0,0,0,0,1,0,0,0,0
+205,"e - mail : sheri.a .  righi@Accenture.com",0,1,0,0,0,0,0,0,0,0
+206,"Phillip Allen 	  8855 Merlin Ct Houston , TX 77055 pallen70@hotmail.com wk 713 - 853 - 7041 hm 713 - 463 - 8626",1,0,0,0,0,0,0,0,0,0
+207,"8855 Merlin Ct Houston , TX 77055",0,0,0,0,0,0,0,0,1,0
+208,"pallen70@hotmail.com",0,1,0,0,0,0,0,0,0,0
+209,"wk 713 - 853 - 7041",0,0,0,0,0,1,0,0,0,0
+210,"hm 713 - 463 - 8626",0,0,0,0,0,1,0,0,0,0
+211,"Phillip Allen 713 - 463 - 8626 pallen70@hotmail.com",1,0,0,0,0,0,0,0,0,0
+212,"713 - 463 - 8626",0,0,0,0,0,1,0,0,0,0
+213,"Regards ,   Kevin A. Boone Accenture -- Houston ( Octel ) 713.837.1638 ( Client ) 281.848.1619 ( C ) 713.306.7940 ( H ) 713.864.4149 Kevin . A.  Boone@accenture.com   Our web address is http://www.accenture.com",1,0,0,0,0,0,0,0,0,0
+214,"Kevin . A.  Boone@accenture.com",0,1,0,0,0,0,0,0,0,0
+215,"Thanks .  Bob Shults EnronOnline LLC Houston , Texas 77002 - 7361 713 853 - 0397 713 825 - 6372 cell 713 646 - 2126 bob.shults@enron.com",1,0,0,0,0,0,0,0,0,0
+216,"Bob Shults",0,0,1,0,0,0,0,0,0,0
+217,"EnronOnline LLC",0,0,0,0,1,0,0,0,0,0
+218,"Houston , Texas 77002 - 7361",0,0,0,0,0,0,0,0,1,0
+219,"713 853 - 0397",0,0,0,0,0,1,0,0,0,0
+220,"713 825 - 6372",0,0,0,0,0,1,0,0,0,0
+221,"cell 713 646 - 2126",0,0,0,0,0,1,0,0,0,0
+222,"bob.shults@enron.com",0,1,0,0,0,0,0,0,0,0
+223,"Enron Global Technology",1,0,0,0,0,0,0,0,0,0
+224,"Global Technology",0,0,0,1,0,0,0,0,0,0
+225,"Thank you ,   Outlook 2000 Migration Team",1,0,0,0,0,0,0,0,0,0
+226,"Outlook 2000 Migration Team",0,0,0,1,0,0,0,0,0,0
+227,"Thank you . ",0,0,0,0,0,0,1,0,0,0
+228,"Thank you .  Outlook 2000 Migration Team",1,0,0,0,0,0,0,0,0,0
+229,"Enron Messaging Administration",1,0,0,0,0,0,0,0,0,0
+230,"Messaging Administration",0,0,0,1,0,0,0,0,0,0
+231,"Thanks , Mike Mc .",1,0,0,0,0,0,0,0,0,0
+232,"Thanks ,   Phillip Allen",1,0,0,0,0,0,0,0,0,0
+233,"Sincerely ,    [ IMAGE ]   David   Risher   Senior VP and Amazon Customer of Five Years ( and Counting )   Amazon.com",1,0,0,0,0,0,0,0,0,0
+234,"David   Risher",0,0,1,0,0,0,0,0,0,0
+235,"Senior VP",0,0,0,1,0,0,0,0,0,0
+236,"Amazon.com",0,0,0,0,1,0,0,1,0,0
+237,"Dell Premier Pages Service",0,0,0,0,1,0,0,0,0,0
+238,"Sincerely , Legal NetEx Administrator",1,0,0,0,0,0,0,0,0,0
+239,"Legal NetEx",0,0,0,0,1,0,0,0,0,0
+240,"Administrator",0,0,0,1,0,0,0,0,0,0
+241,"Sincerely ,   Cheap Tickets , Inc.  ( R ) http://www.cheaptickets.com 888 - 922 - 8849",1,0,0,0,0,0,0,0,0,0
+242,"Cheap Tickets , Inc. ",0,0,0,0,1,0,0,0,0,0
+243,"http://www.cheaptickets.com",0,0,0,0,0,0,0,1,0,0
+244,"888 - 922 - 8849",0,0,0,0,0,1,0,0,0,0
+245,"Thank You . ",0,0,0,0,0,0,1,0,0,0
+246,"Thank You .  Brian O'Connell   Publisher",1,0,0,0,0,0,0,0,0,0
+247,"Brian O'Connell",0,0,1,0,0,0,0,0,0,0
+248,"Publisher",0,0,0,1,0,0,0,0,0,0
+249,"Thank you .  John Adamiak PGS Energy Training",1,0,0,0,0,0,0,0,0,0
+250,"John Adamiak",0,0,1,0,0,0,0,0,0,0
+251,"PGS Energy Training",0,0,0,0,1,0,0,0,0,0
+252,"Best",0,0,0,0,0,0,1,0,0,0
+253,"Best , Brian O'Connell Publisher , VentureWire events@venturewire.com http://events.venturewire.com",1,0,0,0,0,0,0,0,0,0
+254,"VentureWire",0,0,0,0,1,0,0,0,0,0
+255,"events@venturewire.com",0,1,0,0,0,0,0,0,0,0
+256,"http://events.venturewire.com",0,0,0,0,0,0,0,1,0,0
+257,"Yours trulyStephen",0,0,0,0,0,0,1,0,0,0
+258,"Yours trulyStephen Ayling .",1,0,0,0,0,0,0,0,0,0
+259,"trulyStephen Ayling .",0,0,1,0,0,0,0,0,0,0
+260,"Kind Regards ,",0,0,0,0,0,0,1,0,0,0
+261,"Mr Cheung Pui.___________________________________________________________________________Mail",0,0,1,0,0,0,0,0,0,0
+262,"responds=2EYours sincerely=2CRobert",0,0,0,0,0,0,1,0,0,0
+263,"responds=2EYours sincerely=2CRobert Williams Esq=2E",1,0,0,0,0,0,0,0,0,0
+264,"sincerely=2CRobert Williams Esq=2E",0,0,1,0,0,0,0,0,0,0
+265,"nzangamobutu@myself.comBest regards ,",0,0,0,0,0,0,1,0,0,0
+266,"nzangamobutu@myself.comBest regards , MR .  NZANGA MOBUTU .",1,0,0,0,0,0,0,0,0,0
+267,"MR .  NZANGA MOBUTU . ",0,0,1,0,0,0,0,0,0,0
+268,"bgovou@hotmail.comRespectfully submitted,>From",0,0,0,0,0,0,1,0,0,0
+269,"bgovou@hotmail.comRespectfully submitted,>From Mr Edward Govou",1,0,0,0,0,0,0,0,0,0
+270,"Mr Edward Govou",0,0,1,0,0,0,0,0,0,0
+271,"Happy Holidays -- HU.S.  Department of StateCase",1,0,0,0,0,0,0,0,0,0
+272,"Happy Holidays",1,0,0,0,0,0,1,0,0,0
+273,"Department of StateCase",0,0,0,0,1,0,0,0,0,0
+274,"Best regardsDr",0,0,0,0,0,0,1,0,0,0
+275,"Best regardsDr .  Usman ali",1,0,0,0,0,0,0,0,0,0
+276,"regardsDr .  Usman ali",0,0,1,0,0,0,0,0,0,0
+277,"Mrs. Elena Owen . ",0,0,1,0,0,0,0,0,0,0
+278,"Mrs. Elena Owen .  Benefactor",1,0,0,0,0,0,0,0,0,0
+279,"Benefactor",0,0,0,1,0,0,0,0,0,0
+280,"RegardsTom",1,0,0,0,0,0,1,0,0,0
+281,"Sincerely yours ,",0,0,0,0,0,0,1,0,0,0
+282,"Sincerely yours , Tony LeungProject officer",1,0,0,0,0,0,0,0,0,0
+283,"Tony LeungProject",0,0,1,0,0,0,0,0,0,0
+284,"LeungProject officer",0,0,0,1,0,0,0,0,0,0
+285,"CAPT . JAMES C. WILLIAMSUNITED",0,0,1,0,0,0,0,0,0,0
+286,"CAPT . JAMES C. WILLIAMSUNITED NATIONS , LONDON UKUNITED NATION MONETARY FUND ( UNMF )",1,0,0,0,0,0,0,0,0,0
+287,"WILLIAMSUNITED NATIONS",0,0,0,0,1,0,0,0,0,0
+288,"LONDON UKUNITED",0,0,0,0,0,0,0,0,1,0
+289,"UKUNITED NATION MONETARY FUND ( UNMF )",0,0,0,1,0,0,0,0,0,0
+290,"Dan",1,0,0,0,0,0,0,0,0,0
+291,"Yours Sincerely ,",0,0,0,0,0,0,1,0,0,0
+292,"Yours Sincerely , MR .  HASSAN IBRAHIM._________________________________________________________________FREE",1,0,0,0,0,0,0,0,0,0
+293,"MR .  HASSAN IBRAHIM._________________________________________________________________FREE",0,0,1,0,0,0,0,0,0,0
+294,"Yours Faithfully=2C",0,0,0,0,0,0,1,0,0,0
+295,"Yours Faithfully=2C Mike Charles Kobi=2E",1,0,0,0,0,0,0,0,0,0
+296,"Mike Charles Kobi=2E",0,0,1,0,0,0,0,0,0,0
+297,"Thanks and God bless . ",0,0,0,0,0,0,1,0,0,0
+298,"Thanks and God bless .  Mr. Bala Kabore._________________________________________________________________Gagnez",1,0,0,0,0,0,0,0,0,0
+299,"Mr. Bala Kabore._________________________________________________________________Gagnez",0,0,1,0,0,0,0,0,0,0
+300,"BEST REGARDSMS.MUDIWA",0,0,0,0,0,0,1,0,0,0
+301,"BEST REGARDSMS.MUDIWA   ZUKA",1,0,0,0,0,0,0,0,0,0
+302,"REGARDSMS.MUDIWA   ZUKA",0,0,1,0,0,0,0,0,0,0
+303,"know=2EThanksBarrister John Mensah",1,0,1,0,0,0,0,0,0,0
+304,"know=2EThanksBarrister",0,0,0,0,0,0,1,0,0,0
+305,"FAITHFULLY ,",0,0,0,0,0,0,1,0,0,0
+306,"FAITHFULLY ,                                                                                                    ENGINEER ADISON KRIST",1,0,0,0,0,0,0,0,0,0
+307,"ENGINEER ADISON KRIST 			",0,0,1,0,0,0,0,0,0,0
+308,"Yours sincerel = y ,",0,0,0,0,0,0,1,0,0,0
+309,"Yours sincerel = y , Mr.  Koutaba Jean . ",1,0,0,0,0,0,0,0,0,0
+310,"Mr.  Koutaba Jean .",0,0,1,0,0,0,0,0,0,0
+311,"Regards , Nzanga Joseph Desire Mobutu___________________________________________________________________________Mail",1,0,0,0,0,0,0,0,0,0
+312,"Nzanga Joseph Desire Mobutu___________________________________________________________________________Mail",0,0,1,0,0,0,0,0,0,0
+313,"Google.http://yahoo.businessweek.com/technology/content/dec2006/=20tc20061204_923336.htmTony RajakumarVictrio",0,0,1,0,0,0,0,0,0,0
+314,"Google.http://yahoo.businessweek.com/technology/content/dec2006/=20tc20061204_923336.htmTony RajakumarVictrio Inc.tonyr@victrio.com-------------------------------------You",1,0,0,0,0,0,0,0,0,0
+315,"Inc.tonyr@victrio.com-------------------------------------You",0,1,0,0,0,0,0,0,0,0
+316,"julliet06@3xl.netRegards",1,0,0,0,0,0,1,0,0,0
+317,"response=2EThanks and God bless=2E youDavid",0,0,0,0,0,0,1,0,0,0
+318,"response=2EThanks and God bless=2E youDavid Bah = 2E",1,0,0,0,0,0,0,0,0,0
+319,"youDavid Bah = 2E",0,0,1,0,0,0,0,0,0,0
+320,"Best regards ,",0,0,0,0,0,0,1,0,0,0
+321,"Best regards , Ron Sinclear .  ronsinclear@netscape.net",1,0,0,0,0,0,0,0,0,0
+322,"Ron Sinclear . ",0,0,1,0,0,0,0,0,0,0
+323,"ronsinclear@netscape.net",0,1,0,0,0,0,0,0,0,0
+324,"Regards , Soo ChoN.B",1,0,0,0,0,0,0,0,0,0
+325,"Regards , Soo ChoN.B : Endeavour to send your reply through my alternativee - mail address:soo@financesource.com",1,0,0,0,0,0,0,0,0,0
+326,"Soo ChoN.B",0,0,1,0,0,0,0,0,0,0
+327,"address:soo@financesource.com",0,1,0,0,0,0,0,0,0,0
+328,"Best Regards ,",1,0,0,0,0,0,1,0,0,0
+329,"Best Regards , Mr.  Anuka Ifufeh .",1,0,0,0,0,0,0,0,0,0
+330,"Mr.  Anuka Ifufeh .",0,0,1,0,0,0,0,0,0,0
+331,"eric_stephenxxx@yahoo.com=20Yours faithfully,=20MR.ERIC",0,0,0,0,0,0,1,0,0,0
+332,"eric_stephenxxx@yahoo.com=20Yours faithfully,=20MR.ERIC STEPHEN=20",1,0,0,0,0,0,0,0,0,0
+333,"faithfully,=20MR.ERIC STEPHEN=20",0,0,1,0,0,0,0,0,0,0
+334,"IMMEDIATELY.thanksMR",0,0,0,0,0,0,1,0,0,0
+335,"IMMEDIATELY.thanksMR MARK AKIMA_________________________________________________________________Ten",1,0,1,0,0,0,0,0,0,0
+336,"Yours faithfully ,",0,0,0,0,0,0,1,0,0,0
+337,"Yours faithfully , DR .  JOHNSON KENNETH",1,0,0,0,0,0,0,0,0,0
+338,"DR .  JOHNSON KENNETH",0,0,1,0,0,0,0,0,0,0
+339,"Thanks and regards,<FONT",0,0,0,0,0,0,1,0,0,0
+340,"Thanks and regards,<FONT size=3><FONT color=#333333 > Mr.  Willford Breeks",1,0,0,0,0,0,0,0,0,0
+341,"Mr.  Willford Breeks",0,0,1,0,0,0,0,0,0,0
+342,"I await your response.Mr.Cheungmailcheung001@yahoo.com",1,0,0,0,0,0,1,0,0,0
+343,"response.Mr.Cheungmailcheung001@yahoo.com",0,1,0,0,0,0,0,0,0,0
+344,"nbsp;Yours Truly ,",0,0,0,0,0,0,1,0,0,0
+345,"nbsp;Yours Truly , & nbsp;Barrister , Fredrick Thambo",1,0,0,0,0,0,0,0,0,0
+346,"nbsp;Barrister , Fredrick Thambo",0,0,1,0,0,0,0,0,0,0
+347,"/=STRONG>(Attorney - At - Law & amp ; Public Notary",0,0,0,1,0,0,0,0,0,0
+348,"Respectfully submitted ,",0,0,0,0,0,0,1,0,0,0
+349,"Respectfully submitted , BEST REGARDSMr .  Femi Gidado",1,0,0,0,0,0,0,0,0,0
+350,"BEST REGARDSMr",0,0,0,0,0,0,1,0,0,0
+351,"REGARDSMr .  Femi Gidado",0,0,1,0,0,0,0,0,0,0
+352,"Your=92s fa = ithfully ,",0,0,0,0,0,0,1,0,0,0
+353,"Your=92s fa = ithfully , MUSTAFA BRUNU   ( Esq.)FROM ( B.O.A ) OUAGADOUGOU BURKINA - FASO.GOD BLESSINGS , PROTECTIONS AND GUIDIAN = CE TO YOUR ENTIRE FAMILY.POST",1,0,0,0,0,0,0,0,0,0
+354,"MUSTAFA BRUNU   ( Esq.)FROM",0,0,1,0,0,0,0,0,0,0
+355,"( B.O.A )",0,0,0,0,1,0,0,0,0,0
+356,"OUAGADOUGOU BURKINA - FASO.GOD",0,0,0,0,0,0,0,0,1,0
+357,"God bless you . ",0,0,0,0,0,0,1,0,0,0
+358,"God bless you .  Mr. Ahmed Usman .  Union Bank PLC , Lagos , Nigeria . ",1,0,0,0,0,0,0,0,0,0
+359,"Mr. Ahmed Usman . ",0,0,1,0,0,0,0,0,0,0
+360,"Union Bank PLC",0,0,0,0,1,0,0,0,0,0
+361,"Lagos , Nigeria .",0,0,0,0,0,0,0,0,1,0
+362,"28Europe=29=2EThanks and God bless you=2EMr=2EFRED",0,0,0,0,0,0,1,0,0,0
+363,"28Europe=29=2EThanks and God bless you=2EMr=2EFRED OBITel=3A 234 - 80 - 332 96219Fax=3A 234 - 1 - 7592758",1,0,0,0,0,0,0,0,0,0
+364,"you=2EMr=2EFRED OBITel=3A",0,0,1,0,0,0,0,0,0,0
+365,"OBITel=3A 234 - 80 - 332 96219Fax=3A",0,0,0,0,0,1,0,0,0,0
+366,"Best Regards , Gregory Kabila .  NB : ALTERNATIVE EMAIL ADDRESS(gregorykabila222@post.cz )",1,0,0,0,0,0,0,0,0,0
+367,"Gregory Kabila . ",0,0,1,0,0,0,0,0,0,0
+368,"ALTERNATIVE EMAIL ADDRESS(gregorykabila222@post.cz )",0,1,0,0,0,0,0,0,0,0
+369,"John Allen . ",0,0,1,0,0,0,0,0,0,0
+370,"John Allen .  Director , WELLKANG INTERNATIONAL , IMPORT / EXPORT",1,0,0,0,0,0,0,0,0,0
+371,"Director",0,0,0,1,0,0,0,0,0,0
+372,"WELLKANG INTERNATIONAL , IMPORT / EXPORT",0,0,0,0,1,0,0,0,0,0
+373,"Best regards=2C",0,0,0,0,0,0,1,0,0,0
+374,"Best regards=2C Yours Faithfully=2C Musa=2E",1,0,0,0,0,0,0,0,0,0
+375,"Regards StrobeStrobe TalbottPresident The Brookings Institution1775 Massachusetts Avenue NWWashington DC 20036702 797 6700",1,0,0,0,0,0,0,0,0,0
+376,"StrobeStrobe TalbottPresident",0,0,1,0,0,0,0,0,0,0
+377,"TalbottPresident",0,0,0,1,0,0,0,0,0,0
+378,"The Brookings Institution1775",0,0,0,0,1,0,0,0,0,0
+379,"Institution1775 Massachusetts Avenue NWWashington DC 20036702",0,0,0,0,0,0,0,0,1,0
+380,"20036702 797 6700",0,0,0,0,0,1,0,0,0,0
+381,"176928755Impatiently awaiting for your orders , ShadowCrew",1,0,0,0,0,0,0,0,0,0
+382,"176928755Impatiently awaiting for your orders ,",0,0,0,0,0,0,1,0,0,0
+383,"ShadowCrew",0,0,0,0,1,0,0,0,0,0
+384,"responseYours faithfully ,",1,0,0,0,0,0,1,0,0,0
+385,"knowU.S.  Department of StateCase",0,0,0,0,1,0,0,0,0,0
+386,"Yours Truly,=20",0,0,0,0,0,0,1,0,0,0
+387,"Barrister , Fredrick Thambo=20(Attorney",0,0,1,0,0,0,0,0,0,0
+388,"Thambo=20(Attorney - At - Law & Public Notary)=20_________________________________________________________________News",0,0,0,1,0,0,0,0,0,0
+389,"George .  N. Lawson-=20",1,0,1,0,0,0,0,0,0,0
+390,"confidential=2EBest regards=2CJOHNSON",0,0,0,0,0,0,1,0,0,0
+391,"confidential=2EBest regards=2CJOHNSON SAVIMBI",1,0,0,0,0,0,0,0,0,0
+392,"regards=2CJOHNSON SAVIMBI",0,0,1,0,0,0,0,0,0,0
+393,"mail=2EThanks and remain bless=2EPHIRI",0,0,0,0,0,0,1,0,0,0
+394,"mail=2EThanks and remain bless=2EPHIRI ABOA=2E",1,0,0,0,0,0,0,0,0,0
+395,"bless=2EPHIRI ABOA=2E",0,0,1,0,0,0,0,0,0,0
+396,"0D=0A=0D=0AThank you and God bless you . ",0,0,0,0,0,0,1,0,0,0
+397,"0D=0A=0D=0AThank you and God bless you .  = 0D=0A==0D=0ABarrister Gareth Jones .",1,0,0,0,0,0,0,0,0,0
+398,"0D=0A==0D=0ABarrister Gareth Jones",0,0,1,0,0,0,0,0,0,0
+399,"BEST WISHES=2C",0,0,0,0,0,0,1,0,0,0
+400,"BEST WISHES=2C MRS=2E MARIAM ABACHA = 28WIDOW=29=2E",1,0,0,0,0,0,0,0,0,0
+401,"MRS=2E MARIAM ABACHA",0,0,1,0,0,0,0,0,0,0
+402,"28WIDOW=29=2E",0,0,0,1,0,0,0,0,0,0
+403,"Regards=2CDr=2EBola Harry=2EPLEASE",0,0,1,0,0,0,0,0,0,0
+404,"Regards=2CDr=2EBola",0,0,0,0,0,0,1,0,0,0
+405,"Regards=2CDr=2EBola Harry=2EPLEASE SEND YOUR REPLY TO=3A bolaharry1=40kukamail=2Ecom = 3Cmailto=3Abolaharry1=40kukamail=2Ecom=3E",0,1,0,0,0,0,0,0,0,0
+406,"bolaharry1=40kukamail=2Ecom",0,1,0,0,0,0,0,0,0,0
+407,"Engr .  VictorChigoziem",0,0,1,0,0,0,0,0,0,0
+408,"f_jewell0013@yahoo.co.ukYours faithfully",0,0,0,0,0,0,1,0,0,0
+409,"f_jewell0013@yahoo.co.ukYours faithfully , Mr.  Frank Jewell_________________________________________________________________Get",1,0,0,0,0,0,0,0,0,0
+410,"Mr.  Frank Jewell_________________________________________________________________Get",0,0,1,0,0,0,0,0,0,0
+411,"Best regards=2CMrs=2EAtiya",0,0,0,0,0,0,1,0,0,0
+412,"Best regards=2CMrs=2EAtiya Mohameed",1,0,0,0,0,0,0,0,0,0
+413,"regards=2CMrs=2EAtiya Mohameed",0,0,1,0,0,0,0,0,0,0
+414,"Jm",1,0,0,0,0,0,0,0,0,0
+415,"Regards and God Bless you .",0,0,0,0,0,0,1,0,0,0
+416,"Regards and God Bless you . Mrs.  Estelle Mamadou .",1,0,0,0,0,0,0,0,0,0
+417,"Mrs.  Estelle Mamadou . ",0,0,1,0,0,0,0,0,0,0
+418,"Regards , Mr. Robbin Kuuk",1,0,0,0,0,0,0,0,0,0
+419,"Mr. Robbin Kuuk",0,0,1,0,0,0,0,0,0,0
+420,"Happy reading ! ",0,0,0,0,0,0,1,0,0,0
+421,"Happy reading !  AM",1,0,0,0,0,0,0,0,0,0
+422,"Yours truly",0,0,0,0,0,0,1,0,0,0
+423,"Yours truly , Richard AND JANETFROM RICHARD AND JANET.contact me on .  richard64sanko@yahoo.itDear",1,0,0,0,0,0,0,0,0,0
+424,"richard64sanko@yahoo.itDear",0,1,0,0,0,0,0,0,0,0
+425,"Remain blessed ,",0,0,0,0,0,0,1,0,0,0
+426,"Remain blessed , MR.FAN JEN - LIANG.SHANGHAI COMMERCIAL BANK LIMITED , UK(London Branch)Private Email : fanjenliang@terrapins.comDirect Telephone:44 - 7031915718 .",1,0,0,0,0,0,0,0,0,0
+427,"MR.FAN JEN - LIANG.SHANGHAI",0,0,1,0,0,0,0,0,0,0
+428,"LIANG.SHANGHAI COMMERCIAL BANK LIMITED",0,0,0,0,1,0,0,0,0,0
+429,"UK(London Branch)Private",0,0,0,0,0,0,0,0,1,0
+430,"Branch)Private Email : fanjenliang@terrapins.comDirect",0,1,0,0,0,0,0,0,0,0
+431,"fanjenliang@terrapins.comDirect Telephone:44 - 7031915718 .",0,0,0,0,0,1,0,0,0,0
+432,"Regards , MR Campbell William",1,0,0,0,0,0,0,0,0,0
+433,"MR Campbell William",0,0,1,0,0,0,0,0,0,0
+434,"I await your reply ,",0,0,0,0,0,0,1,0,0,0
+435,"I await your reply ,   BARR.PAUL RICHARD { Esq .  } .  Accra , Ghana - West Africa .",1,0,0,0,0,0,0,0,0,0
+436,"BARR.PAUL RICHARD { Esq .  } . ",0,0,1,0,0,0,0,0,0,0
+437,"Accra , Ghana - West Africa . ",0,0,0,0,0,0,0,0,1,0
+438,"Yours Sincerely , Dr.  Agu Johnson Chairman , Payment Committee",1,0,0,0,0,0,0,0,0,0
+439,"Dr.  Agu Johnson Chairman",0,0,1,0,0,0,0,0,0,0
+440,"Payment Committee",0,0,0,1,0,0,0,0,0,0
+441,"NZANGA MOBUTU . ",0,0,1,0,0,0,0,0,0,0
+442,"NZANGA MOBUTU",1,0,0,0,0,0,0,0,0,0
+443,"Mr Edward Govou .",0,0,1,0,0,0,0,0,0,0
+444,"Yours faithfully",0,0,0,0,0,0,1,0,0,0
+445,"Yours faithfully , Dr Idris Ali .",1,0,0,0,0,0,0,0,0,0
+446,"Dr Idris Ali .",0,0,1,0,0,0,0,0,0,0
+447,"Yours Sincerely",0,0,0,0,0,0,1,0,0,0
+448,"Yours Sincerely ,               Chief Anthony Enahoro .  JPCoordinator , Coalition to protect Contractors / Inheritances beneficiaries",1,0,0,0,0,0,0,0,0,0
+449,"Chief Anthony Enahoro",0,0,1,0,0,0,0,0,0,0
+450,"JPCoordinator",0,0,0,1,0,0,0,0,0,0
+451,"Coalition to protect Contractors / Inheritances beneficiaries",0,0,0,0,1,0,0,0,0,0
+452,"Yours faithfully , Mr Mohamat Ali .",1,0,0,0,0,0,0,0,0,0
+453,"Mr Mohamat Ali .",0,0,1,0,0,0,0,0,0,0
+454,"Yours faithfully , Musa Garuba .",1,0,0,0,0,0,0,0,0,0
+455,"Musa Garuba .",0,0,1,0,0,0,0,0,0,0
+456,"Yours   faithfullyYUSUF",0,0,0,0,0,0,1,0,0,0
+457,"Yours   faithfullyYUSUF ALI .  Please mail me with this adress   Email;yusuf_ali778@yahoo.fr",1,0,0,0,0,0,0,0,0,0
+458,"faithfullyYUSUF ALI .",0,0,1,0,0,0,0,0,0,0
+459,"Email;yusuf_ali778@yahoo.fr",0,1,0,0,0,0,0,0,0,0
+460,"Yours faithfully , Dr Hassan Dantata",1,0,0,0,0,0,0,0,0,0
+461,"Dr Hassan Dantata",0,0,1,0,0,0,0,0,0,0
+462,"Best Regards",0,0,0,0,0,0,1,0,0,0
+463,"Best Regards DR PETER CLAPTON",1,0,0,0,0,0,0,0,0,0
+464,"DR PETER CLAPTON",0,0,1,0,0,0,0,0,0,0
+465,"Yours faithfully , George Path",1,0,0,0,0,0,0,0,0,0
+466,"George Path",0,0,1,0,0,0,0,0,0,0
+467,"MR . KELLEY KO",0,0,1,0,0,0,0,0,0,0
+468,"EMPLOYMENT CO - ORDINATOR(KELLEYKO",0,0,0,1,0,0,0,0,0,0
+469,"ORDINATOR(KELLEYKO FABRICS&amp;TEXTILES )",0,0,0,0,1,0,0,0,0,0
+470,"Thanks and God bless you . ",0,0,0,0,0,0,1,0,0,0
+471,"Thanks and God bless you .  DR . ( MRS . ) MARYAM ABACHA . ",1,0,0,0,0,0,0,0,0,0
+472,"DR . ( MRS . ) MARYAM ABACHA",0,0,1,0,0,0,0,0,0,0
+473,"Your faithfully . ",0,0,0,0,0,0,1,0,0,0
+474,"Your faithfully .  PROF , CHARLES SOLUDO(CBN ) GOVERNOR .  ( FGN)Direct line 234 - 80 - 348 - 53467-",1,0,0,0,0,0,0,0,0,0
+475,"PROF , CHARLES SOLUDO(CBN",0,0,1,0,0,0,0,0,0,0
+476,"GOVERNOR",0,0,0,1,0,0,0,0,0,0
+477,"( FGN)Direct line 234 - 80 - 348 - 53467-",0,0,0,0,0,1,0,0,0,0
+478,"Yours faithfully , Ben Maluleke ( ENGR.)DEPARTMENT OF MINERALS AND ENERGYREPUBLIC OF SOUTH AFRICA .",1,0,0,0,0,0,0,0,0,0
+479,"Ben Maluleke",0,0,1,0,0,0,0,0,0,0
+480,"ENGR.)DEPARTMENT OF MINERALS AND ENERGYREPUBLIC OF SOUTH AFRICA .",0,0,0,0,1,0,0,0,0,0
+481,"Judith KiefferExecutive",0,0,1,0,0,0,0,0,0,0
+482,"Judith KiefferExecutive DirectorLos Angeles Parks Foundation11973 San Vicente Blvd .  Suite 200Los Angeles CA 90049Office : 310 - 472 - 1990FAX : 310 - 472 - 0992Mobile",1,0,0,0,0,0,0,0,0,0
+483,"KiefferExecutive DirectorLos",0,0,0,1,0,0,0,0,0,0
+484,"DirectorLos Angeles Parks Foundation11973",0,0,0,0,1,0,0,0,0,0
+485,"Foundation11973 San Vicente Blvd .  Suite 200Los Angeles CA 90049Office",0,0,0,0,0,0,0,0,1,0
+486,"90049Office : 310 - 472 - 1990FAX",0,0,0,0,0,1,0,0,0,0
+487,"Best regards",0,0,0,0,0,0,1,0,0,0
+488,"Ron Sinclear .",0,0,1,0,0,0,0,0,0,0
+489,"0D=0DRegards,=0DISAAC BAKA",0,0,1,0,0,0,0,0,0,0
+490,"0D=0DRegards,=0DISAAC",0,0,0,0,0,0,1,0,0,0
+491,"0D=0DRegards,=0DISAAC BAKA .",1,0,0,0,0,0,0,0,0,0
+492,"Yours faithfully , Mark Luke",1,0,0,0,0,0,0,0,0,0
+493,"Mark Luke",0,0,1,0,0,0,0,0,0,0
+494,"Regards Mr YOKO Ono   Executive Director",1,0,0,0,0,0,0,0,0,0
+495,"Mr YOKO Ono",0,0,1,0,0,0,0,0,0,0
+496,"Executive Director",0,0,0,1,0,0,0,0,0,0
+497,"PROCEED.THANKS.MR NOEL PANGA .",1,0,1,0,0,0,0,0,0,0
+498,"PROCEED.THANKS.MR",0,0,0,0,0,0,1,0,0,0
+499,"Mr_muhammd_amin@yahoo.frYours sincerely",0,0,0,0,0,0,1,0,0,0
+500,"Mr_muhammd_amin@yahoo.frYours sincerely , mr .  MUHAMMD    AMIN",1,0,0,0,0,0,0,0,0,0
+501,"mr .  MUHAMMD    AMIN",0,0,1,0,0,0,0,0,0,0
+502,"Yours Faithfully",0,0,0,0,0,0,1,0,0,0
+503,"Yours Faithfully , DR.MIKE   CHIBUZOR.CHIARMAN CONTRACTREVEIW .",1,0,0,0,0,0,0,0,0,0
+504,"DR.MIKE   CHIBUZOR.CHIARMAN",0,0,1,0,0,0,0,0,0,0
+505,"CONTRACTREVEIW",0,0,0,1,0,0,0,0,0,0
+506,"Yours faithfully , Dr. Henry   Salami .  Auditor of   the Federation .",1,0,0,0,0,0,0,0,0,0
+507,"Dr. Henry   Salami . ",0,0,1,0,0,0,0,0,0,0
+508,"Auditor of   the Federation . ",0,0,0,1,0,0,0,0,0,0
+509,"Mr. Christopher Wilson",1,0,1,0,0,0,0,0,0,0
+510,"Regards , MR .  MATTHEW MOLEFE .",1,0,0,0,0,0,0,0,0,0
+511,"MR .  MATTHEW MOLEFE .",0,0,1,0,0,0,0,0,0,0
+512,"Best RegardsDr",0,0,0,0,0,0,1,0,0,0
+513,"RegardsDr .  Andrew William",0,0,1,0,0,0,0,0,0,0
+514,"Best Regards . ",0,0,0,0,0,0,1,0,0,0
+515,"Best Regards .  MRS.SUZANA NUHAN VAYE ( WIDOW )",1,0,0,0,0,0,0,0,0,0
+516,"MRS.SUZANA NUHAN VAYE ( WIDOW )",0,0,1,0,0,0,0,0,0,0
+517,"Yours sincerely",0,0,0,0,0,0,1,0,0,0
+518,"PRINCESS&nbsp;GES = INTA",0,0,1,0,0,0,0,0,0,0
+519,"RegardsMr .  YURIY LAGUTIN",1,0,1,0,0,0,0,0,0,0
+520,"RegardsMr",0,0,0,0,0,0,1,0,0,0
+521,"REGARDS ! ",0,0,0,0,0,0,1,0,0,0
+522,"REGARDS !  DR.GAIUS OBASEKIFORMER GROUP MANAGING DIRECTORNIGERIAN NATIONAL PETROLEUM CO - OPERATIONSNIGERIA .",1,0,0,0,0,0,0,0,0,0
+523,"DR.GAIUS OBASEKIFORMER",0,0,1,0,0,0,0,0,0,0
+524,"OBASEKIFORMER GROUP MANAGING DIRECTORNIGERIAN",0,0,0,1,0,0,0,0,0,0
+525,"DIRECTORNIGERIAN NATIONAL PETROLEUM CO - OPERATIONSNIGERIA",0,0,0,0,1,0,0,0,0,0
+526,"OPERATIONSNIGERIA",0,0,0,0,0,0,0,0,1,0
+527,"Yours truly , Robert Zulugan .",1,0,0,0,0,0,0,0,0,0
+528,"Robert Zulugan . ",0,0,1,0,0,0,0,0,0,0
+529,"ThanksTomicah",1,0,0,0,0,0,1,0,0,0
+530,"Regards , Ali Raza Khan",1,0,0,0,0,0,0,0,0,0
+531,"Ali Raza Khan . ",0,0,1,0,0,0,0,0,0,0
+532,"Regards , Gonzelez",1,0,0,0,0,0,0,0,0,0
+533,"Sincerely , Frank kone",1,0,0,0,0,0,0,0,0,0
+534,", Frank kone",0,0,1,0,0,0,0,0,0,0
+535,"Thanks and regards .  Mr John Obi .",1,0,0,0,0,0,0,0,0,0
+536,"John Obi",0,0,1,0,0,0,0,0,0,0
+537,"We look forward to working with you .  Dr. Edward Swaraden CookyCon Oil and Gas Ltd.  HACKNEY E50hx LONDON FAX:448709129080,TELEPHONE:+447024096224 .  PLEASE CONTACT US VIA EMAIL:edward4notice@sify.com,zicobee@zwallet.com",1,0,0,0,0,0,0,0,0,0
+538,"We look forward to working with you",0,0,0,0,0,0,1,0,0,0
+539,"Dr. Edward Swaraden CookyCon",0,0,1,0,0,0,0,0,0,0
+540,"CookyCon Oil and Gas Ltd.",0,0,0,0,1,0,0,0,0,0
+541,"CookyCon Oil and Gas Ltd.  HACKNEY E50hx LONDON",0,0,0,0,0,0,0,0,1,0
+542,"FAX:448709129080,TELEPHONE:+447024096224",0,0,0,0,0,1,0,0,0,0
+543,"EMAIL:edward4notice@sify.com,zicobee@zwallet.com",0,1,0,0,0,0,0,0,0,0

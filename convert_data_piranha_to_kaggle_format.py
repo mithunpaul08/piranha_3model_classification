@@ -26,6 +26,8 @@ seg = pysbd.Segmenter(language="en", clean=True)
 
 
 print(f"found that the type of label in this training run is: {TYPE_OF_LABEL}")
+print(f"length of all labels is : {len(labels_all)}")
+
 if TYPE_OF_LABEL=="all":
     for label in labels_all:
         labels_in_this_training.append(label)
@@ -184,7 +186,6 @@ def create_training_data():
         out.write(",".join(header))
         out.write("\n")
 
-    dict_break_even = {} #keep track of if a label has equal positive or negative examples
 
     with open("data/query_file.jsonl", 'r') as in_file:
         Lines = in_file.readlines()
@@ -221,11 +222,6 @@ def create_training_data():
 
                         # dont add that datapoint if adding it will make the number of negative examples more than positive examples
                         if (CREATE_LABEL_BALANCED_DATASET):
-
-
-                            #     print(
-                            #         f"ratio of positive to negative examples in label {pkey} is={pvalue / dict_per_label_negative_examples[pkey]}")
-                            # #
                             for idx,label_status in enumerate(labels_onehot):
                                 if label_status==0:
                                     label_string=dict_all_index_labels[idx]
