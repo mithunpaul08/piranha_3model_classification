@@ -287,6 +287,10 @@ def create_training_data():
                 print(f"ratio of positive to negative examples in label {pkey} is={pvalue/dict_per_label_negative_examples[pkey]}")
             print(f"total data points for label of type {TYPE_OF_LABEL} is {len(dict_spantext_to_labels)} of which "
                   f"there are {overall_positive_examples_counter} positive examples and {overall_negative_examples_counter} negative examples")
+    if QUIT_AFTER_DATACREATION:
+        import sys
+        sys.exit()
+
 create_training_data()
 
 
