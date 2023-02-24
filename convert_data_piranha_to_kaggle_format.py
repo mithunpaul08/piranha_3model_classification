@@ -154,7 +154,7 @@ def get_freq_create_text_span_mapping(Lines, label_frequency,dict_all_labels_ind
         if "spans" in annotations:
             for entry in annotations["spans"]:
                 label = entry["label"]
-                if label in labels_in_this_training:
+                if TYPE_OF_LABEL in label:
                     label_frequency = increase_counter(label, label_frequency)
                     if "message" in label and TYPE_OF_LABEL=="message":
                         #explicitly picking same text of the email because we want the empty entry in dict_spantext_to_labels to be replaced by
