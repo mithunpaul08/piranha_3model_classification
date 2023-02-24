@@ -9,7 +9,7 @@ import spacy
 wandb.init(project="training_3model_piranha")
 
 QUIT_AFTER_DATACREATION=True
-TYPE_OF_LABEL="message" #["message","words","signature","sentence","all"]
+TYPE_OF_LABEL="signature" #["message","words","signature","sentence","all"]
 #is it training or testing. testing means will load a saved modeland test
 TYPE_OF_RUN="train" # ["train","test"]
 

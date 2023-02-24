@@ -13,11 +13,12 @@ import json
 import csv
 import hashlib
 
+import configs
 from configs import *
+
 dict_spantext_to_labels={}
-dict_all_labels_index = {}
-dict_all_index_labels = {}
-labels_in_this_training=[]
+
+
 seg = pysbd.Segmenter(language="en", clean=True)
 
 
@@ -27,28 +28,32 @@ seg = pysbd.Segmenter(language="en", clean=True)
 
 print(f"found that the type of label in this training run is: {TYPE_OF_LABEL}")
 print(f"length of all labels is : {len(labels_all)}")
+def initiate_labels(labels_in_this_training):
+    if TYPE_OF_LABEL=="all":
+        for label in labels_all:
+            labels_in_this_training[label]=1
 
-if TYPE_OF_LABEL=="all":
-    for label in labels_all:
-        labels_in_this_training.append(label)
+    else:
+        for label in labels_all:
+            if TYPE_OF_LABEL in label:
+                labels_in_this_training[label]=1
 
-else:
-    for label in labels_all:
-        if TYPE_OF_LABEL in label:
-            labels_in_this_training.append(label)
-
-assert len(labels_in_this_training)>1
-
-
-
-for label in labels_in_this_training:
-    header.append(label)
+    assert len(labels_in_this_training)>1
+    return labels_in_this_training
+def create_header_training_data(labels_in_this_training,header):
+    for label in labels_in_this_training.keys():
+        header.append(label)
+    return header
 
 
-def create_label_index_mapping_both_directions():
-    for index,label in enumerate(labels_in_this_training):
+
+def create_label_index_mapping_both_directions(labels_in_this_training):
+    dict_all_labels_index={}
+    dict_all_index_labels={}
+    for index,label in enumerate(labels_in_this_training.keys()):
         dict_all_labels_index[label]=index
         dict_all_index_labels[index]=label
+    return dict_all_labels_index,dict_all_index_labels
 
 
 
@@ -125,10 +130,18 @@ def get_negative_examples(dict_spantext_to_labels,plain_text_whole_email,empty_l
 
     return
 
+#given a dictionary and a key, increase its count if it exists, else add it
+def increase_counter(key,dict_to_check):
+    if key in dict_to_check:
+        old_value=dict_to_check[key]
+        dict_to_check[key]=old_value+1
+    else:
+        dict_to_check[key]=1
+    return dict_to_check
 
 #go through each of the spans, find each of the labels in the spans, and check if that label is one of the labels we are
 #searching for. if yes, add it to a dictionary which maps text->label
-def get_text_for_label_from_all_spans(Lines):
+def get_freq_create_text_span_mapping(Lines, label_frequency,dict_all_labels_index,labels_in_this_training):
     for index, line in enumerate(Lines):
 
         annotations = json.loads(line)
@@ -142,6 +155,7 @@ def get_text_for_label_from_all_spans(Lines):
             for entry in annotations["spans"]:
                 label = entry["label"]
                 if label in labels_in_this_training:
+                    label_frequency = increase_counter(label, label_frequency)
                     if "message" in label and TYPE_OF_LABEL=="message":
                         #explicitly picking same text of the email because we want the empty entry in dict_spantext_to_labels to be replaced by
                         text=plain_text_whole_email
@@ -163,7 +177,7 @@ def get_text_for_label_from_all_spans(Lines):
                                     dict_spantext_to_labels[text] = old_value
                             else:
                                 dict_spantext_to_labels[text] = [label]
-
+    return label_frequency
 
 #given the start and end of a span return the collection of the tokens corresponding to this in string format
 def get_spans_text_given_start_end_tokens(token_start_of_span, token_end_of_span, annotations):
@@ -180,20 +194,37 @@ def get_spans_text_given_start_end_tokens(token_start_of_span, token_end_of_span
     assert len(starts_ends_tokens) >0
     return " ".join(starts_ends_tokens)
 
+def remove_key_dict(key,d):
+    if key in d:
+        del d[key]
+    return d
 
 def create_training_data():
-    with open(OUTPUT_FILE_NAME, 'w') as out:
-        out.write(",".join(header))
-        out.write("\n")
-
-
-    with open("data/query_file.jsonl", 'r') as in_file:
+    with open(OUTPUT_FILE_NAME, 'w') as out,open("data/query_file.jsonl", 'r') as in_file:
         Lines = in_file.readlines()
-        create_label_index_mapping_both_directions()
+        dict_all_labels_index={}
+        dict_all_index_labels={}
+        labels_in_this_training={}
+        labels_in_this_training=initiate_labels(labels_in_this_training)
+
+        dict_all_labels_index,dict_all_index_labels=create_label_index_mapping_both_directions(labels_in_this_training)
+
+        label_frequency={}
         # go through each of the annotated data point, extract text and its label into a dictionary dict_spantext_to_labels
-        get_text_for_label_from_all_spans(Lines)
+        label_frequency=get_freq_create_text_span_mapping(Lines, label_frequency,dict_all_labels_index,labels_in_this_training)
+        if(REMOVE_LESS_FREQUENT_LABELS):
+            #get all the labels which has frequency less than THRESHOLD_LESS_FREQUENT_LABELS and remove it from training
+            low_freq=[key for key,val in label_frequency.items() if val<THRESHOLD_LESS_FREQUENT_LABELS]
+            for x in low_freq:
+                labels_in_this_training=remove_key_dict(x,labels_in_this_training)
+            dict_all_labels_index, dict_all_index_labels = create_label_index_mapping_both_directions(labels_in_this_training)
+
         # once the dict_spantext_to_labels is filled with a mapping from spantext to corresponding labels, write it out in a one hot vector
         with open(OUTPUT_FILE_NAME, 'a') as out:
+            header=create_header_training_data(labels_in_this_training,configs.header)
+            out.write(",".join(header))
+            out.write("\n")
+
             counter=0
             line_counter=0
             overall_positive_examples_counter=0
@@ -225,6 +256,7 @@ def create_training_data():
                             for idx,label_status in enumerate(labels_onehot):
                                 if label_status==0:
                                     label_string=dict_all_index_labels[idx]
+                                    #if adding this label will increase the number of negative examples/reduce the ratio dont add it
                                     if label_string in dict_per_label_positive_examples and label_string in dict_per_label_negative_examples:
                                         ration=dict_per_label_positive_examples[label_string] / (dict_per_label_negative_examples[label_string]+1)
                                         if label_string in LABELS_TO_BALANCE and  ration<RATIO_TO_CHECK:
