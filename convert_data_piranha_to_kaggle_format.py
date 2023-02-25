@@ -16,7 +16,7 @@ import hashlib
 import configs
 from configs import *
 
-dict_spantext_to_labels={}
+
 
 
 seg = pysbd.Segmenter(language="en", clean=True)
@@ -141,21 +141,18 @@ def increase_counter(key,dict_to_check):
 
 #go through each of the spans, find each of the labels in the spans, and check if that label is one of the labels we are
 #searching for. if yes, add it to a dictionary which maps text->label
-def get_freq_create_text_span_mapping(Lines, label_frequency,dict_all_labels_index,labels_in_this_training):
+def create_text_span_mapping(Lines,dict_all_labels_index,labels_in_this_training,dict_spantext_to_labels):
     for index, line in enumerate(Lines):
-
         annotations = json.loads(line)
         # for adding negative examples as text, 0,0,0
         empty_labels = [""] * len(labels_in_this_training)
         plain_text_whole_email=annotations['text'].replace("\n","")
         get_negative_examples(((dict_spantext_to_labels)),plain_text_whole_email,empty_labels)
-
         #existence of label spans means there was atleast one label in this email that was annotated
         if "spans" in annotations:
             for entry in annotations["spans"]:
                 label = entry["label"]
                 if TYPE_OF_LABEL in label:
-                    label_frequency = increase_counter(label, label_frequency)
                     if "message" in label and TYPE_OF_LABEL=="message":
                         #explicitly picking same text of the email because we want the empty entry in dict_spantext_to_labels to be replaced by
                         text=plain_text_whole_email
@@ -177,7 +174,20 @@ def get_freq_create_text_span_mapping(Lines, label_frequency,dict_all_labels_ind
                                     dict_spantext_to_labels[text] = old_value
                             else:
                                 dict_spantext_to_labels[text] = [label]
+    return dict_spantext_to_labels
+
+
+#go through all data to get frequency of labels and fill dictionaries
+def get_freq(Lines, label_frequency):
+    for index, line in enumerate(Lines):
+        annotations = json.loads(line)
+        if "spans" in annotations:
+            for entry in annotations["spans"]:
+                label = entry["label"]
+                if TYPE_OF_LABEL in label:
+                    label_frequency = increase_counter(label, label_frequency)
     return label_frequency
+
 
 #given the start and end of a span return the collection of the tokens corresponding to this in string format
 def get_spans_text_given_start_end_tokens(token_start_of_span, token_end_of_span, annotations):
@@ -204,20 +214,24 @@ def create_training_data():
         Lines = in_file.readlines()
         dict_all_labels_index={}
         dict_all_index_labels={}
-        labels_in_this_training={}
-        labels_in_this_training=initiate_labels(labels_in_this_training)
-
-        dict_all_labels_index,dict_all_index_labels=create_label_index_mapping_both_directions(labels_in_this_training)
-
+        dict_spantext_to_labels = {}
         label_frequency={}
-        # go through each of the annotated data point, extract text and its label into a dictionary dict_spantext_to_labels
-        label_frequency=get_freq_create_text_span_mapping(Lines, label_frequency,dict_all_labels_index,labels_in_this_training)
-        if(REMOVE_LESS_FREQUENT_LABELS):
-            #get all the labels which has frequency less than THRESHOLD_LESS_FREQUENT_LABELS and remove it from training
-            low_freq=[key for key,val in label_frequency.items() if val<THRESHOLD_LESS_FREQUENT_LABELS]
+
+        label_frequency=get_freq(Lines,label_frequency)
+        labels_in_this_training = label_frequency.copy()
+        if (REMOVE_LESS_FREQUENT_LABELS):
+            low_freq = [key for key, val in label_frequency.items() if val < THRESHOLD_LESS_FREQUENT_LABELS]
             for x in low_freq:
-                labels_in_this_training=remove_key_dict(x,labels_in_this_training)
-            dict_all_labels_index, dict_all_index_labels = create_label_index_mapping_both_directions(labels_in_this_training)
+                labels_in_this_training = remove_key_dict(x, labels_in_this_training)
+            dict_all_labels_index, dict_all_index_labels = create_label_index_mapping_both_directions(
+                labels_in_this_training)
+
+
+        # go through each of the annotated data point, extract text and its label into a dictionary dict_spantext_to_labels
+        dict_spantext_to_labels=create_text_span_mapping(Lines,dict_all_labels_index,labels_in_this_training,dict_spantext_to_labels)
+
+            #get all the labels which has frequency less than THRESHOLD_LESS_FREQUENT_LABELS and remove it from training
+
 
         # once the dict_spantext_to_labels is filled with a mapping from spantext to corresponding labels, write it out in a one hot vector
         with open(OUTPUT_FILE_NAME, 'a') as out:
