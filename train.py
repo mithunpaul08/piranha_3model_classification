@@ -14,7 +14,8 @@ import convert_data_piranha_to_kaggle_format
 import os
 from torch import cuda
 from configs import *
-
+import utils
+from utils import *
 import spacy
 
 global_f1_validation=0
@@ -300,15 +301,35 @@ def given_dataframe_return_loader(df):
     testing_set = CustomDataset(testing_dataset, tokenizer, MAX_LEN)
     return DataLoader(testing_set, **test_params)
 
-if TYPE_OF_RUN=="train":
+def get_per_label_positive_examples(df,no_of_classes):
+    per_label_positive_examples={}
+    per_label_negative_examples = {}
+    labels=df.columns[2:2+no_of_classes].tolist()
+    for label in labels:
+        for datapoint in df[label]:
+            if datapoint:
+                increase_counter(label,per_label_positive_examples)
+            else:
+                increase_counter(label, per_label_negative_examples)
+    print(per_label_positive_examples)
+    print(per_label_negative_examples)
+    return per_label_positive_examples, per_label_negative_examples
 
-    NO_OF_CLASSES=convert_data_piranha_to_kaggle_format.create_training_data()
+
+if TYPE_OF_RUN=="train":
+    no_of_classes=convert_data_piranha_to_kaggle_format.create_training_data()
     df = pd.read_csv(convert_data_piranha_to_kaggle_format.OUTPUT_FILE_NAME, sep=",", on_bad_lines='skip')
     df['list'] = df[df.columns[2:]].values.tolist()
-    new_df = df[['text', 'list']].copy()
+
+    new_df= df[['text', 'list']].copy()
+    
     train_size = 0.8
     train_dataset = new_df.sample(frac=train_size, random_state=200)
+    print("for train")
+    per_label_positive_examples, per_label_negative_examples = get_per_label_positive_examples(train_dataset, no_of_classes)
     validation_dataset = new_df.drop(train_dataset.index).reset_index(drop=True)
+    print("for validation")
+    per_label_positive_examples, per_label_negative_examples = get_per_label_positive_examples(validation_dataset, no_of_classes)
     train_dataset = train_dataset.reset_index(drop=True)
 
     training_set = CustomDataset(train_dataset, tokenizer, MAX_LEN)
@@ -337,9 +358,9 @@ if TYPE_OF_RUN=="train":
             print(f"found that validation loss is not improving after hitting patience of {PATIENCE}. Quitting")
             sys.exit()
 
-        model = BERTClass(NO_OF_CLASSES)
+        model = BERTClass(no_of_classes)
         model.to(device)
-        train_loss=train(epoch,NO_OF_CLASSES,model)
+        train_loss=train(epoch, no_of_classes, model)
         predictions_validation, gold_validation ,validation_loss = validation(epoch,model)
 
 

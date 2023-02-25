@@ -10,9 +10,8 @@
 # then create a one hot vector based on how many labels a given text corresponds to/was marked with
 #e.g. an entire email could be marked with multiple labels. remember it is a multilabel classifier
 import json
-import csv
-import hashlib
-
+import utils
+from utils import *
 import configs
 from configs import *
 
@@ -130,14 +129,7 @@ def get_negative_examples(dict_spantext_to_labels,plain_text_whole_email,empty_l
 
     return
 
-#given a dictionary and a key, increase its count if it exists, else add it
-def increase_counter(key,dict_to_check):
-    if key in dict_to_check:
-        old_value=dict_to_check[key]
-        dict_to_check[key]=old_value+1
-    else:
-        dict_to_check[key]=1
-    return dict_to_check
+
 
 #go through each of the spans, find each of the labels in the spans, and check if that label is one of the labels we are
 #searching for. if yes, add it to a dictionary which maps text->label
@@ -320,6 +312,7 @@ def create_training_data():
             print(f"dict_per_label_negative_examples={dict_per_label_negative_examples}")
             for (pkey,pvalue) in dict_per_label_positive_examples.items():
                 print(f"ratio of positive to negative examples in label {pkey} is={pvalue/dict_per_label_negative_examples[pkey]}")
+                assert pvalue+dict_per_label_negative_examples[pkey]==len(dict_spantext_to_labels.items())
             print(f"total data points for label of type {TYPE_OF_LABEL} is {len(dict_spantext_to_labels)} of which "
                   f"there are {overall_positive_examples_counter} positive examples and {overall_negative_examples_counter} negative examples")
             print(f"total number of data points ={len(dict_spantext_to_labels.items())}")
