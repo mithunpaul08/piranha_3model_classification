@@ -21,17 +21,15 @@ global_f1_validation=0
 global_validation_loss=999999
 precision_global=0
 device = 'cuda' if cuda.is_available() else 'cpu'
-NO_OF_CLASSES=len(convert_data_piranha_to_kaggle_format.labels_in_this_training)
 
+if (DISABLE_WANDB):
+    os.environ['WANDB_DISABLED'] = DISABLE_WANDB
+else:
+    wandb.init(project="training_3model_piranha")
 print(f"found that the type of run is: {TYPE_OF_RUN}")
-def train(epoch):
-
-    if(DISABLE_WANDB):
-        os.environ['WANDB_DISABLED'] = DISABLE_WANDB
-    else:
-        wandb.init(project="training_3model_piranha")
-
+def train(epoch,NO_OF_CLASSES,model):
     model.train()
+    optimizer = torch.optim.Adam(params=model.parameters(), lr=LEARNING_RATE)
     for _, data in enumerate(training_loader, 0):
         ids = data['ids'].to(device, dtype=torch.long)
         mask = data['mask'].to(device, dtype=torch.long)
@@ -89,7 +87,7 @@ class CustomDataset(Dataset):
 
 
 class BERTClass(torch.nn.Module):
-    def __init__(self):
+    def __init__(self,NO_OF_CLASSES):
         super(BERTClass, self).__init__()
         self.l1 = transformers.BertModel.from_pretrained('bert-base-uncased')
         self.l2 = torch.nn.Dropout(0.3)
@@ -100,16 +98,15 @@ class BERTClass(torch.nn.Module):
         output_2 = self.l2(output_1['pooler_output'])
         output = self.l3(output_2)
         return output
-model = BERTClass()
-model.to(device)
+
 
 def loss_fn(outputs, targets):
     return torch.nn.BCEWithLogitsLoss()(outputs, targets)
-optimizer = torch.optim.Adam(params =  model.parameters(), lr=LEARNING_RATE)
 
 
 
-def validation(epoch):
+
+def validation(epoch,model):
     model.eval()
     fin_targets=[]
     fin_outputs=[]
@@ -304,8 +301,8 @@ def given_dataframe_return_loader(df):
     return DataLoader(testing_set, **test_params)
 
 if TYPE_OF_RUN=="train":
-    wandb.log({'LEARNING_RATE': LEARNING_RATE})
-    convert_data_piranha_to_kaggle_format.create_training_data()
+
+    NO_OF_CLASSES=convert_data_piranha_to_kaggle_format.create_training_data()
     df = pd.read_csv(convert_data_piranha_to_kaggle_format.OUTPUT_FILE_NAME, sep=",", on_bad_lines='skip')
     df['list'] = df[df.columns[2:]].values.tolist()
     new_df = df[['text', 'list']].copy()
@@ -340,8 +337,10 @@ if TYPE_OF_RUN=="train":
             print(f"found that validation loss is not improving after hitting patience of {PATIENCE}. Quitting")
             sys.exit()
 
-        train_loss=train(epoch)
-        predictions_validation, gold_validation ,validation_loss = validation(epoch)
+        model = BERTClass(NO_OF_CLASSES)
+        model.to(device)
+        train_loss=train(epoch,NO_OF_CLASSES,model)
+        predictions_validation, gold_validation ,validation_loss = validation(epoch,model)
 
 
         if validation_loss<global_validation_loss:

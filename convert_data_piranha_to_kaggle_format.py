@@ -327,8 +327,9 @@ def create_training_data():
     if QUIT_AFTER_DATACREATION:
         import sys
         sys.exit()
+    return len(labels_in_this_training)
 
-create_training_data()
+
 
 
 

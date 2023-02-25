@@ -6,11 +6,11 @@ import wandb
 import sys
 import spacy
 
-QUIT_AFTER_DATACREATION=True
+QUIT_AFTER_DATACREATION=False
 TYPE_OF_LABEL="message" #["message","words","signature","sentence","all"]
 #is it training or testing. testing means will load a saved modeland test
 TYPE_OF_RUN="train" # ["train","test"]
-DISABLE_WANDB=True
+DISABLE_WANDB=False
 #used purely in experiments
 CREATE_LABEL_BALANCED_DATASET=False
 LABELS_TO_BALANCE=["signature_jobtitle"]
