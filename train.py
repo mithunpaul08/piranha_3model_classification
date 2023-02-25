@@ -25,6 +25,12 @@ NO_OF_CLASSES=len(convert_data_piranha_to_kaggle_format.labels_in_this_training)
 
 print(f"found that the type of run is: {TYPE_OF_RUN}")
 def train(epoch):
+
+    if(DISABLE_WANDB):
+        os.environ['WANDB_DISABLED'] = DISABLE_WANDB
+    else:
+        wandb.init(project="training_3model_piranha")
+
     model.train()
     for _, data in enumerate(training_loader, 0):
         ids = data['ids'].to(device, dtype=torch.long)

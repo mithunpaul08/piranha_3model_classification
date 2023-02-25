@@ -256,12 +256,10 @@ def create_training_data():
                     #if there is more than one label for the given span update the one hot vector to include 1s
                     if len(labels) > 1:
                         for lblindx,label in enumerate(labels):
-                            if label.lower()=="signature_address":
-                                print("found signature_address")
                             if label in dict_all_labels_index:
                                 label_index=dict_all_labels_index[label]
                                 labels_onehot[label_index]=1
-                                # if sum(labels_onehot)>0: #if atleast one posiitve label was found for this datapoint-write to disk
+
 
 
 
@@ -296,18 +294,9 @@ def create_training_data():
                     for index,value in enumerate(labels_onehot):
                         label_string=dict_all_index_labels[index]
                         if value==1:
-                            if label_string in dict_per_label_positive_examples:
-                                old_value=dict_per_label_positive_examples[label_string]
-                                dict_per_label_positive_examples[label_string]=old_value+1
-                            else:
-                                dict_per_label_positive_examples[label_string] = 1
+                            increase_counter(label_string, dict_per_label_positive_examples)
                         else:
-                            if label_string in dict_per_label_negative_examples:
-                                dict_per_label_negative_examples[label_string] += 1
-                                old_value = dict_per_label_negative_examples[label_string]
-                                dict_per_label_negative_examples[label_string] = old_value + 1
-                            else:
-                                dict_per_label_negative_examples[label_string] = 1
+                            increase_counter(label_string, dict_per_label_negative_examples)
 
 
 
@@ -333,6 +322,8 @@ def create_training_data():
                 print(f"ratio of positive to negative examples in label {pkey} is={pvalue/dict_per_label_negative_examples[pkey]}")
             print(f"total data points for label of type {TYPE_OF_LABEL} is {len(dict_spantext_to_labels)} of which "
                   f"there are {overall_positive_examples_counter} positive examples and {overall_negative_examples_counter} negative examples")
+            print(f"total number of data points ={len(dict_spantext_to_labels.items())}")
+
     if QUIT_AFTER_DATACREATION:
         import sys
         sys.exit()
