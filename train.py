@@ -142,7 +142,7 @@ def get_label_string_given_index(labels_boolvalue):
         string_truple_labels = []
         for index, bool_value in enumerate(each_truple):
             if bool_value==1:
-                string_truple_labels.append(convert_data_piranha_to_kaggle_format.dict_all_index_labels[index])
+                string_truple_labels.append(dict_all_index_labels[index])
             else:
                 string_truple_labels.append(0)
         all_labels_string_value.extend(string_truple_labels)
@@ -169,7 +169,7 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
 
     #initializing the dictionaries with zeores
     for x in range(len(gold_labels_boolean_tuples[0])):
-        label_string = convert_data_piranha_to_kaggle_format.dict_all_index_labels[x]
+        label_string = dict_all_index_labels[x]
         label_counter_accuracy[label_string] = 0
         label_tp = label_string + "_TP"
         true_positive_true_negative_etc_per_label[label_tp] = 0
@@ -185,7 +185,7 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
         assert len(gold_truple)==len(pred_truple)
         for index,value in enumerate(gold_truple):
             #to calculate overall count of labels... should be same as len(gold)
-            label_string=convert_data_piranha_to_kaggle_format.dict_all_index_labels[index]
+            label_string=dict_all_index_labels[index]
             if label_string in label_counter_overall:
                 current_count = label_counter_overall[label_string]
                 label_counter_overall[label_string] = current_count + 1
@@ -317,12 +317,12 @@ def get_per_label_positive_examples(df,no_of_classes):
 
 
 if TYPE_OF_RUN=="train":
-    no_of_classes=convert_data_piranha_to_kaggle_format.create_training_data()
+    no_of_classes,dict_all_labels_index, dict_all_index_labels,labels_in_this_training=convert_data_piranha_to_kaggle_format.create_training_data()
     df = pd.read_csv(convert_data_piranha_to_kaggle_format.OUTPUT_FILE_NAME, sep=",", on_bad_lines='skip')
     df['list'] = df[df.columns[2:]].values.tolist()
 
-    new_df= df[['text', 'list']].copy()
-    
+    new_df= df[['text', 'list','message_org','message_contact_person_asking','message_contact_person_org']].copy()
+
     train_size = 0.8
     train_dataset = new_df.sample(frac=train_size, random_state=200)
     print("for train")

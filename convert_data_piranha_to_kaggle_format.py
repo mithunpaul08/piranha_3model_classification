@@ -320,7 +320,7 @@ def create_training_data():
     if QUIT_AFTER_DATACREATION:
         import sys
         sys.exit()
-    return len(labels_in_this_training)
+    return len(labels_in_this_training),dict_all_labels_index, dict_all_index_labels,labels_in_this_training
 
 
 
