@@ -19,6 +19,7 @@ LABELS_TO_BALANCE=["signature_jobtitle"]
 REMOVE_LESS_FREQUENT_LABELS=True
 THRESHOLD_LESS_FREQUENT_LABELS=50
 
+
 RATIO_TO_CHECK=0.03
 OUTPUT_FILE_NAME= "data/training_data.csv"
 header=["id","text"]

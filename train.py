@@ -301,7 +301,7 @@ def given_dataframe_return_loader(df):
     testing_set = CustomDataset(testing_dataset, tokenizer, MAX_LEN)
     return DataLoader(testing_set, **test_params)
 
-def get_per_label_positive_examples(df,no_of_classes):
+def get_per_label_positive_negative_examples(df, no_of_classes):
     per_label_positive_examples={}
     per_label_negative_examples = {}
     labels=df.columns[2:2+no_of_classes].tolist()
@@ -324,12 +324,19 @@ if TYPE_OF_RUN=="train":
     new_df= df[['text', 'list','message_org','message_contact_person_asking','message_contact_person_org']].copy()
 
     train_size = 0.8
+    dev_size = 0.5
     train_dataset = new_df.sample(frac=train_size, random_state=200)
     print("for train")
-    per_label_positive_examples, per_label_negative_examples = get_per_label_positive_examples(train_dataset, no_of_classes)
-    validation_dataset = new_df.drop(train_dataset.index).reset_index(drop=True)
+    per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(train_dataset, no_of_classes)
+    validation_dev_dataset = new_df.drop(train_dataset.index).reset_index(drop=True)
+    validation_dataset = validation_dev_dataset.sample(frac=dev_size, random_state=200)
+    test_dataset = validation_dev_dataset.drop(validation_dataset.index).reset_index(drop=True)
     print("for validation")
-    per_label_positive_examples, per_label_negative_examples = get_per_label_positive_examples(validation_dataset, no_of_classes)
+    per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(validation_dataset, no_of_classes)
+    print("for test")
+    per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(
+        test_dataset, no_of_classes)
+
     train_dataset = train_dataset.reset_index(drop=True)
 
     training_set = CustomDataset(train_dataset, tokenizer, MAX_LEN)
