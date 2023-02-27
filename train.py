@@ -329,7 +329,7 @@ if TYPE_OF_RUN=="train":
     print("for train")
     per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(train_dataset, no_of_classes)
     validation_dev_dataset = new_df.drop(train_dataset.index).reset_index(drop=True)
-    validation_dataset = validation_dev_dataset.sample(frac=dev_size, random_state=200)
+    validation_dataset = validation_dev_dataset.sample(frac=dev_size, random_state=200).reset_index(drop=True)
     test_dataset = validation_dev_dataset.drop(validation_dataset.index).reset_index(drop=True)
     print("for validation")
     per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(validation_dataset, no_of_classes)
