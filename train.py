@@ -311,8 +311,8 @@ def get_per_label_positive_negative_examples(df, no_of_classes):
                 increase_counter(label,per_label_positive_examples)
             else:
                 increase_counter(label, per_label_negative_examples)
-    print(per_label_positive_examples)
-    print(per_label_negative_examples)
+    print(f"per_label_positive_examples={per_label_positive_examples}")
+    print(f"per_label_negative_examples={per_label_negative_examples}")
     return per_label_positive_examples, per_label_negative_examples
 
 
