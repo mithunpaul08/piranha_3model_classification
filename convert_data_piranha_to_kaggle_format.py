@@ -151,9 +151,10 @@ def create_text_span_mapping(Lines,dict_all_labels_index,labels_in_this_training
                         if text is not None :
                             if text in dict_spantext_to_labels:
                                 old_value = dict_spantext_to_labels[text]
-                                idx=dict_all_labels_index[label]
-                                old_value[idx]=label
-                                dict_spantext_to_labels[text] = old_value
+                                if label in dict_all_labels_index:
+                                    idx=dict_all_labels_index[label]
+                                    old_value[idx]=label
+                                    dict_spantext_to_labels[text] = old_value
                     else:
                         text = get_spans_text_given_start_end_tokens(entry['token_start'], entry['token_end'],
                                                                      annotations)

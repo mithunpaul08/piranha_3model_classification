@@ -17,7 +17,7 @@ LABELS_TO_BALANCE=["signature_jobtitle"]
 
 #remove the less frequent labels because there is not enough signal to learn
 REMOVE_LESS_FREQUENT_LABELS=True
-THRESHOLD_LESS_FREQUENT_LABELS=200
+THRESHOLD_LESS_FREQUENT_LABELS=210
 
 
 RATIO_TO_CHECK=0.03

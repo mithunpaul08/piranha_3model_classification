@@ -403,8 +403,6 @@ if TYPE_OF_RUN=="train":
 
         print(f"avg F1:{avg_f1_validation_this_epoch}\n")
         wandb.log({'average_f1': avg_f1_validation_this_epoch})
-        print(f"Gold labels:{get_label_string_given_index(gold_validation)}\n")
-        print(f"predicted:{get_label_string_given_index(outputs_float)}")
         print(f"end of epoch {epoch}")
         print(f"---------------------------")
 else:
