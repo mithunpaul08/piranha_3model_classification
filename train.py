@@ -320,8 +320,10 @@ if TYPE_OF_RUN=="train":
     no_of_classes,dict_all_labels_index, dict_all_index_labels,labels_in_this_training=convert_data_piranha_to_kaggle_format.create_training_data()
     df = pd.read_csv(convert_data_piranha_to_kaggle_format.OUTPUT_FILE_NAME, sep=",", on_bad_lines='skip')
     df['list'] = df[df.columns[2:]].values.tolist()
-
-    new_df= df[['text', 'list','message_org','message_contact_person_asking','message_contact_person_org']].copy()
+    columns_combined= ['text', 'list']
+    for m in labels_in_this_training.keys():
+        columns_combined.append(m)
+    new_df= df[columns_combined].copy()
 
     train_size = 0.8
     dev_size = 0.5
@@ -331,11 +333,14 @@ if TYPE_OF_RUN=="train":
     validation_dev_dataset = new_df.drop(train_dataset.index).reset_index(drop=True)
     validation_dataset = validation_dev_dataset.sample(frac=dev_size, random_state=200).reset_index(drop=True)
     test_dataset = validation_dev_dataset.drop(validation_dataset.index).reset_index(drop=True)
+    print(f"total number of train datapoints={len(train_dataset)}")
     print("for validation")
     per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(validation_dataset, no_of_classes)
+    print(f"total number of validation_dataset datapoints={len(validation_dataset)}")
     print("for test")
     per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(
         test_dataset, no_of_classes)
+    print(f"total number of test_dataset datapoints={len(test_dataset)}")
 
     train_dataset = train_dataset.reset_index(drop=True)
 
