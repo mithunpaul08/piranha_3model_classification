@@ -7,7 +7,7 @@ import sys
 import spacy
 
 QUIT_AFTER_DATACREATION=False
-TYPE_OF_LABEL="message" #["message","words","signature","sentence","all"]
+TYPE_OF_LABEL="signature" #["message","words","signature","sentence","all"]
 #is it training or testing. testing means will load a saved modeland test
 TYPE_OF_RUN="train" # ["train","test"]
 DISABLE_WANDB=False
@@ -17,7 +17,7 @@ LABELS_TO_BALANCE=["signature_jobtitle"]
 
 #remove the less frequent labels because there is not enough signal to learn
 REMOVE_LESS_FREQUENT_LABELS=True
-THRESHOLD_LESS_FREQUENT_LABELS=210
+THRESHOLD_LESS_FREQUENT_LABELS=50
 
 
 RATIO_TO_CHECK=0.03

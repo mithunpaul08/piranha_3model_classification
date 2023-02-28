@@ -212,6 +212,7 @@ def create_training_data():
 
         label_frequency=get_freq(Lines,label_frequency)
         labels_in_this_training = label_frequency.copy()
+        print(f"label_frequency before threshold:{label_frequency}")
         if (REMOVE_LESS_FREQUENT_LABELS):
             low_freq = [key for key, val in label_frequency.items() if val < THRESHOLD_LESS_FREQUENT_LABELS]
             for x in low_freq:
