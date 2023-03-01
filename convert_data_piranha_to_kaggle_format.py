@@ -309,9 +309,9 @@ def create_training_data():
                     oneHotString=",".join([str(x) for x in labels_onehot])
                     out.write(f"{counter},\"{datapoint}\",{oneHotString}\n")
                     counter = counter + 1
-
+            print(f"-----------before removing labels by threshold")
             print(f"dict_per_label_positive_examples={dict_per_label_positive_examples}")
-            print(f"dict_per_label_negative_examples={dict_per_label_negative_examples}")
+            print(f" dict_per_label_negative_examples={dict_per_label_negative_examples}")
             for (pkey,pvalue) in dict_per_label_positive_examples.items():
                 print(f"ratio of positive to negative examples in label {pkey} is={pvalue/dict_per_label_negative_examples[pkey]}")
                 assert pvalue+dict_per_label_negative_examples[pkey]==len(dict_spantext_to_labels.items())

@@ -307,7 +307,7 @@ def get_per_label_positive_negative_examples(df, no_of_classes):
     labels=df.columns[2:2+no_of_classes].tolist()
     for label in labels:
         for datapoint in df[label]:
-            if datapoint:
+            if datapoint==1:
                 increase_counter(label,per_label_positive_examples)
             else:
                 increase_counter(label, per_label_negative_examples)
@@ -328,6 +328,7 @@ if TYPE_OF_RUN=="train":
     train_size = 0.8
     dev_size = 0.5
     train_dataset = new_df.sample(frac=train_size, random_state=200)
+    print("------during removal of threshold")
     print("for train")
     per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(train_dataset, no_of_classes)
     validation_dev_dataset = new_df.drop(train_dataset.index).reset_index(drop=True)
