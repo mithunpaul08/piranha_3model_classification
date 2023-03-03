@@ -7,7 +7,7 @@ import sys
 import spacy
 
 QUIT_AFTER_DATACREATION=False
-TYPE_OF_LABEL="words" #["message","words","signature","sentence","all"]
+TYPE_OF_LABEL="sentence" #["message","words","signature","sentence","all"]
 #is it training or testing. testing means will load a saved modeland test
 TYPE_OF_RUN="train" # ["train","test"]
 DISABLE_WANDB=False
@@ -17,7 +17,7 @@ LABELS_TO_BALANCE=["signature_jobtitle"]
 
 #remove the less frequent labels because there is not enough signal to learn
 REMOVE_LESS_FREQUENT_LABELS=True
-THRESHOLD_LESS_FREQUENT_LABELS=50
+THRESHOLD_LESS_FREQUENT_LABELS=100
 
 
 RATIO_TO_CHECK=0.03
@@ -33,7 +33,7 @@ TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
 TESTING_BATCH_SIZE=1
 EPOCHS = 1000
-LEARNING_RATE = 1e-5
+LEARNING_RATE = 1e-07
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
 TESTING_FILE_PATH="./data/testing_data.csv"
