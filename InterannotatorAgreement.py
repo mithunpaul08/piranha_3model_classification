@@ -222,7 +222,24 @@ def get_label_stub_labels_only(label_stub,labels_this_annotator):
         if label_stub in labels:
             list_labels_annotator2_shortlist_with_stub_label.append(labels)
     return list_labels_annotator2_shortlist_with_stub_label
-        #workhorse: for annotations by each annotator, check if his label was annotated by the second guy also
+
+
+dict_per_tag_agreement_count={}
+
+#given a dict and a key, get its value, increase by one put it back. else add as one
+def increase_counter(d,k,value_to_increase_by):
+    if k in d:
+        v=d[k]
+        v=v+value_to_increase_by
+        d[k]=v
+    else:
+        d[k] = 0
+    return d
+
+
+
+
+#main workhorse: for annotations by each annotator, check if his label was annotated by the second guy also
 for index, hash_annotator_id in enumerate(intersecting_annotations.keys()):
     ehasharr = hash_annotator_id.split('_')
     email_hash = ehasharr[0]
@@ -246,9 +263,16 @@ for index, hash_annotator_id in enumerate(intersecting_annotations.keys()):
             #labels_annotator2_set = set(labels_annotator1)
 
             #find intersection-print
-            count_labels_intersection+= len(set(list_labels_annotator1_shortlist_with_stub_label).intersection(set(list_labels_annotator2_shortlist_with_stub_label)))
-            if(count_labels_intersection)>0:
-                print()
+            intersecting_labels=(set(list_labels_annotator1_shortlist_with_stub_label).intersection(
+                set(list_labels_annotator2_shortlist_with_stub_label)))
+            count_labels_intersection+= len(intersecting_labels)
+
+            denominator=max(len(set(list_labels_annotator1_shortlist_with_stub_label)),len(set(list_labels_annotator2_shortlist_with_stub_label)))
+            #to calculate the per LABEL agreement
+            #OUT OF 4 labels in this email, did 1 overlap. so 4 is the
+            for each_overlapping_label in intersecting_labels:
+                dict_per_tag_agreement_count=increase_counter(dict_per_tag_agreement_count,each_overlapping_label,1/denominator)
+
             labels_per_email+= max(len(set(list_labels_annotator1_shortlist_with_stub_label)),len(set(list_labels_annotator2_shortlist_with_stub_label)))
             cumulative_of_per_email_agreement += (count_labels_intersection/labels_per_email)
             count_emails_both += 1
@@ -297,6 +321,7 @@ else:
     percentage_v1=count_labels_intersection/labels_per_email
     percentage_v2=cumulative_of_per_email_agreement/count_emails_both
     count_emails_both_annotated=len(email_hash_labels_annotator)
+    print(dict_per_tag_agreement_count)
 
     #
     # print(f"total labels_per_email:{labels_per_email}")

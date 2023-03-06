@@ -214,6 +214,7 @@ def create_training_data():
         labels_in_this_training = label_frequency.copy()
         print(f"label_frequency before threshold:{label_frequency}")
         if (REMOVE_LESS_FREQUENT_LABELS):
+            #get all the labels which has frequency less than THRESHOLD_LESS_FREQUENT_LABELS and remove it from training
             low_freq = [key for key, val in label_frequency.items() if val < THRESHOLD_LESS_FREQUENT_LABELS]
             for x in low_freq:
                 labels_in_this_training = remove_key_dict(x, labels_in_this_training)
@@ -224,7 +225,6 @@ def create_training_data():
         # go through each of the annotated data point, extract text and its label into a dictionary dict_spantext_to_labels
         dict_spantext_to_labels=create_text_span_mapping(Lines,dict_all_labels_index,labels_in_this_training,dict_spantext_to_labels)
 
-            #get all the labels which has frequency less than THRESHOLD_LESS_FREQUENT_LABELS and remove it from training
 
 
         # once the dict_spantext_to_labels is filled with a mapping from spantext to corresponding labels, write it out in a one hot vector
