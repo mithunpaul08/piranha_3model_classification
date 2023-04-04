@@ -8,7 +8,10 @@
 
 ## steps
 
-- copy your training data to data/query_file.jsonl. Should be in the format produced by prodigy tool used for annotation
+- download annotated dataset from osf [repo]( https://osf.io/3rcu4/?view_only=2800ce01e12645a48bbeae53cc2fb201) 
+- unzip piranha.zip
+- move the type of data you want to train on to the folder `data/`
+  - e.g., data/signature.tsv
 - `cp combined_all_annotation_jan9th2023.jsonl query_file.jsonl`
 - `python train.py`
 
