@@ -43,7 +43,7 @@ print(f" Analysis of  {label_stub} level labels annotations between {annotator2_
 #laptop
 
 
-with open("/Users/mithunpaul/research_code/piranha/tuning_3model_classification/data/combined_all_annotation_jan9th2023.jsonl", 'r') as f:
+with open("data/combined_all_annotation_jan9th2023.jsonl", 'r') as f:
 
 #server
 #with open("/Users/mitch/research/piranha/annotated_datasets/ta3_reloading_oct18th_message_level_annotated_3annotators_oct26th_extraction.jsonl", 'r') as f:
@@ -175,9 +175,10 @@ if(flag_show_per_person_labels_missed==True):
             label=split_key[1]
             annotator_id=v[0]
             annotator_name=annotator_id_vs_name[int(annotator_id)]
-            print(f" For email with hash {email_hash} only {annotator_name} annotated the label {label}")
+            # print(f" For email with hash {email_hash} only {annotator_name} annotated the label {label}")
 
-        
+
+
 def cohen_kappa(ann1, ann2):
     """Computes Cohen kappa for pair-wise annotators.
     :param ann1: annotations provided by first annotator
@@ -333,7 +334,8 @@ else:
 
 
     #print(f"Inter annotator agreement-cumulative_average_of_per_email_ratio={percentage_v2},")
-    #print(f"average kappa cohen score={cohen_kappa_score_overall/count_emails_both},")
+    if(flag_show_kappa_cohen):
+        print(f"average kappa cohen score={cohen_kappa_score_overall/count_emails_both},")
 
 
 
