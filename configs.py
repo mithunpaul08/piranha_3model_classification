@@ -37,7 +37,7 @@ TESTING_BATCH_SIZE=1
 EPOCHS = 1000
 LEARNING_RATE = 1e-07
 #tokenizer = BertTokenizer.from_pretrained('roberta-base')
-tokenizer = RobertaTokenizer.from_pretrained('roberta-base')
+tokenizer = RobertaTokenizer.from_pretrained('roberta-large')
 
 TESTING_FILE_PATH="./data/testing_data.csv"
 
