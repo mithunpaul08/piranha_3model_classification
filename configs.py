@@ -37,7 +37,13 @@ TESTING_BATCH_SIZE=1
 EPOCHS = 1000
 LEARNING_RATE = 1e-07
 #tokenizer = BertTokenizer.from_pretrained('roberta-base')
-tokenizer = RobertaTokenizer.from_pretrained('roberta-large')
+TYPE_OF_MODEL="roberta-large"
+
+if "roberta" in TYPE_OF_MODEL:
+    tokenizer = RobertaTokenizer.from_pretrained(TYPE_OF_MODEL)
+    MODEL= RobertaModel.from_pretrained(TYPE_OF_MODEL)
+
+LAST_LAYER_INPUT_SIZE=1024 #will be 768 for bert and 1024 for roberta large
 
 TESTING_FILE_PATH="./data/testing_data.csv"
 

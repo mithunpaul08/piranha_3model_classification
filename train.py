@@ -37,7 +37,10 @@ def train(epoch,NO_OF_CLASSES,model):
         token_type_ids = data['token_type_ids'].to(device, dtype=torch.long)
         targets = data['targets'].to(device, dtype=torch.float)
 
-        outputs = model(ids, mask, token_type_ids)
+        if "bert" in TYPE_OF_MODEL:
+            outputs = model(ids, mask, token_type_ids)
+        if "roberta" in TYPE_OF_MODEL:
+            outputs = model(ids, token_type_ids)
 
         optimizer.zero_grad()
         loss = loss_fn(outputs, targets)
@@ -90,15 +93,30 @@ class CustomDataset(Dataset):
 class BERTClass(torch.nn.Module):
     def __init__(self,NO_OF_CLASSES):
         super(BERTClass, self).__init__()
-        self.l1 = transformers.BertModel.from_pretrained('bert-base-uncased')
+        self.l1 = model
         self.l2 = torch.nn.Dropout(0.3)
-        self.l3 = torch.nn.Linear(768, NO_OF_CLASSES)
+        self.l3 = torch.nn.Linear(LAST_LAYER_INPUT_SIZE,NO_OF_CLASSES)
 
     def forward(self, ids, mask, token_type_ids):
         output_1 = self.l1(ids, attention_mask=mask, token_type_ids=token_type_ids)
         output_2 = self.l2(output_1['pooler_output'])
         output = self.l3(output_2)
         return output
+
+
+class Roberta(torch.nn.Module):
+    def __init__(self,NO_OF_CLASSES):
+        super(BERTClass, self).__init__()
+        self.l1 = MODEL
+        self.l2 = torch.nn.Dropout(0.3)
+        self.l3 = torch.nn.Linear(LAST_LAYER_INPUT_SIZE,NO_OF_CLASSES)
+
+    def forward(self, ids, mask, token_type_ids):
+        output_1 = self.l1(ids, attention_mask=mask, token_type_ids=token_type_ids)
+        output_2 = self.l2(output_1['pooler_output'])
+        output = self.l3(output_2)
+        return output
+
 
 
 def loss_fn(outputs, targets):
@@ -371,7 +389,8 @@ if TYPE_OF_RUN=="train":
             print(f"found that validation loss is not improving after hitting patience of {PATIENCE}. Quitting")
             sys.exit()
 
-        model = BERTClass(no_of_classes)
+
+        model = Roberta(no_of_classes)
         model.to(device)
         train_loss=train(epoch, no_of_classes, model)
         predictions_validation, gold_validation ,validation_loss = validation(epoch,model)
