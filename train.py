@@ -36,18 +36,12 @@ def train(epoch,NO_OF_CLASSES,model):
         mask = data['mask'].to(device, dtype=torch.long)
         token_type_ids = data['token_type_ids'].to(device, dtype=torch.long)
         targets = data['targets'].to(device, dtype=torch.float)
-
-        if "bert" in TYPE_OF_MODEL:
-            outputs = model(ids, mask, token_type_ids)
-        if "roberta" in TYPE_OF_MODEL:
-            outputs = model(ids, token_type_ids)
-
+        outputs = model(ids, mask, token_type_ids)
         optimizer.zero_grad()
         loss = loss_fn(outputs, targets)
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-
         return loss
 
 
@@ -90,10 +84,10 @@ class CustomDataset(Dataset):
         }
 
 
-class BERTClass(torch.nn.Module):
-    def __init__(self,NO_OF_CLASSES):
-        super(BERTClass, self).__init__()
-        self.l1 = model
+class ModelWithNN(torch.nn.Module):
+    def __init__(self,NO_OF_CLASSES,base_model):
+        super(ModelWithNN, self).__init__()
+        self.l1 = base_model
         self.l2 = torch.nn.Dropout(0.3)
         self.l3 = torch.nn.Linear(LAST_LAYER_INPUT_SIZE,NO_OF_CLASSES)
 
@@ -104,10 +98,10 @@ class BERTClass(torch.nn.Module):
         return output
 
 
-class Roberta(torch.nn.Module):
-    def __init__(self,NO_OF_CLASSES):
-        super(BERTClass, self).__init__()
-        self.l1 = MODEL
+class RobertaWithFFNN(torch.nn.Module):
+    def __init__(self,NO_OF_CLASSES,base_model):
+        super(RobertaWithFFNN, self).__init__()
+        self.l1 = base_model
         self.l2 = torch.nn.Dropout(0.3)
         self.l3 = torch.nn.Linear(LAST_LAYER_INPUT_SIZE,NO_OF_CLASSES)
 
@@ -390,7 +384,7 @@ if TYPE_OF_RUN=="train":
             sys.exit()
 
 
-        model = Roberta(no_of_classes)
+        model = ModelWithNN(no_of_classes,MODEL)
         model.to(device)
         train_loss=train(epoch, no_of_classes, model)
         predictions_validation, gold_validation ,validation_loss = validation(epoch,model)
