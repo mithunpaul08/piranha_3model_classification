@@ -9,7 +9,7 @@ import spacy
 
 
 QUIT_AFTER_DATACREATION=False
-TYPE_OF_LABEL="sentence" #["message","words","signature","sentence","all"]
+TYPE_OF_LABEL="signature" #["message","words","signature","sentence","all"]
 #is it training or testing. testing means will load a saved modeland test
 TYPE_OF_RUN="train" # ["train","test"]
 DISABLE_WANDB=False
@@ -35,7 +35,7 @@ TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
 TESTING_BATCH_SIZE=1
 EPOCHS = 1000
-LEARNING_RATE = 1e-07
+#LEARNING_RATE = 1e-07
 
 TYPE_OF_MODEL="roberta-large" #[bert-base-uncased, roberta-large]
 

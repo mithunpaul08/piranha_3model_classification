@@ -316,96 +316,99 @@ def get_per_label_positive_negative_examples(df, no_of_classes):
 
 
 if TYPE_OF_RUN=="train":
-    no_of_classes,dict_all_labels_index, dict_all_index_labels,labels_in_this_training=convert_data_piranha_to_kaggle_format.create_training_data()
-    df = pd.read_csv(convert_data_piranha_to_kaggle_format.OUTPUT_FILE_NAME, sep=",", on_bad_lines='skip')
-    df['list'] = df[df.columns[2:]].values.tolist()
-    columns_combined= ['text', 'list']
-    for m in labels_in_this_training.keys():
-        columns_combined.append(m)
-    new_df= df[columns_combined].copy()
 
-    train_size = 0.8
-    dev_size = 0.5
-    train_dataset = new_df.sample(frac=train_size, random_state=200)
-    print("------during removal of threshold")
-    print("for train")
-    per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(train_dataset, no_of_classes)
-    validation_dev_dataset = new_df.drop(train_dataset.index).reset_index(drop=True)
-    validation_dataset = validation_dev_dataset.sample(frac=dev_size, random_state=200).reset_index(drop=True)
-    test_dataset = validation_dev_dataset.drop(validation_dataset.index).reset_index(drop=True)
-    print(f"total number of train datapoints={len(train_dataset)}")
-    print("for validation")
-    per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(validation_dataset, no_of_classes)
-    print(f"total number of validation_dataset datapoints={len(validation_dataset)}")
-    print("for test")
-    per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(
-        test_dataset, no_of_classes)
-    print(f"total number of test_dataset datapoints={len(test_dataset)}")
+    for LEARNING_RATE in (1e-2,1e-3,1,1e-4,1e-5,1e-6,1e-7):
+        print(f"**************starting training for learning rate={LEARNING_RATE}")
+        no_of_classes,dict_all_labels_index, dict_all_index_labels,labels_in_this_training=convert_data_piranha_to_kaggle_format.create_training_data()
+        df = pd.read_csv(convert_data_piranha_to_kaggle_format.OUTPUT_FILE_NAME, sep=",", on_bad_lines='skip')
+        df['list'] = df[df.columns[2:]].values.tolist()
+        columns_combined= ['text', 'list']
+        for m in labels_in_this_training.keys():
+            columns_combined.append(m)
+        new_df= df[columns_combined].copy()
 
-    train_dataset = train_dataset.reset_index(drop=True)
+        train_size = 0.8
+        dev_size = 0.5
+        train_dataset = new_df.sample(frac=train_size, random_state=200)
+        print("------during removal of threshold")
+        print("for train")
+        per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(train_dataset, no_of_classes)
+        validation_dev_dataset = new_df.drop(train_dataset.index).reset_index(drop=True)
+        validation_dataset = validation_dev_dataset.sample(frac=dev_size, random_state=200).reset_index(drop=True)
+        test_dataset = validation_dev_dataset.drop(validation_dataset.index).reset_index(drop=True)
+        print(f"total number of train datapoints={len(train_dataset)}")
+        print("for validation")
+        per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(validation_dataset, no_of_classes)
+        print(f"total number of validation_dataset datapoints={len(validation_dataset)}")
+        print("for test")
+        per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(
+            test_dataset, no_of_classes)
+        print(f"total number of test_dataset datapoints={len(test_dataset)}")
 
-    training_set = CustomDataset(train_dataset, tokenizer, MAX_LEN)
-    validation_set = CustomDataset(validation_dataset, tokenizer, MAX_LEN)
+        train_dataset = train_dataset.reset_index(drop=True)
 
-    train_params = {'batch_size': TRAIN_BATCH_SIZE,
-                    'shuffle': True,
-                    'num_workers': 0
-                    }
+        training_set = CustomDataset(train_dataset, tokenizer, MAX_LEN)
+        validation_set = CustomDataset(validation_dataset, tokenizer, MAX_LEN)
 
-    validation_params = {'batch_size': VALID_BATCH_SIZE,
-                         'shuffle': True,
-                         'num_workers': 0
-                         }
+        train_params = {'batch_size': TRAIN_BATCH_SIZE,
+                        'shuffle': True,
+                        'num_workers': 0
+                        }
 
-    training_loader = DataLoader(training_set, **train_params)
-    validation_loader = DataLoader(validation_set, **validation_params)
+        validation_params = {'batch_size': VALID_BATCH_SIZE,
+                             'shuffle': True,
+                             'num_workers': 0
+                             }
 
-    print(f"************found that the device is {device}\n")
-    patience_counter=0
-    overall_accuracy=0
-    accuracy_validation=0
-    for epoch in range(EPOCHS):
-        wandb.log({'patience_counter': patience_counter, 'epoch': epoch})
-        if(patience_counter>PATIENCE):
-            print(f"found that validation loss is not improving after hitting patience of {PATIENCE}. Quitting")
-            sys.exit()
+        training_loader = DataLoader(training_set, **train_params)
+        validation_loader = DataLoader(validation_set, **validation_params)
 
-
-        model = ModelWithNN(no_of_classes,MODEL)
-        model.to(device)
-        train_loss=train(epoch, no_of_classes, model)
-        predictions_validation, gold_validation ,validation_loss = validation(epoch,model)
+        print(f"************found that the device is {device}\n")
+        patience_counter=0
+        overall_accuracy=0
+        accuracy_validation=0
+        for epoch in range(EPOCHS):
+            wandb.log({'patience_counter': patience_counter, 'epoch': epoch})
+            if(patience_counter>PATIENCE):
+                print(f"found that validation loss is not improving after hitting patience of {PATIENCE}. Quitting")
+                sys.exit()
 
 
-        if validation_loss<global_validation_loss:
-            global_validation_loss=validation_loss
-        else:
-            patience_counter+=1
+            model = ModelWithNN(no_of_classes,MODEL)
+            model.to(device)
+            train_loss=train(epoch, no_of_classes, model)
+            predictions_validation, gold_validation ,validation_loss = validation(epoch,model)
+
+
+            if validation_loss<global_validation_loss:
+                global_validation_loss=validation_loss
+            else:
+                patience_counter+=1
 
 
 
-        wandb.log({'train_loss': train_loss,'epoch': epoch})
-        wandb.log({'validation_loss': validation_loss,'epoch': epoch})
-        predictions_validation = np.array(predictions_validation) >= 0.5
-        accuracy_validation_scikit_version = metrics.accuracy_score(gold_validation, predictions_validation)
-        overall_accuracy=overall_accuracy+accuracy_validation
-        avg_accuracy_scikit_version=overall_accuracy/(epoch+1)
-        outputs_float = predictions_validation.astype(float)
+            wandb.log({'train_loss': train_loss,'epoch': epoch})
+            wandb.log({'validation_loss': validation_loss,'epoch': epoch})
+            predictions_validation = np.array(predictions_validation) >= 0.5
+            accuracy_validation_scikit_version = metrics.accuracy_score(gold_validation, predictions_validation)
+            overall_accuracy=overall_accuracy+accuracy_validation
+            avg_accuracy_scikit_version=overall_accuracy/(epoch+1)
+            outputs_float = predictions_validation.astype(float)
 
 
-        avg_f1_validation_this_epoch = print_return_per_label_metrics(gold_validation, outputs_float)
-        #rewrite the best model every time the f1 score improves
-        if avg_f1_validation_this_epoch > global_f1_validation:
-            global_f1_validation = avg_f1_validation_this_epoch
-            torch.save(model.state_dict(), SAVED_MODEL_PATH)
+            avg_f1_validation_this_epoch = print_return_per_label_metrics(gold_validation, outputs_float)
+            #rewrite the best model every time the f1 score improves
+            if avg_f1_validation_this_epoch > global_f1_validation:
+                global_f1_validation = avg_f1_validation_this_epoch
+                torch.save(model.state_dict(), SAVED_MODEL_PATH)
 
-        gold=get_label_string_given_index(gold_validation)
-        predicted=get_label_string_given_index(outputs_float)
+            gold=get_label_string_given_index(gold_validation)
+            predicted=get_label_string_given_index(outputs_float)
 
-        print(f"avg F1:{avg_f1_validation_this_epoch}\n")
-        wandb.log({'average_f1': avg_f1_validation_this_epoch})
-        print(f"end of epoch {epoch}")
-        print(f"---------------------------")
+            print(f"avg F1:{avg_f1_validation_this_epoch}\n")
+            wandb.log({'average_f1': avg_f1_validation_this_epoch})
+            print(f"end of epoch {epoch}")
+            print(f"---------------------------")
 else:
     if TYPE_OF_RUN=="test":
         df = pd.read_csv(TESTING_FILE_PATH, sep=",", on_bad_lines='skip')
