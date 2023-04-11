@@ -67,8 +67,9 @@ class CustomDataset(Dataset):
             comment_text,
             None,
             add_special_tokens=True,
+            padding='max_length',
             max_length=self.max_len,
-            pad_to_max_length=True,
+            truncation=True,
             return_token_type_ids=True
         )
         ids = inputs['input_ids']
@@ -88,13 +89,20 @@ class ModelWithNN(torch.nn.Module):
     def __init__(self,NO_OF_CLASSES,base_model):
         super(ModelWithNN, self).__init__()
         self.l1 = base_model
-        self.l2 = torch.nn.Dropout(0.3)
-        self.l3 = torch.nn.Linear(LAST_LAYER_INPUT_SIZE,NO_OF_CLASSES)
+        self.l2 = torch.nn.Dropout(DROP_OUT_RATE)
+        self.l3 = torch.nn.Linear(LAST_LAYER_INPUT_SIZE, 64)
+        self.l4 = torch.nn.LayerNorm(64)
+        self.l5 = torch.nn.Dropout(DROP_OUT_RATE)
+        self.l6 = torch.nn.Linear(64,NO_OF_CLASSES)
 
     def forward(self, ids, mask, token_type_ids):
         output_1 = self.l1(ids, attention_mask=mask, token_type_ids=token_type_ids)
-        output_2 = self.l2(output_1['pooler_output'])
-        output = self.l3(output_2)
+        output = self.l2(output_1['pooler_output'])
+        output = self.l3(output)
+        output = self.l4(output)
+        output = self.l5(output)
+        output = self.l6(output)
+
         return output
 
 
@@ -316,9 +324,6 @@ def get_per_label_positive_negative_examples(df, no_of_classes):
 
 
 if TYPE_OF_RUN=="train":
-
-    for LEARNING_RATE in (1e-2,1e-3,1,1e-4,1e-5,1e-6,1e-7):
-        print(f"**************starting training for learning rate={LEARNING_RATE}")
         no_of_classes,dict_all_labels_index, dict_all_index_labels,labels_in_this_training=convert_data_piranha_to_kaggle_format.create_training_data()
         df = pd.read_csv(convert_data_piranha_to_kaggle_format.OUTPUT_FILE_NAME, sep=",", on_bad_lines='skip')
         df['list'] = df[df.columns[2:]].values.tolist()
@@ -371,7 +376,7 @@ if TYPE_OF_RUN=="train":
             wandb.log({'patience_counter': patience_counter, 'epoch': epoch})
             if(patience_counter>PATIENCE):
                 print(f"found that validation loss is not improving after hitting patience of {PATIENCE}. Quitting")
-                sys.exit()
+                break
 
 
             model = ModelWithNN(no_of_classes,MODEL)
