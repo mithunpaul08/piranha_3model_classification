@@ -9,7 +9,7 @@ import spacy
 
 
 QUIT_AFTER_DATACREATION=False
-TYPE_OF_LABEL="message" #["message","words","signature","sentence","all"]
+TYPE_OF_LABEL="sentence" #["message","words","signature","sentence","all"]
 #is it training or testing. testing means will load a saved modeland test
 TYPE_OF_RUN="train" # ["train","test"]
 DISABLE_WANDB=False
@@ -35,15 +35,15 @@ TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
 TESTING_BATCH_SIZE=1
 EPOCHS = 100
-LEARNING_RATE = 1e-06
+LEARNING_RATE = 1e-7
 DROP_OUT_RATE=0.3
 
-TYPE_OF_MODEL="roberta-large" #[bert-base-uncased, roberta-large]
+TYPE_OF_MODEL="roberta-base" #[bert-base-uncased, roberta-large]
 
 if "roberta" in TYPE_OF_MODEL:
     tokenizer = RobertaTokenizer.from_pretrained(TYPE_OF_MODEL)
     MODEL= RobertaModel.from_pretrained(TYPE_OF_MODEL)
-    LAST_LAYER_INPUT_SIZE = 1024  # will be 768 for bert and 1024 for roberta large
+    LAST_LAYER_INPUT_SIZE = 768  # will be 768 for bert and 1024 for roberta large
 else:
     if "bert" in TYPE_OF_MODEL:
         tokenizer = BertTokenizer.from_pretrained(TYPE_OF_MODEL)

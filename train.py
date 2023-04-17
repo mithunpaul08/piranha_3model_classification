@@ -30,6 +30,7 @@ else:
 print(f"found that the type of run is: {TYPE_OF_RUN}")
 def train(epoch,NO_OF_CLASSES,model):
     model.train()
+    print(f"value of learning rate is {LEARNING_RATE}")
     optimizer = torch.optim.Adam(params=model.parameters(), lr=LEARNING_RATE)
     for _, data in enumerate(training_loader, 0):
         ids = data['ids'].to(device, dtype=torch.long)
