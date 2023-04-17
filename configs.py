@@ -35,7 +35,7 @@ TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
 TESTING_BATCH_SIZE=1
 EPOCHS = 100
-LEARNING_RATE = 1e-3
+LEARNING_RATE = 1e-5
 DROP_OUT_RATE=0.3
 
 TYPE_OF_MODEL="roberta-base" #[bert-base-uncased, roberta-large]
