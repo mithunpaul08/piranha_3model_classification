@@ -43,7 +43,7 @@ TYPE_OF_MODEL="roberta-large" #[bert-base-uncased, roberta-large]
 if "roberta" in TYPE_OF_MODEL:
     tokenizer = RobertaTokenizer.from_pretrained(TYPE_OF_MODEL)
     MODEL= RobertaModel.from_pretrained(TYPE_OF_MODEL)
-    LAST_LAYER_INPUT_SIZE = 768  # will be 768 for bert and 1024 for roberta large
+    LAST_LAYER_INPUT_SIZE = 1024  # will be 768 for roberta base, bert and 1024 for roberta large
 else:
     if "bert" in TYPE_OF_MODEL:
         tokenizer = BertTokenizer.from_pretrained(TYPE_OF_MODEL)
