@@ -1,4 +1,5 @@
 from transformers import BertTokenizer, BertModel, BertConfig
+from transformers import RobertaTokenizer, RobertaModel
 import os
 import pysbd
 from tqdm import tqdm
@@ -6,15 +7,25 @@ import wandb
 import sys
 import spacy
 
-wandb.init(project="training_3model_piranha")
 
-TYPE_OF_LABEL="message" #["message","words","signature","sentence","all"]
+QUIT_AFTER_DATACREATION=False
+TYPE_OF_LABEL="words" #["message","words","signature","sentence","all"]
 #is it training or testing. testing means will load a saved modeland test
 TYPE_OF_RUN="train" # ["train","test"]
+DISABLE_WANDB=False
+#used purely in experiments
+CREATE_LABEL_BALANCED_DATASET=False
+LABELS_TO_BALANCE=["signature_jobtitle"]
 
+#remove the less frequent labels because there is not enough signal to learn
+REMOVE_LESS_FREQUENT_LABELS=True
+THRESHOLD_LESS_FREQUENT_LABELS=50
+
+
+RATIO_TO_CHECK=0.03
 OUTPUT_FILE_NAME= "data/training_data.csv"
 header=["id","text"]
-labels_all=["message_contact_person_asking", "message_contact_person_org", "message_org", "sentence_intent_attachment", "sentence_intent_click", "sentence_intent_intro", "sentence_intent_money", "sentence_intent_phonecall", "sentence_intent_products", "sentence_intent_recruiting", "sentence_intent_scheduling", "sentence_intent_service", "sentence_intent_unsubscribe", "sentence_org_used_by_employer", "sentence_passwd", "sentence_tone_polite", "sentence_tone_urgent", "sentence_url_no_name", "sentence_url_third_party", "signature", "signature_email", "signature_fullname", "signature_jobtitle", "signature_org", "signature_phone", "signature_signoff", "signature_url", "signaure_address", "signaure_handle", "words_reciever_organization", "words_sender_location", "words_sender_organization"]
+labels_all=["message_contact_person_asking", "message_contact_person_org", "message_org", "sentence_intent_attachment", "sentence_intent_click", "sentence_intent_intro", "sentence_intent_money", "sentence_intent_phonecall", "sentence_intent_products", "sentence_intent_recruiting", "sentence_intent_scheduling", "sentence_intent_service", "sentence_intent_unsubscribe", "sentence_org_used_by_employer", "sentence_passwd", "sentence_tone_polite", "sentence_tone_urgent", "sentence_url_no_name", "sentence_url_third_party", "signature", "signature_email", "signature_fullname", "signature_jobtitle", "signature_org", "signature_phone", "signature_signoff", "signature_url", "signature_address", "signature_handle", "words_reciever_organization", "words_sender_location", "words_sender_organization"]
 NER = spacy.load("en_core_web_sm")
 PATIENCE=20
 SPAN_LENGTH_NEGATIVE_EXAMPLE_SPAN_WORDS=5
@@ -23,9 +34,24 @@ MAX_LEN = 500
 TRAIN_BATCH_SIZE = 8
 VALID_BATCH_SIZE = 4
 TESTING_BATCH_SIZE=1
-EPOCHS = 1000
-LEARNING_RATE = 1e-5
-tokenizer = BertTokenizer.from_pretrained('bert-base-cased')
+EPOCHS = 100
+LEARNING_RATE = 1e-7
+DROP_OUT_RATE=0.3
+
+TYPE_OF_MODEL="roberta-large" #[bert-base-uncased, roberta-large]
+
+if "roberta" in TYPE_OF_MODEL:
+    tokenizer = RobertaTokenizer.from_pretrained(TYPE_OF_MODEL)
+    MODEL= RobertaModel.from_pretrained(TYPE_OF_MODEL)
+    LAST_LAYER_INPUT_SIZE = 1024  # will be 768 for roberta base, bert and 1024 for roberta large
+else:
+    if "bert" in TYPE_OF_MODEL:
+        tokenizer = BertTokenizer.from_pretrained(TYPE_OF_MODEL)
+        MODEL= BertModel.from_pretrained(TYPE_OF_MODEL)
+        LAST_LAYER_INPUT_SIZE = 768
+
+
+
 
 TESTING_FILE_PATH="./data/testing_data.csv"
 

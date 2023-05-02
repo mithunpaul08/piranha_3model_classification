@@ -13,6 +13,8 @@
 - move the type of data you want to train on to the folder `data/`
   - e.g., data/signature.tsv
 - `cp combined_all_annotation_jan9th2023.jsonl query_file.jsonl`
+open `configs.py` and pick the TYPE_OF_LABEL on which you want to train on . i.e pick one from ["message","words","signature","sentence","all"]
+- 
 - `python train.py`
 
  

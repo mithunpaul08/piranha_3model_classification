@@ -14,32 +14,35 @@ import convert_data_piranha_to_kaggle_format
 import os
 from torch import cuda
 from configs import *
-
+import utils
+from utils import *
 import spacy
 
 global_f1_validation=0
 global_validation_loss=999999
 precision_global=0
 device = 'cuda' if cuda.is_available() else 'cpu'
-NO_OF_CLASSES=len(convert_data_piranha_to_kaggle_format.labels_in_this_training)
 
+if (DISABLE_WANDB):
+    os.environ['WANDB_DISABLED'] = DISABLE_WANDB
+else:
+    wandb.init(project="training_3model_piranha")
 print(f"found that the type of run is: {TYPE_OF_RUN}")
-def train(epoch):
+def train(epoch,NO_OF_CLASSES,model):
     model.train()
+    print(f"value of learning rate is {LEARNING_RATE} and the model used is {TYPE_OF_MODEL}")
+    optimizer = torch.optim.Adam(params=model.parameters(), lr=LEARNING_RATE)
     for _, data in enumerate(training_loader, 0):
         ids = data['ids'].to(device, dtype=torch.long)
         mask = data['mask'].to(device, dtype=torch.long)
         token_type_ids = data['token_type_ids'].to(device, dtype=torch.long)
         targets = data['targets'].to(device, dtype=torch.float)
-
         outputs = model(ids, mask, token_type_ids)
-
         optimizer.zero_grad()
         loss = loss_fn(outputs, targets)
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-
         return loss
 
 
@@ -65,8 +68,9 @@ class CustomDataset(Dataset):
             comment_text,
             None,
             add_special_tokens=True,
+            padding='max_length',
             max_length=self.max_len,
-            pad_to_max_length=True,
+            truncation=True,
             return_token_type_ids=True
         )
         ids = inputs['input_ids']
@@ -82,28 +86,36 @@ class CustomDataset(Dataset):
         }
 
 
-class BERTClass(torch.nn.Module):
-    def __init__(self):
-        super(BERTClass, self).__init__()
-        self.l1 = transformers.BertModel.from_pretrained('bert-base-uncased')
-        self.l2 = torch.nn.Dropout(0.3)
-        self.l3 = torch.nn.Linear(768, NO_OF_CLASSES)
+class ModelWithNN(torch.nn.Module):
+    def __init__(self,NO_OF_CLASSES,base_model):
+        super(ModelWithNN, self).__init__()
+        self.l1 = base_model
+        self.l2 = torch.nn.Dropout(DROP_OUT_RATE)
+        self.l3 = torch.nn.Linear(LAST_LAYER_INPUT_SIZE, 64)
+        self.l4 = torch.nn.LayerNorm(64)
+        self.l5 = torch.nn.Dropout(DROP_OUT_RATE)
+        self.l6 = torch.nn.Linear(64,NO_OF_CLASSES)
 
     def forward(self, ids, mask, token_type_ids):
         output_1 = self.l1(ids, attention_mask=mask, token_type_ids=token_type_ids)
-        output_2 = self.l2(output_1['pooler_output'])
-        output = self.l3(output_2)
+        output = self.l2(output_1['pooler_output'])
+        output = self.l3(output)
+        output = self.l4(output)
+        output = self.l5(output)
+        output = self.l6(output)
+
         return output
-model = BERTClass()
-model.to(device)
+
+
+
 
 def loss_fn(outputs, targets):
     return torch.nn.BCEWithLogitsLoss()(outputs, targets)
-optimizer = torch.optim.Adam(params =  model.parameters(), lr=LEARNING_RATE)
 
 
 
-def validation(epoch):
+
+def validation(epoch,model):
     model.eval()
     fin_targets=[]
     fin_outputs=[]
@@ -138,7 +150,7 @@ def get_label_string_given_index(labels_boolvalue):
         string_truple_labels = []
         for index, bool_value in enumerate(each_truple):
             if bool_value==1:
-                string_truple_labels.append(convert_data_piranha_to_kaggle_format.dict_all_index_labels[index])
+                string_truple_labels.append(dict_all_index_labels[index])
             else:
                 string_truple_labels.append(0)
         all_labels_string_value.extend(string_truple_labels)
@@ -165,7 +177,7 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
 
     #initializing the dictionaries with zeores
     for x in range(len(gold_labels_boolean_tuples[0])):
-        label_string = convert_data_piranha_to_kaggle_format.dict_all_index_labels[x]
+        label_string = dict_all_index_labels[x]
         label_counter_accuracy[label_string] = 0
         label_tp = label_string + "_TP"
         true_positive_true_negative_etc_per_label[label_tp] = 0
@@ -181,7 +193,7 @@ def print_return_per_label_metrics(gold_labels_boolean_tuples, pred_labels_boole
         assert len(gold_truple)==len(pred_truple)
         for index,value in enumerate(gold_truple):
             #to calculate overall count of labels... should be same as len(gold)
-            label_string=convert_data_piranha_to_kaggle_format.dict_all_index_labels[index]
+            label_string=dict_all_index_labels[index]
             if label_string in label_counter_overall:
                 current_count = label_counter_overall[label_string]
                 label_counter_overall[label_string] = current_count + 1
@@ -297,78 +309,112 @@ def given_dataframe_return_loader(df):
     testing_set = CustomDataset(testing_dataset, tokenizer, MAX_LEN)
     return DataLoader(testing_set, **test_params)
 
+def get_per_label_positive_negative_examples(df, no_of_classes):
+    per_label_positive_examples={}
+    per_label_negative_examples = {}
+    labels=df.columns[2:2+no_of_classes].tolist()
+    for label in labels:
+        for datapoint in df[label]:
+            if datapoint==1:
+                increase_counter(label,per_label_positive_examples)
+            else:
+                increase_counter(label, per_label_negative_examples)
+    print(f"per_label_positive_examples={per_label_positive_examples}")
+    print(f"per_label_negative_examples={per_label_negative_examples}")
+    return per_label_positive_examples, per_label_negative_examples
+
+
 if TYPE_OF_RUN=="train":
-    wandb.log({'LEARNING_RATE': LEARNING_RATE})
-    convert_data_piranha_to_kaggle_format.create_training_data()
-    df = pd.read_csv(convert_data_piranha_to_kaggle_format.OUTPUT_FILE_NAME, sep=",", on_bad_lines='skip')
-    df['list'] = df[df.columns[2:]].values.tolist()
-    new_df = df[['text', 'list']].copy()
-    train_size = 0.8
-    train_dataset = new_df.sample(frac=train_size, random_state=200)
-    validation_dataset = new_df.drop(train_dataset.index).reset_index(drop=True)
-    train_dataset = train_dataset.reset_index(drop=True)
+        no_of_classes,dict_all_labels_index, dict_all_index_labels,labels_in_this_training=convert_data_piranha_to_kaggle_format.create_training_data()
+        df = pd.read_csv(convert_data_piranha_to_kaggle_format.OUTPUT_FILE_NAME, sep=",", on_bad_lines='skip')
+        df['list'] = df[df.columns[2:]].values.tolist()
+        columns_combined= ['text', 'list']
+        for m in labels_in_this_training.keys():
+            columns_combined.append(m)
+        new_df= df[columns_combined].copy()
 
-    training_set = CustomDataset(train_dataset, tokenizer, MAX_LEN)
-    validation_set = CustomDataset(validation_dataset, tokenizer, MAX_LEN)
+        train_size = 0.8
+        dev_size = 0.5
+        train_dataset = new_df.sample(frac=train_size, random_state=200)
+        print("------during removal of threshold")
+        print("for train")
+        per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(train_dataset, no_of_classes)
+        validation_dev_dataset = new_df.drop(train_dataset.index).reset_index(drop=True)
+        validation_dataset = validation_dev_dataset.sample(frac=dev_size, random_state=200).reset_index(drop=True)
+        test_dataset = validation_dev_dataset.drop(validation_dataset.index).reset_index(drop=True)
+        print(f"total number of train datapoints={len(train_dataset)}")
+        print("for validation")
+        per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(validation_dataset, no_of_classes)
+        print(f"total number of validation_dataset datapoints={len(validation_dataset)}")
+        print("for test")
+        per_label_positive_examples, per_label_negative_examples = get_per_label_positive_negative_examples(
+            test_dataset, no_of_classes)
+        print(f"total number of test_dataset datapoints={len(test_dataset)}")
 
-    train_params = {'batch_size': TRAIN_BATCH_SIZE,
-                    'shuffle': True,
-                    'num_workers': 0
-                    }
+        train_dataset = train_dataset.reset_index(drop=True)
 
-    validation_params = {'batch_size': VALID_BATCH_SIZE,
-                         'shuffle': True,
-                         'num_workers': 0
-                         }
+        training_set = CustomDataset(train_dataset, tokenizer, MAX_LEN)
+        validation_set = CustomDataset(validation_dataset, tokenizer, MAX_LEN)
 
-    training_loader = DataLoader(training_set, **train_params)
-    validation_loader = DataLoader(validation_set, **validation_params)
+        train_params = {'batch_size': TRAIN_BATCH_SIZE,
+                        'shuffle': True,
+                        'num_workers': 0
+                        }
 
-    print(f"************found that the device is {device}\n")
-    patience_counter=0
-    overall_accuracy=0
-    accuracy_validation=0
-    for epoch in range(EPOCHS):
-        wandb.log({'patience_counter': patience_counter, 'epoch': epoch})
-        if(patience_counter>PATIENCE):
-            print(f"found that validation loss is not improving after hitting patience of {PATIENCE}. Quitting")
-            sys.exit()
+        validation_params = {'batch_size': VALID_BATCH_SIZE,
+                             'shuffle': True,
+                             'num_workers': 0
+                             }
 
-        train_loss=train(epoch)
-        predictions_validation, gold_validation ,validation_loss = validation(epoch)
+        training_loader = DataLoader(training_set, **train_params)
+        validation_loader = DataLoader(validation_set, **validation_params)
 
-
-        if validation_loss<global_validation_loss:
-            global_validation_loss=validation_loss
-        else:
-            patience_counter+=1
+        print(f"************found that the device is {device}\n")
+        patience_counter=0
+        overall_accuracy=0
+        accuracy_validation=0
+        for epoch in range(EPOCHS):
+            wandb.log({'patience_counter': patience_counter, 'epoch': epoch})
+            if(patience_counter>PATIENCE):
+                print(f"found that validation loss is not improving after hitting patience of {PATIENCE}. Quitting")
+                break
 
 
-
-        wandb.log({'train_loss': train_loss,'epoch': epoch})
-        wandb.log({'validation_loss': validation_loss,'epoch': epoch})
-        predictions_validation = np.array(predictions_validation) >= 0.5
-        accuracy_validation_scikit_version = metrics.accuracy_score(gold_validation, predictions_validation)
-        overall_accuracy=overall_accuracy+accuracy_validation
-        avg_accuracy_scikit_version=overall_accuracy/(epoch+1)
-        outputs_float = predictions_validation.astype(float)
+            model = ModelWithNN(no_of_classes,MODEL)
+            model.to(device)
+            train_loss=train(epoch, no_of_classes, model)
+            predictions_validation, gold_validation ,validation_loss = validation(epoch,model)
 
 
-        avg_f1_validation_this_epoch = print_return_per_label_metrics(gold_validation, outputs_float)
-        #rewrite the best model every time the f1 score improves
-        if avg_f1_validation_this_epoch > global_f1_validation:
-            global_f1_validation = avg_f1_validation_this_epoch
-            torch.save(model.state_dict(), SAVED_MODEL_PATH)
+            if validation_loss<global_validation_loss:
+                global_validation_loss=validation_loss
+            else:
+                patience_counter+=1
 
-        gold=get_label_string_given_index(gold_validation)
-        predicted=get_label_string_given_index(outputs_float)
 
-        print(f"avg F1:{avg_f1_validation_this_epoch}\n")
-        wandb.log({'average_f1': avg_f1_validation_this_epoch})
-        print(f"Gold labels:{get_label_string_given_index(gold_validation)}\n")
-        print(f"predicted:{get_label_string_given_index(outputs_float)}")
-        print(f"end of epoch {epoch}")
-        print(f"---------------------------")
+
+            wandb.log({'train_loss': train_loss,'epoch': epoch})
+            wandb.log({'validation_loss': validation_loss,'epoch': epoch})
+            predictions_validation = np.array(predictions_validation) >= 0.5
+            accuracy_validation_scikit_version = metrics.accuracy_score(gold_validation, predictions_validation)
+            overall_accuracy=overall_accuracy+accuracy_validation
+            avg_accuracy_scikit_version=overall_accuracy/(epoch+1)
+            outputs_float = predictions_validation.astype(float)
+
+
+            avg_f1_validation_this_epoch = print_return_per_label_metrics(gold_validation, outputs_float)
+            #rewrite the best model every time the f1 score improves
+            if avg_f1_validation_this_epoch > global_f1_validation:
+                global_f1_validation = avg_f1_validation_this_epoch
+                torch.save(model.state_dict(), SAVED_MODEL_PATH)
+
+            gold=get_label_string_given_index(gold_validation)
+            predicted=get_label_string_given_index(outputs_float)
+
+            print(f"avg F1:{avg_f1_validation_this_epoch}\n")
+            wandb.log({'average_f1': avg_f1_validation_this_epoch})
+            print(f"end of epoch {epoch}")
+            print(f"---------------------------")
 else:
     if TYPE_OF_RUN=="test":
         df = pd.read_csv(TESTING_FILE_PATH, sep=",", on_bad_lines='skip')
